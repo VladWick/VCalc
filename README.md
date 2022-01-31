@@ -6,7 +6,7 @@ Author: VladWick
 
 ---------------------------------------
 
-Description 
+<h3>Description</h3>
 This programm is written in Java using Swing.
 
 Standart 
@@ -25,13 +25,13 @@ Derivatives and Integrals provide JTextField in which you can paste expression a
 	
 ---------------------------------------
 
-Implementation 
+<h3>Implementation</h3>
 Architecture of the programm in this version is terrible. 75 classes for just a calculator.
 Every single button has its own ActionListener class that doing the same thing in 90% of buttons. 
 
 ---------------------------------------
 
-<h1>Problems and bugs in this version<h1>
+<h3>Problems and bugs in this version</h3>
 Standart 
 	No parentheses available 
 	Change sign works only for the first number 
