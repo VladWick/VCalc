@@ -35,8 +35,8 @@ Every single button has its own ActionListener class that doing the same thing i
 
 <h2>Problems and bugs in this version</h2>
 Standart <br>
-	&emsp No parentheses available <br>
-	&emsp Change sign works only for the first number <br>
+	&emsp; No parentheses available <br>
+	&emsp; Change sign works only for the first number <br>
 	
 Scientific <br>
 	&emsp Copy of the StandartCalc <br>
