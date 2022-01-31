@@ -6,7 +6,7 @@ Author: VladWick
 
 ---------------------------------------
 
-#Description 
+# Description 
 This programm is written in Java using Swing.
 
 Standart 
@@ -25,26 +25,30 @@ Derivatives and Integrals provide JTextField in which you can paste expression a
 	
 ---------------------------------------
 
-#Implementation 
+# Implementation 
 Architecture of the programm in this version is terrible. 75 classes for just a calculator.
 Every single button has its own ActionListener class that doing the same thing in 90% of buttons. 
 
 ---------------------------------------
 
-#Problems and bugs in this version 
+# Problems and bugs in this version 
 Standart 
 	No parentheses available 
 	Change sign works only for the first number 
+	
 Scientific 
 	Copy of the StandartCalc
 	Scientific Calc buttons work as well as in the StandartCalc but other buttons does not make sense and only provide errors  
+	
 Derivatives 
 	Only Supports standart table of functions (such as sin(x), x^n etc...)
 		no coefficients 
 		no other variables (only x)
 	Stupid and raw side of programm actually 
+	
 Integrals 
 	Only Supports standart table of functions (such as sin(x), x^n etc...)
 		no coefficients 
 		no other variables (only x)
 	Stupid and raw side of programm as well as Derivatives 
+	
