@@ -17,7 +17,7 @@ This programm is written in Java using Swing.
 <h3>Derivatives</h3>
 	&emsp; Find the derivative of a function if the function itself is in user's input 
 <h3>Integrals</h3>
-	&emsp; Find indefinite integral of a function if the function itself is in user's input 
+	&emsp; Find indefinite integral of a function if the function itself is in user's input<br>
 	
 "Standart" and "Scientific" provide a whole bunch of buttons. Press on button - means change text in JLabel.
 It means that you can not paste expression and find an answer. You need type it. 
@@ -33,7 +33,7 @@ Every single button has its own ActionListener class that doing the same thing i
 ---------------------------------------
 
 <h2>Problems and bugs in this version</h2>
-<h3>Standart</h3> <br>
+<h3>Standart</h3>
 	&emsp; No parentheses available <br>
 	&emsp; Change sign works only for the first number <br>
 	
@@ -41,13 +41,13 @@ Every single button has its own ActionListener class that doing the same thing i
 	&emsp; Copy of the StandartCalc <br>
 	&emsp; Scientific Calc buttons work as well as in the StandartCalc but other buttons does not make sense and only provide errors <br>
 	
-<h3>Derivatives</h3> <br>
+<h3>Derivatives</h3>
 	&emsp; Only Supports standart table of functions (such as sin(x), x^n etc...)<br>
 		&emsp; &emsp; no coefficients <br>
 		&emsp; &emsp; no other variables (only x)<br>
 	&emsp; Stupid and raw side of programm actually <br>
 	
-<h3>Integrals</h3> <br>
+<h3>Integrals</h3>
 	&emsp; Only Supports standart table of functions (such as sin(x), x^n etc...)<br>
 		&emsp; &emsp; no coefficients <br>
 		&emsp; &emsp; no other variables (only x)<br>
