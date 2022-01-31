@@ -17,7 +17,7 @@ This programm is written in Java using Swing.
 <h3>Derivatives</h3>
 	&emsp; Find the derivative of a function if the function itself is in user's input 
 <h3>Integrals</h3>
-	&emsp; Find indefinite integral of a function if the function itself is in user's input<br>
+	&emsp;Find indefinite integral of a function if the function itself is in user's input<br>
 	
 "Standart" and "Scientific" provide a whole bunch of buttons. Press on button - means change text in JLabel.
 It means that you can not paste expression and find an answer. You need type it. 
