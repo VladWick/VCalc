@@ -1,8 +1,8 @@
 # VCalc
 Handy calculator with useful features for math students.
 
-Version: 0.1 
-Author: VladWick
+<i>Version: 0.1</i> <br>
+<i>Author: VladWick</i>
 
 ---------------------------------------
 
@@ -14,24 +14,25 @@ Standart
 Scientific 
 	Extended Calc with doubled functionality
 Derivatives 
-	Find the derivative of a function if the function itself is in user`s input 
+	Find the derivative of a function if the function itself is in user's input 
 Integrals 
-	Find indefinite integral of a function if the function itself is in user`s input 
+	Find indefinite integral of a function if the function itself is in user's input 
 	
 "Standart" and "Scientific" provide a whole bunch of buttons. Press on button - means change text in JLabel.
-It means that you can`t paste expression and find an answer. You need type it. 
+It means that you can not paste expression and find an answer. You need type it. 
 
 Derivatives and Integrals provide JTextField in which you can paste expression and then, after clicking on "Find Derivative/Integral", you can get an answer in the botton field.
 	
 ---------------------------------------
 
-<h3>Implementation</h3>
+<h2>Implementation</h2>
 Architecture of the programm in this version is terrible. 75 classes for just a calculator.
+
 Every single button has its own ActionListener class that doing the same thing in 90% of buttons. 
 
 ---------------------------------------
 
-<h3>Problems and bugs in this version</h3>
+<h2>Problems and bugs in this version</h2>
 Standart 
 	No parentheses available 
 	Change sign works only for the first number 
