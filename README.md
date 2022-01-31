@@ -1,4 +1,4 @@
-# VCalc
+# VCalc 0.1
 ---------------------------------------
 Handy calculator with useful features for math students.
 
