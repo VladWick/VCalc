@@ -1,4 +1,5 @@
 # VCalc
+---------------------------------------
 Handy calculator with useful features for math students.
 
 <i>Version: 0.1</i> <br>
@@ -33,23 +34,23 @@ Every single button has its own ActionListener class that doing the same thing i
 ---------------------------------------
 
 <h2>Problems and bugs in this version</h2>
-Standart 
-	No parentheses available 
-	Change sign works only for the first number 
+Standart <br>
+	No parentheses available <br>
+	Change sign works only for the first number <br>
 	
-Scientific 
-	Copy of the StandartCalc
-	Scientific Calc buttons work as well as in the StandartCalc but other buttons does not make sense and only provide errors  
+Scientific <br>
+	Copy of the StandartCalc <br>
+	Scientific Calc buttons work as well as in the StandartCalc but other buttons does not make sense and only provide errors <br>
 	
-Derivatives 
-	Only Supports standart table of functions (such as sin(x), x^n etc...)
-		no coefficients 
-		no other variables (only x)
-	Stupid and raw side of programm actually 
+Derivatives <br>
+	Only Supports standart table of functions (such as sin(x), x^n etc...)<br>
+		no coefficients <br>
+		no other variables (only x)<br>
+	Stupid and raw side of programm actually <br>
 	
-Integrals 
-	Only Supports standart table of functions (such as sin(x), x^n etc...)
-		no coefficients 
-		no other variables (only x)
-	Stupid and raw side of programm as well as Derivatives 
+Integrals <br>
+	Only Supports standart table of functions (such as sin(x), x^n etc...)<br>
+		no coefficients <br>
+		no other variables (only x)<br>
+	Stupid and raw side of programm as well as Derivatives <br>
 	
