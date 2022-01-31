@@ -6,7 +6,7 @@ Author: VladWick
 
 ---------------------------------------
 
-<h3><b>Description</b></h3>
+<h2>Description</h2>
 This programm is written in Java using Swing.
 
 Standart 
