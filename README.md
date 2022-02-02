@@ -55,7 +55,8 @@ Every single button has its own ActionListener class that doing the same thing i
 	
 ---------------------------------------
 <h2>UPDATE VCalc0.2</h2>
-&emsp; Dark and white mode move to another new class called "Design"<br>
-&emsp; Move switching classes to the "Design"<br>
-&emsp; Make a Calc with the same functionality. but with one operation at a time in StandartCalc<br>
+&emsp; - Better readability and architecture now because less classes<br>
+&emsp; - Dark and white mode move to another new class called "Design"<br>
+&emsp; - Move switching classes to the "Design"<br>
+&emsp; - Made a Calc with the same functionality. but with one operation at a time in StandartCalc<br>
 	
