@@ -19,8 +19,28 @@ public class Main {
 		frameScientific.createScientificCalc();
 		frameDerivatives.createDerivativesCalc();
 		frameIntegrals.createIntegralsCalc();
-		
-		System.out.println("asd");
-		System.out.println("asd");
 	}
 }
+
+/*
+ * 
+ * name of the all variables 
+ * 
+ * we work only with one operation at a time
+ * 
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

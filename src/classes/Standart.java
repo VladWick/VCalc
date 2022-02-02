@@ -19,6 +19,11 @@ public class Standart {
 				/**********************/
 	
 	public static ArrayList<Character> operators = new ArrayList<Character>();
+	public static ArrayList<Integer> numbers = new ArrayList<Integer>();
+	
+	//public static ArrayList<Double> operations = new ArrayList<Double>();
+	public static double[] operations = {0.0, 0.0};
+	public static char currentOperator = ' ';
 	
 	Border solidBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 	
@@ -93,8 +98,10 @@ public class Standart {
 	public static JButton dotButton = new JButton();
 	public static JButton equalsButton = new JButton();
 	public static JButton changeSignButton = new JButton();
-
 	
+	
+	/*********************************************/
+
 	public void createStandartCalc() throws IOException {
 		
 		operators.add('+');
@@ -102,6 +109,17 @@ public class Standart {
 		operators.add('*');
 		operators.add('/');
 		operators.add('%');
+		
+		numbers.add(0);
+		numbers.add(1);
+		numbers.add(2);
+		numbers.add(3);
+		numbers.add(4);
+		numbers.add(5);
+		numbers.add(6);
+		numbers.add(7);
+		numbers.add(8);
+		numbers.add(9);
 
 		/*Main Panel options*/
 		//mainPanelStandart.setBounds(30,100, 50, 50);
@@ -201,7 +219,8 @@ public class Standart {
 		buttonsLabelStandart.setBounds(40, 50, 0, 0);
 		
 		deleteAllButton.setText("AC");
-		deleteAllButton.addActionListener(new DeleteAllPressed());
+		deleteAllButton.setName("deleteAll");
+		deleteAllButton.addActionListener(new DeletePressed());
 		deleteAllButton.setFont(font20);
 		
 		BufferedImage buttonIconDelete = ImageIO.read(new File("src/images/iconDelete.png"));
@@ -209,79 +228,88 @@ public class Standart {
 		deleteOneButton = new JButton(new ImageIcon(buttonIconDelete));
 		//deleteOneButton.setBorder(BorderFactory.createEmptyBorder());
 		//deleteOneButton.setContentAreaFilled(false);
-		deleteOneButton.addActionListener(new DeleteOnePressed());
+		deleteOneButton.addActionListener(new DeletePressed());
+		deleteOneButton.setName("deleteOne");
 		
 		persentButton.setText("%");
-		persentButton.addActionListener(new PersentPressed());
+		persentButton.setName("%");
+		persentButton.addActionListener(new OperatorPressed());
 		persentButton.setFont(font20);
 
 		divideButton.setText("/");
-		divideButton.addActionListener(new DividePressed());
+		divideButton.setName("/");
+		divideButton.addActionListener(new OperatorPressed());
 		divideButton.setFont(font20);
 	
 		sevenButton.setText("7");
-		sevenButton.addActionListener(new SevenPressed());
+		sevenButton.setName("7");
+		sevenButton.addActionListener(new NumberPressed());
 		sevenButton.setFont(font20);
 		
 		eightButton.setText("8");
-		eightButton.addActionListener(new EightPressed());
+		eightButton.setName("8");
+		eightButton.addActionListener(new NumberPressed());
 		eightButton.setFont(font20);
 		eightButton.setBackground(colorRed);
 		
-		/*Image behind the button*/
-		/*
-		BufferedImage buttonIcon = ImageIO.read(new File("src/images/icon1.png"));
-		eightButton = new JButton(new ImageIcon(buttonIcon));
-		eightButton.setBorder(BorderFactory.createEmptyBorder());
-		eightButton.setContentAreaFilled(false);
-		*/
-		
 		nineButton.setText("9");
-		nineButton.addActionListener(new NinePressed());
+		nineButton.setName("9");
+		nineButton.addActionListener(new NumberPressed());
 		nineButton.setFont(font20);
 		
 		multipleButton.setText("*");
-		multipleButton.addActionListener(new MultiplyPressed());
+		multipleButton.setName("*");
+		multipleButton.addActionListener(new OperatorPressed());
 		multipleButton.setFont(font20);
 		
 		fourButton.setText("4");
-		fourButton.addActionListener(new FourPressed());
+		fourButton.setName("4");
+		fourButton.addActionListener(new NumberPressed());
 		fourButton.setFont(font20);
 		
 		fiveButton.setText("5");
-		fiveButton.addActionListener(new FivePressed());
+		fiveButton.setName("5");
+		fiveButton.addActionListener(new NumberPressed());
 		fiveButton.setFont(font20);
 		
 		sixButton.setText("6");
-		sixButton.addActionListener(new SixPressed());
+		sixButton.setName("6");
+		sixButton.addActionListener(new NumberPressed());
 		sixButton.setFont(font20);
 		
 		minusButton.setText("-");
-		minusButton.addActionListener(new MinusPressed());
+		minusButton.setName("-");
+		minusButton.addActionListener(new OperatorPressed());
 		minusButton.setFont(font20);
 	
 		oneButton.setText("1");
-		oneButton.addActionListener(new OnePressed());
+		oneButton.setName("1");
+		oneButton.addActionListener(new NumberPressed());
 		oneButton.setFont(font20);
 		
 		twoButton.setText("2");
-		twoButton.addActionListener(new TwoPressed());
+		twoButton.setName("2");
+		twoButton.addActionListener(new NumberPressed());
 		twoButton.setFont(font20);
 		
 		threeButton.setText("3");
-		threeButton.addActionListener(new ThreePressed());
+		threeButton.setName("3");
+		threeButton.addActionListener(new NumberPressed());
 		threeButton.setFont(font20);
 	
 		plusButton.setText("+");
-		plusButton.addActionListener(new PlusPressed());
+		plusButton.setName("+");
+		plusButton.addActionListener(new OperatorPressed());
 		plusButton.setFont(font20);
 		
 		zeroButton.setText("0");
-		zeroButton.addActionListener(new ZeroPressed());
+		zeroButton.setName("0");
+		zeroButton.addActionListener(new NumberPressed());
 		zeroButton.setFont(font20);
 		
 		dotButton.setText(".");
-		dotButton.addActionListener(new DotPressed());
+		dotButton.setName(".");
+		dotButton.addActionListener(new OperatorPressed());
 		dotButton.setFont(font20);
 		
 		changeSignButton.setText("+/-");
@@ -420,7 +448,380 @@ public class Standart {
 					/*Action Listeners*/
 					/******************/
 
-/*Numbers*/
+class NumberPressed extends Standart implements ActionListener{
+	public void actionPerformed(ActionEvent e) {
+		
+		String str = outputFieldStandart.getText();
+		
+		/*Get the number of the button*/
+		JButton o = (JButton)e.getSource();
+		String name = o.getName();
+		int nameInt = Integer.parseInt(name);
+		
+		//Crutch
+		int ref = 0;
+		
+		/*Clear string if operator was pressed in the previous move*/
+		if(!str.isEmpty()) {
+			char lastChar = str.charAt(str.length()-1);
+			for(int i = 0 ; i < operators.size(); ++i) {
+				if(lastChar == operators.get(i)) {
+					currentOperator = operators.get(i);
+					//Crutch
+					ref = 1;
+					//System.out.println(currentOperator);
+					
+					/*Adding first operation here to prevent problems in 'ChangeSign'*/
+					String substr = str.substring(0, str.length()-1);
+					double firstOperation = Double.parseDouble(substr); 
+					operations[0] = firstOperation;
+					break;
+				}
+			}
+		}
+
+		/*Write number*/
+		for(int i = 0 ; i < numbers.size(); ++i) {
+			if(nameInt == numbers.get(i)) {
+				if(ref == 0) {
+					Standart.outputFieldStandart.setText(str + numbers.get(i));
+				} else if (ref == 1){
+					Standart.outputFieldStandart.setText(Integer.toString(numbers.get(i)));
+				}
+			} 
+		}
+	}
+}
+class OperatorPressed extends Standart implements ActionListener{
+	public void actionPerformed(ActionEvent e) {
+		
+		String str = outputFieldStandart.getText();
+		
+		JButton o = (JButton)e.getSource();
+		String name = o.getName();
+		
+		if(!str.isEmpty()) {
+			
+			/*Adding first operation number*/
+			String lastChar = str.substring(str.length()-1);
+			double lastCharDouble = Double.parseDouble(lastChar);
+			
+			/*provide problems with 'ChangeSign'*/
+			/*
+			for(int i = 0 ; i < numbers.size(); ++i) {
+				if(lastCharDouble == numbers.get(i)) {
+					String substr = str.substring(0, str.length());
+					double firstOperation = Double.parseDouble(substr); 
+					operations[0] = firstOperation;
+					break;
+				}
+			}
+			*/
+			
+			for(int i = 0 ; i < operators.size(); ++i) {
+				if(name.charAt(0) == operators.get(i)) {
+					Standart.outputFieldStandart.setText(str + operators.get(i));
+				} 
+			}
+		} else {
+			System.out.println("Expression can`t start with the operator.");
+		}
+	}
+}
+class DeletePressed extends Standart implements ActionListener{
+	public void actionPerformed(ActionEvent e) { 
+		
+		String str = outputFieldStandart.getText();
+		
+		JButton o = (JButton)e.getSource();
+		String name = o.getName();
+		
+		if(name == "deleteAll") {
+			Standart.outputFieldStandart.setText("");
+		} else if (name == "deleteOne") {
+			Standart.outputFieldStandart.setText(str.substring(0, str.length()-1));
+		} else {
+			System.out.println("Something went wrong.");
+		}
+	}
+}
+class EqualsPressed extends Standart implements ActionListener{
+	public void actionPerformed(ActionEvent e) { 
+		String str = outputFieldStandart.getText();
+		
+		String lastChar = str.substring(str.length()-1);
+		double lastCharDouble = Double.parseDouble(lastChar);
+		
+		/*Adding second operation number*/
+		for(int i = 0 ; i < numbers.size(); ++i) {
+			if(lastCharDouble == numbers.get(i)) {
+				
+				String substr = str.substring(0, str.length());
+				double secondOperation = Double.parseDouble(substr); 
+				operations[1] = secondOperation;
+				
+				break;
+			}
+		}
+		
+		/*Solving the Calc*/
+		switch(currentOperator) {
+			case '*': {
+				double x = operations[0];
+				double y = operations[1];
+				double answer = x*y;
+				Standart.outputFieldStandart.setText(Double.toString(answer));
+				
+				operations[0] = answer;
+				operations[1] = 0.0;
+	
+				break;
+			}
+			case '/': {
+				double x = operations[0];
+				double y = operations[1];
+				double answer = x/y;
+				Standart.outputFieldStandart.setText(Double.toString(answer));
+				
+				operations[0] = answer;
+				operations[1] = 0.0;
+				
+				break;
+			}
+			case '+': {
+				double x = operations[0];
+				double y = operations[1];
+				double answer = x+y;
+				Standart.outputFieldStandart.setText(Double.toString(answer));
+				
+				operations[0] = answer;
+				operations[1] = 0.0;
+				
+				break;
+			}
+			case '-': {
+				double x = operations[0];
+				double y = operations[1];
+				double answer = x-y;
+				Standart.outputFieldStandart.setText(Double.toString(answer));
+				
+				operations[0] = answer;
+				operations[1] = 0.0;
+				
+				break;
+			}
+			case '%': {
+				double x = operations[0];
+				double y = operations[1];
+				double answer = x%y;
+				Standart.outputFieldStandart.setText(Double.toString(answer));
+				
+				operations[0] = answer;
+				operations[1] = 0.0;
+				
+				break;
+			}
+		}
+		
+	}
+}
+
+class ChangeSignPressed extends Standart implements ActionListener{
+	public void actionPerformed(ActionEvent e) { 
+		String str = outputFieldStandart.getText();
+		
+		String firstChar = str.substring(0,1);
+		
+		if(!firstChar.equals("-")) {
+			Standart.outputFieldStandart.setText("-" + str);
+		} else {
+			Standart.outputFieldStandart.setText(str.substring(1, str.length()));
+		} 
+	}
+}
+
+/**/
+/*
+class ChangeSignPressed extends Standart implements ActionListener{
+	public void actionPerformed(ActionEvent e) { 
+		
+		String str = outputFieldStandart.getText();
+		
+		char charAtEnd = str.charAt(str.length() - 1);
+		
+		if(!str.isEmpty() && !(str.contains("%") || str.contains("*") || str.contains("/") || str.contains("-") || str.contains("+")) ) {
+
+			if(charAtEnd != '%' && charAtEnd != '*' && charAtEnd != '/' && charAtEnd != '+' && charAtEnd != '-') {
+				Standart.outputFieldStandart.setText("-" + str);
+			} 
+			
+		} else if(str.length() == 1 && charAtEnd != '%' && charAtEnd != '*' && charAtEnd != '/' && charAtEnd != '+' && charAtEnd != '-') {
+			Standart.outputFieldStandart.setText("-" + str);
+		} else {
+			Standart.outputFieldStandart.setText("-");
+		}
+	}
+}
+
+class EqualsPressed extends Standart implements ActionListener{
+	public void actionPerformed(ActionEvent e) { 
+		
+		String fullStringOfInput = outputFieldStandart.getText();
+		char charAtEnd = fullStringOfInput.charAt(fullStringOfInput.length() - 1);
+		
+		if(charAtEnd != '%' && charAtEnd != '*' && charAtEnd != '/' && charAtEnd != '+' && charAtEnd != '-') {
+			
+			ArrayList<String> arrayOfNumbers = new ArrayList<String>();
+			ArrayList<String> arrayOfOperators = new ArrayList<String>();
+
+			Double answer = 0.0;
+			
+			int i = 0;
+			if(fullStringOfInput.charAt(0) == '-') {
+				i = 1;
+			}
+			for(; i < fullStringOfInput.length(); ++i) {
+				
+				String substr = fullStringOfInput.substring(i, i+1); 
+				
+				if("+".equals(substr) || "-".equals(substr) || "/".equals(substr) || "*".equals(substr) || "%".equals(substr)) {
+					String substr2 = fullStringOfInput.substring(0,i);
+					
+					arrayOfNumbers.add(substr2);
+					arrayOfOperators.add(substr);
+					
+					fullStringOfInput = fullStringOfInput.substring(i+1, fullStringOfInput.length());
+					i = 0;
+				}
+			}
+			arrayOfNumbers.add(fullStringOfInput);
+			
+			System.out.println(arrayOfNumbers);
+			System.out.println(arrayOfOperators);
+			
+			//System.out.println(answer);
+			
+			while(!arrayOfNumbers.isEmpty() || !arrayOfOperators.isEmpty() ) {
+				//System.out.println(arrayOfNumbers.isEmpty());
+				//System.out.println(arrayOfOperators.isEmpty());
+
+				
+				if(arrayOfOperators.contains("%") || arrayOfOperators.contains("*") || arrayOfOperators.contains("/")) {
+					
+					//System.out.println(arrayOfOperators.contains("%"));
+					
+					int index1 = 1000, index2 = 1000, index3 = 1000;
+					
+					if(arrayOfOperators.contains("%")) {
+						index1 = arrayOfOperators.indexOf("%");
+					}
+					if(arrayOfOperators.contains("*")) {
+						index2 = arrayOfOperators.indexOf("*");
+					}
+					if(arrayOfOperators.contains("/")) {
+						index3 = arrayOfOperators.indexOf("/");
+					}
+					
+					if(index1 < index2) {
+						if(index1 < index3) {
+							
+							double x = Double.parseDouble(arrayOfNumbers.get(index1));
+							double y = Double.parseDouble(arrayOfNumbers.get(index1+1));
+
+							arrayOfNumbers.set(index1, Double.toString(x%y));
+							arrayOfNumbers.remove(index1+1);
+							
+							arrayOfOperators.remove(index1);
+							
+						} else {
+							double x = Double.parseDouble(arrayOfNumbers.get(index3));
+							double y = Double.parseDouble(arrayOfNumbers.get(index3+1));
+
+							arrayOfNumbers.set(index3, Double.toString(x/y));
+							arrayOfNumbers.remove(index3+1);
+							
+							arrayOfOperators.remove(index3);
+						}
+					} else {
+						if(index2 < index3) {
+							double x = Double.parseDouble(arrayOfNumbers.get(index2));
+							double y = Double.parseDouble(arrayOfNumbers.get(index2+1));
+
+							arrayOfNumbers.set(index2, Double.toString(x*y));
+							arrayOfNumbers.remove(index2+1);
+							
+							arrayOfOperators.remove(index2);
+						} else {
+							double x = Double.parseDouble(arrayOfNumbers.get(index3));
+							double y = Double.parseDouble(arrayOfNumbers.get(index3+1));
+
+							arrayOfNumbers.set(index3, Double.toString(x/y));
+							arrayOfNumbers.remove(index3+1);
+							
+							arrayOfOperators.remove(index3);
+						}
+					}
+				} else if(arrayOfOperators.contains("+") || arrayOfOperators.contains("-")) {
+					
+					int index1 = 1000, index2 = 1000;
+					
+					if(arrayOfOperators.contains("+")) {
+						index1 = arrayOfOperators.indexOf("+");
+					}
+					if(arrayOfOperators.contains("-")) {
+						index2 = arrayOfOperators.indexOf("-");
+					}
+					
+					if(index1 < index2) {
+						double x = Double.parseDouble(arrayOfNumbers.get(index1));
+						double y = Double.parseDouble(arrayOfNumbers.get(index1+1));
+
+						arrayOfNumbers.set(index1, Double.toString(x+y));
+						arrayOfNumbers.remove(index1+1);
+						arrayOfOperators.remove(index1);
+						
+					} else {
+						double x = Double.parseDouble(arrayOfNumbers.get(index2));
+						double y = Double.parseDouble(arrayOfNumbers.get(index2+1));
+						
+						arrayOfNumbers.set(index2, Double.toString(x-y));
+						arrayOfNumbers.remove(index2+1);
+						arrayOfOperators.remove(index2);
+					}
+
+					//System.out.println(index);
+					//System.out.println("current array: " + arrayOfNumbers);
+					
+				} else {
+					//System.out.println("Something went wrong. Or we good.");
+					
+					answer = Double.parseDouble(arrayOfNumbers.get(0));
+					
+					arrayOfNumbers.remove(0);
+				}
+			}
+		
+			//System.out.println(arrayOfNumbers);
+			
+			if(answer == Math.floor(answer)) {
+				int answerFinal = answer.intValue();
+				System.out.println(answerFinal);
+				outputFieldStandart.setText(Integer.toString(answerFinal));
+				System.out.println("------");
+			} else {
+				System.out.println(answer);
+				outputFieldStandart.setText(Double.toString(answer));
+				System.out.println("------");
+			}
+		} else {
+			System.out.println("Wrong end of input (after press equals)");
+		}
+	}
+}
+*/
+
+/*Clac 0.1*/
+/*
 class OnePressed extends Standart implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String str = outputFieldStandart.getText();
@@ -540,9 +941,9 @@ class ZeroPressed extends Standart implements ActionListener{
 		}
 	}
 }
-
-
+*/
 /*Operators*/
+/*
 class PlusPressed extends Standart implements ActionListener{
 	public void actionPerformed(ActionEvent e) { 
 
@@ -623,7 +1024,6 @@ class PersentPressed extends Standart implements ActionListener{
 		}
 	}
 }
-
 class DotPressed extends Standart implements ActionListener{
 	public void actionPerformed(ActionEvent e) { 
 
@@ -640,405 +1040,4 @@ class DotPressed extends Standart implements ActionListener{
 		}
 	}
 }
-class DeleteOnePressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldStandart.getText();
-		Standart.outputFieldStandart.setText(str.substring(0, str.length()-1));
-	}
-}
-class DeleteAllPressed  extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		Standart.outputFieldStandart.setText("");
-	}
-}
-class ChangeSignPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		
-		String str = outputFieldStandart.getText();
-		
-		char charAtEnd = str.charAt(str.length() - 1);
-		
-		if(!str.isEmpty() && !(str.contains("%") || str.contains("*") || str.contains("/") || str.contains("-") || str.contains("+")) ) {
-
-			if(charAtEnd != '%' && charAtEnd != '*' && charAtEnd != '/' && charAtEnd != '+' && charAtEnd != '-') {
-				Standart.outputFieldStandart.setText("-" + str);
-			} 
-			
-		} else if(str.length() == 1 && charAtEnd != '%' && charAtEnd != '*' && charAtEnd != '/' && charAtEnd != '+' && charAtEnd != '-') {
-			Standart.outputFieldStandart.setText("-" + str);
-		} else {
-			Standart.outputFieldStandart.setText("-");
-		}
-	}
-}
-
-class EqualsPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		
-		String fullStringOfInput = outputFieldStandart.getText();
-		char charAtEnd = fullStringOfInput.charAt(fullStringOfInput.length() - 1);
-		
-		if(charAtEnd != '%' && charAtEnd != '*' && charAtEnd != '/' && charAtEnd != '+' && charAtEnd != '-') {
-			
-			ArrayList<String> arrayOfNumbers = new ArrayList<String>();
-			ArrayList<String> arrayOfOperators = new ArrayList<String>();
-
-			Double answer = 0.0;
-			
-			int i = 0;
-			if(fullStringOfInput.charAt(0) == '-') {
-				i = 1;
-			}
-			for(; i < fullStringOfInput.length(); ++i) {
-				
-				String substr = fullStringOfInput.substring(i, i+1); 
-				
-				if("+".equals(substr) || "-".equals(substr) || "/".equals(substr) || "*".equals(substr) || "%".equals(substr)) {
-					String substr2 = fullStringOfInput.substring(0,i);
-					
-					arrayOfNumbers.add(substr2);
-					arrayOfOperators.add(substr);
-					
-					fullStringOfInput = fullStringOfInput.substring(i+1, fullStringOfInput.length());
-					i = 0;
-				}
-			}
-			arrayOfNumbers.add(fullStringOfInput);
-			
-			System.out.println(arrayOfNumbers);
-			System.out.println(arrayOfOperators);
-			
-			//System.out.println(answer);
-			
-			while(!arrayOfNumbers.isEmpty() || !arrayOfOperators.isEmpty() ) {
-				//System.out.println(arrayOfNumbers.isEmpty());
-				//System.out.println(arrayOfOperators.isEmpty());
-				
-				/*
-				if(arrayOfOperators.get(0) == "-" && !arrayOfNumbers.isEmpty()) {
-					arrayOfOperators.remove(0);
-					System.out.println("cringe");
-				} 
-				*/
-				
-				if(arrayOfOperators.contains("%") || arrayOfOperators.contains("*") || arrayOfOperators.contains("/")) {
-					
-					//System.out.println(arrayOfOperators.contains("%"));
-					
-					int index1 = 1000, index2 = 1000, index3 = 1000;
-					
-					if(arrayOfOperators.contains("%")) {
-						index1 = arrayOfOperators.indexOf("%");
-					}
-					if(arrayOfOperators.contains("*")) {
-						index2 = arrayOfOperators.indexOf("*");
-					}
-					if(arrayOfOperators.contains("/")) {
-						index3 = arrayOfOperators.indexOf("/");
-					}
-					
-					if(index1 < index2) {
-						if(index1 < index3) {
-							
-							double x = Double.parseDouble(arrayOfNumbers.get(index1));
-							double y = Double.parseDouble(arrayOfNumbers.get(index1+1));
-
-							arrayOfNumbers.set(index1, Double.toString(x%y));
-							arrayOfNumbers.remove(index1+1);
-							
-							arrayOfOperators.remove(index1);
-							
-						} else {
-							double x = Double.parseDouble(arrayOfNumbers.get(index3));
-							double y = Double.parseDouble(arrayOfNumbers.get(index3+1));
-
-							arrayOfNumbers.set(index3, Double.toString(x/y));
-							arrayOfNumbers.remove(index3+1);
-							
-							arrayOfOperators.remove(index3);
-						}
-					} else {
-						if(index2 < index3) {
-							double x = Double.parseDouble(arrayOfNumbers.get(index2));
-							double y = Double.parseDouble(arrayOfNumbers.get(index2+1));
-
-							arrayOfNumbers.set(index2, Double.toString(x*y));
-							arrayOfNumbers.remove(index2+1);
-							
-							arrayOfOperators.remove(index2);
-						} else {
-							double x = Double.parseDouble(arrayOfNumbers.get(index3));
-							double y = Double.parseDouble(arrayOfNumbers.get(index3+1));
-
-							arrayOfNumbers.set(index3, Double.toString(x/y));
-							arrayOfNumbers.remove(index3+1);
-							
-							arrayOfOperators.remove(index3);
-						}
-					}
-				} else if(arrayOfOperators.contains("+") || arrayOfOperators.contains("-")) {
-					
-					int index1 = 1000, index2 = 1000;
-					
-					if(arrayOfOperators.contains("+")) {
-						index1 = arrayOfOperators.indexOf("+");
-					}
-					if(arrayOfOperators.contains("-")) {
-						index2 = arrayOfOperators.indexOf("-");
-					}
-					
-					if(index1 < index2) {
-						double x = Double.parseDouble(arrayOfNumbers.get(index1));
-						double y = Double.parseDouble(arrayOfNumbers.get(index1+1));
-
-						arrayOfNumbers.set(index1, Double.toString(x+y));
-						arrayOfNumbers.remove(index1+1);
-						arrayOfOperators.remove(index1);
-						
-					} else {
-						double x = Double.parseDouble(arrayOfNumbers.get(index2));
-						double y = Double.parseDouble(arrayOfNumbers.get(index2+1));
-						
-						arrayOfNumbers.set(index2, Double.toString(x-y));
-						arrayOfNumbers.remove(index2+1);
-						arrayOfOperators.remove(index2);
-					}
-
-					//System.out.println(index);
-					//System.out.println("current array: " + arrayOfNumbers);
-					
-				} else {
-					//System.out.println("Something went wrong. Or we good.");
-					
-					answer = Double.parseDouble(arrayOfNumbers.get(0));
-					
-					arrayOfNumbers.remove(0);
-				}
-			}
-		
-			//System.out.println(arrayOfNumbers);
-			
-			if(answer == Math.floor(answer)) {
-				int answerFinal = answer.intValue();
-				System.out.println(answerFinal);
-				outputFieldStandart.setText(Integer.toString(answerFinal));
-				System.out.println("------");
-			} else {
-				System.out.println(answer);
-				outputFieldStandart.setText(Double.toString(answer));
-				System.out.println("------");
-			}
-		} else {
-			System.out.println("Wrong end of input (after press equals)");
-		}
-	}
-}
-
-/*Switch to standart calculator*/
-class StandartMenuPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		
-		scientificFrame.setVisible(false);
-		derivativesFrame.setVisible(false);
-		integralsFrame.setVisible(false);
-		
-		standartFrame.setVisible(true);
-	}
-}
-/*Switch to scientific calculator*/
-class ScientificMenuPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		
-		standartFrame.setVisible(false);
-		derivativesFrame.setVisible(false);
-		integralsFrame.setVisible(false);
-		
-		scientificFrame.setVisible(true);
-	}
-}
-
-/*Switch to calculator of the derivatives*/
-class DerivativesMenuPressed extends Standart implements ActionListener{
-
-	public void actionPerformed(ActionEvent e) { 
-		
-		standartFrame.setVisible(false);
-		scientificFrame.setVisible(false);
-		integralsFrame.setVisible(false);
-		
-		derivativesFrame.setVisible(true);
-	}
-}
-
-/*Switch to calculator of the integrals*/
-class IntegralsMenuPressed extends Standart implements ActionListener{
-	
-	public void actionPerformed(ActionEvent e) { 
-		
-		standartFrame.setVisible(false);
-		scientificFrame.setVisible(false);
-		derivativesFrame.setVisible(false);
-		
-		integralsFrame.setVisible(true);
-	}
-}
-
-
-
-
-
-/*Design side*/
-class darkThemeButtonDefaultStandartPressed extends Standart implements ActionListener {
-	public void actionPerformed(ActionEvent e) {
-
-		/*Change background color*/
-		menuFieldStandart.setBackground(colorSlightlyDarkGrey);
-		nameStandart.setBackground(colorSlightlyDarkGrey);
-		darkThemeButtonDefaultStandart.setBackground(colorSlightlyDarkGrey);
-		lightThemeButtonDefaultStandart.setBackground(colorSlightlyDarkGrey);
-		
-		switchPanelStandart.setBackground(colorSlightlyDarkGrey);
-		standartCalcButtonStandart.setBackground(colorSlightlyDarkGrey);
-		scientificCalcButtonStandart.setBackground(colorSlightlyDarkGrey);
-		derivativesCalcButtonStandart.setBackground(colorSlightlyDarkGrey);
-		integralsCalcButtonStandart.setBackground(colorSlightlyDarkGrey);
-		outputFieldStandart.setBackground(colorSlightlyDarkGrey);
-		
-		buttonsLabelStandart.setBackground(colorBlack);
-		
-		oneButton.setBackground(colorSlightlyDarkGrey);
-		twoButton.setBackground(colorSlightlyDarkGrey);
-		threeButton.setBackground(colorSlightlyDarkGrey);
-		fourButton.setBackground(colorSlightlyDarkGrey);
-		fiveButton.setBackground(colorSlightlyDarkGrey);
-		sixButton.setBackground(colorSlightlyDarkGrey);
-		sevenButton.setBackground(colorSlightlyDarkGrey);
-		eightButton.setBackground(colorSlightlyDarkGrey);
-		nineButton.setBackground(colorSlightlyDarkGrey);
-		zeroButton.setBackground(colorSlightlyDarkGrey);
-		deleteAllButton.setBackground(colorSlightlyDarkGrey);
-		deleteOneButton.setBackground(colorSlightlyDarkGrey);
-		persentButton.setBackground(colorSlightlyDarkGrey);
-		equalsButton.setBackground(colorSlightlyDarkGrey);
-		changeSignButton.setBackground(colorSlightlyDarkGrey);
-		dotButton.setBackground(colorSlightlyDarkGrey);
-		plusButton.setBackground(colorSlightlyDarkGrey);
-		minusButton.setBackground(colorSlightlyDarkGrey);
-		multipleButton.setBackground(colorSlightlyDarkGrey);
-		divideButton.setBackground(colorSlightlyDarkGrey);
-		
-		
-		/*Change font color*/
-		oneButton.setForeground(colorDarkWhite);
-		twoButton.setForeground(colorDarkWhite);
-		threeButton.setForeground(colorDarkWhite);
-		fourButton.setForeground(colorDarkWhite);
-		fiveButton.setForeground(colorDarkWhite);
-		sixButton.setForeground(colorDarkWhite);
-		sevenButton.setForeground(colorDarkWhite);
-		eightButton.setForeground(colorDarkWhite);
-		nineButton.setForeground(colorDarkWhite);
-		zeroButton.setForeground(colorDarkWhite);
-		deleteAllButton.setForeground(colorDarkWhite);
-		deleteOneButton.setForeground(colorDarkWhite);
-		persentButton.setForeground(colorDarkWhite);
-		equalsButton.setForeground(colorDarkWhite);
-		changeSignButton.setForeground(colorDarkWhite);
-		dotButton.setForeground(colorDarkWhite);
-		plusButton.setForeground(colorDarkWhite);
-		minusButton.setForeground(colorDarkWhite);
-		multipleButton.setForeground(colorDarkWhite);
-		divideButton.setForeground(colorDarkWhite);
-		
-		menuFieldStandart.setForeground(colorDarkWhite);
-		nameStandart.setForeground(colorDarkWhite);
-		darkThemeButtonDefaultStandart.setForeground(colorDarkWhite);
-		lightThemeButtonDefaultStandart.setForeground(colorDarkWhite);
-		switchPanelStandart.setForeground(colorDarkWhite);
-		standartCalcButtonStandart.setForeground(colorDarkWhite);
-		scientificCalcButtonStandart.setForeground(colorDarkWhite);
-		derivativesCalcButtonStandart.setForeground(colorDarkWhite);
-		integralsCalcButtonStandart.setForeground(colorDarkWhite);
-		//outputFieldStandart.setForeground(colorDarkWhite);
-		
-		/*Here is changing image colors...*/
-
-		
-		
-		
-	}
-}
-class lightThemeButtonDefaultStandartPressed extends Standart implements ActionListener {
-	public void actionPerformed(ActionEvent e) {
-		
-		/*Change background color*/
-		menuFieldStandart.setBackground(colorDarkWhite);
-		nameStandart.setBackground(colorDarkWhite);
-		darkThemeButtonDefaultStandart.setBackground(colorDarkWhite);
-		lightThemeButtonDefaultStandart.setBackground(colorDarkWhite);
-		switchPanelStandart.setBackground(colorDarkWhite);
-		standartCalcButtonStandart.setBackground(colorDarkWhite);
-		scientificCalcButtonStandart.setBackground(colorDarkWhite);
-		derivativesCalcButtonStandart.setBackground(colorDarkWhite);
-		integralsCalcButtonStandart.setBackground(colorDarkWhite);
-		outputFieldStandart.setBackground(colorDarkWhite);
-		
-		buttonsLabelStandart.setBackground(colorWhite);
-		
-		oneButton.setBackground(colorDarkWhite);
-		twoButton.setBackground(colorDarkWhite);
-		threeButton.setBackground(colorDarkWhite);
-		fourButton.setBackground(colorDarkWhite);
-		fiveButton.setBackground(colorDarkWhite);
-		sixButton.setBackground(colorDarkWhite);
-		sevenButton.setBackground(colorDarkWhite);
-		eightButton.setBackground(colorDarkWhite);
-		nineButton.setBackground(colorDarkWhite);
-		zeroButton.setBackground(colorDarkWhite);
-		deleteAllButton.setBackground(colorDarkWhite);
-		deleteOneButton.setBackground(colorDarkWhite);
-		persentButton.setBackground(colorDarkWhite);
-		equalsButton.setBackground(colorDarkWhite);
-		changeSignButton.setBackground(colorDarkWhite);
-		dotButton.setBackground(colorDarkWhite);
-		plusButton.setBackground(colorDarkWhite);
-		minusButton.setBackground(colorDarkWhite);
-		multipleButton.setBackground(colorDarkWhite);
-		divideButton.setBackground(colorDarkWhite);
-		
-		/*Change font color*/
-		oneButton.setForeground(colorBlack);
-		twoButton.setForeground(colorBlack);
-		threeButton.setForeground(colorBlack);
-		fourButton.setForeground(colorBlack);
-		fiveButton.setForeground(colorBlack);
-		sixButton.setForeground(colorBlack);
-		sevenButton.setForeground(colorBlack);
-		eightButton.setForeground(colorBlack);
-		nineButton.setForeground(colorBlack);
-		zeroButton.setForeground(colorBlack);
-		deleteAllButton.setForeground(colorBlack);
-		deleteOneButton.setForeground(colorBlack);
-		persentButton.setForeground(colorBlack);
-		equalsButton.setForeground(colorBlack);
-		changeSignButton.setForeground(colorBlack);
-		dotButton.setForeground(colorBlack);
-		plusButton.setForeground(colorBlack);
-		minusButton.setForeground(colorBlack);
-		multipleButton.setForeground(colorBlack);
-		divideButton.setForeground(colorBlack);
-		
-		menuFieldStandart.setForeground(colorBlack);
-		nameStandart.setForeground(colorBlack);
-		darkThemeButtonDefaultStandart.setForeground(colorBlack);
-		lightThemeButtonDefaultStandart.setForeground(colorBlack);
-		switchPanelStandart.setForeground(colorBlack);
-		standartCalcButtonStandart.setForeground(colorBlack);
-		scientificCalcButtonStandart.setForeground(colorBlack);
-		derivativesCalcButtonStandart.setForeground(colorBlack);
-		integralsCalcButtonStandart.setForeground(colorBlack);
-		outputFieldStandart.setForeground(colorBlack);
-	
-	}
-}
-
+*/
