@@ -1,8 +1,8 @@
-# VCalc 0.1
+# VCalc 0.2
 ---------------------------------------
 Handy calculator with useful features for math students.
 
-<i>Version: 0.1</i> <br>
+<i>Version: 0.2</i> <br>
 <i>Author: VladWick</i>
 
 ---------------------------------------
@@ -52,4 +52,10 @@ Every single button has its own ActionListener class that doing the same thing i
 		&emsp; &emsp; no coefficients <br>
 		&emsp; &emsp; no other variables (only x)<br>
 	&emsp; Stupid and raw side of programm as well as Derivatives <br>
+	
+---------------------------------------
+<h2>UPDATE VCalc0.2</h2>
+&emsp; Dark and white mode move to another new class called "Design"<br>
+&emsp; Move switching classes to the "Design"<br>
+&emsp; Make a Calc with the same functionality. but with one operation at a time in StandartCalc<br>
 	
