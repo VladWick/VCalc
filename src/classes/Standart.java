@@ -9,55 +9,17 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.border.*;
 
 public class Standart {
 	
-				/**********************/
-				/**Neutral components**/
-				/**********************/
-	
-	public static ArrayList<Character> operators = new ArrayList<Character>();
-	public static ArrayList<Integer> numbers = new ArrayList<Integer>();
-	
-	//public static ArrayList<Double> operations = new ArrayList<Double>();
-	public static double[] operations = {0.0, 0.0};
-	public static char currentOperator = ' ';
-	
-	Border solidBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
-	
-	Font font18 = new Font(Font.SANS_SERIF,  Font.BOLD, 18);
-	Font font20 = new Font(Font.SANS_SERIF,  Font.BOLD, 20);
-	Font font25 = new Font(Font.SANS_SERIF,  Font.BOLD, 25);
-	
-	/*Dark mode*/
-	Color colorBlack = new Color(0, 0, 0);
-	Color colorDarkGrey = new Color(12, 12, 12);
-	Color colorSlightlyDarkGrey = new Color(75, 75, 75);
-	
-	/*Light mode*/
-	Color colorWhite = new Color(255, 255, 255);
-	Color colorDarkWhite = new Color(250, 250, 250);
-	Color colorDeeperDarkWhite = new Color(245, 245, 245);
-	
-	/*Example colors*/
-	Color colorRed = new Color(255, 0, 0);
-	Color colorGreen = new Color(0, 255, 0);
-	Color colorBlue = new Color(0, 0, 255);
-	
-				/***********************/
-				/*********Frames********/
-				/***********************/
-	
 	public static JFrame standartFrame = new JFrame();
 	public static JFrame scientificFrame = new JFrame();
 	public static JFrame derivativesFrame = new JFrame();
 	public static JFrame integralsFrame = new JFrame(); 
-				
-				/**************************/
-				/*StandartFrame components*/
-				/**************************/
 
 	public JPanel mainPanelStandart = new JPanel();
 	
@@ -65,8 +27,6 @@ public class Standart {
 	public static JLabel nameStandart = new JLabel("Standart");
 	public static JButton darkThemeButtonDefaultStandart = new JButton();
 	public static JButton lightThemeButtonDefaultStandart = new JButton();
-	//public static JButton darkThemeButtonDark = new JButton();
-	//public static JButton lightThemeButtonDark = new JButton();
 	
 	public static JPanel switchPanelStandart = new JPanel();
 	public static JButton standartCalcButtonStandart = new JButton();
@@ -76,7 +36,6 @@ public class Standart {
 	
 	public static JLabel outputFieldStandart = new JLabel();
 	
-	/*Calculators`s buttons*/
 	public static JPanel buttonsLabelStandart = new JPanel();
 	public static JButton deleteAllButton = new JButton();
 	public static JButton deleteOneButton = new JButton();
@@ -98,272 +57,222 @@ public class Standart {
 	public static JButton dotButton = new JButton();
 	public static JButton equalsButton = new JButton();
 	public static JButton changeSignButton = new JButton();
-	
-	
-	/*********************************************/
 
-	public void createStandartCalc() throws IOException {
-		
-		operators.add('+');
-		operators.add('-');
-		operators.add('*');
-		operators.add('/');
-		operators.add('%');
-		
-		numbers.add(0);
-		numbers.add(1);
-		numbers.add(2);
-		numbers.add(3);
-		numbers.add(4);
-		numbers.add(5);
-		numbers.add(6);
-		numbers.add(7);
-		numbers.add(8);
-		numbers.add(9);
+	// Calculation variables
+	public static List<Character> operators = Arrays.asList('+', '-', '*', '/', '%');
+	public static List<Integer> numbers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
-		/*Main Panel options*/
-		//mainPanelStandart.setBounds(30,100, 50, 50);
-		mainPanelStandart.setLayout(new GridLayout(3,1));
-		
-		/*****************************************/
-		/****************Upper menu***************/
-		/*****************************************/
-		
-		nameStandart.setText("Standart Calc");
-		nameStandart.setFont(font20);
-		nameStandart.setVerticalAlignment(JLabel.CENTER);
-		nameStandart.setHorizontalAlignment(JLabel.CENTER);
-		
-		/*Default theme buttons*/
-		BufferedImage buttonIconDark = ImageIO.read(new File("src/images/iconDarkTheme.png"));
-		buttonIconDark = resize(buttonIconDark, 50, 50);
-		darkThemeButtonDefaultStandart = new JButton(new ImageIcon(buttonIconDark));
-		darkThemeButtonDefaultStandart.setBorder(BorderFactory.createEmptyBorder());
-		darkThemeButtonDefaultStandart.setContentAreaFilled(false);
-		darkThemeButtonDefaultStandart.addActionListener(new darkThemeButtonDefaultStandartPressed());
-				
-		BufferedImage buttonIconLight = ImageIO.read(new File("src/images/iconlightTheme.png"));
-		buttonIconLight = resize(buttonIconLight, 50, 50);
-		lightThemeButtonDefaultStandart = new JButton(new ImageIcon(buttonIconLight));
-		lightThemeButtonDefaultStandart.setBorder(BorderFactory.createEmptyBorder());
-		lightThemeButtonDefaultStandart.setContentAreaFilled(false);
-		lightThemeButtonDefaultStandart.addActionListener(new lightThemeButtonDefaultStandartPressed());
-		
-		/*Dark theme images*/
-		/*
-		BufferedImage buttonIconDarkInDarkMode = ImageIO.read(new File("src/images/iconDarkModeWhite.png"));
-		buttonIconDarkInDarkMode = resize(buttonIconDarkInDarkMode, 50, 50);
-		darkThemeButtonDark = new JButton(new ImageIcon(buttonIconDarkInDarkMode));
-		darkThemeButtonDark.setBorder(BorderFactory.createEmptyBorder());
-		darkThemeButtonDark.setContentAreaFilled(false);
-		//darkThemeButtonDark.addActionListener(new darkThemeButtonDarkPressed());
-		darkThemeButtonDark.setBackground(colorWhite);
-		darkThemeButtonDark.setVisible(false);
-		
-		BufferedImage buttonIconLightInDarkMode = ImageIO.read(new File("src/images/iconLightThemeWhite.png"));
-		buttonIconLightInDarkMode = resize(buttonIconLightInDarkMode, 50, 50);
-		lightThemeButtonDark = new JButton(new ImageIcon(buttonIconLightInDarkMode));
-		lightThemeButtonDark.setBorder(BorderFactory.createEmptyBorder());
-		lightThemeButtonDark.setContentAreaFilled(false);
-		//lightThemeButtonDark.addActionListener(new darkThemeButtonDarkPressed());
-		lightThemeButtonDark.setVisible(false);
-		*/
+	public static double[] operations = {0.0, 0.0};
+	public static char currentOperator = ' ';
+	
+	// Neutral components
+	public static Border solidBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
+	public static Font font18 = new Font(Font.SANS_SERIF,  Font.BOLD, 18);
+	public static Font font20 = new Font(Font.SANS_SERIF,  Font.BOLD, 20);
+	public static Font font25 = new Font(Font.SANS_SERIF,  Font.BOLD, 25);
+
+	public static Color colorBlack = new Color(0, 0, 0);
+	public static Color colorDarkGrey = new Color(12, 12, 12);
+	public static Color colorSlightlyDarkGrey = new Color(75, 75, 75);
+	public static Color colorWhite = new Color(255, 255, 255);
+	public static Color colorDarkWhite = new Color(250, 250, 250);
+	public static Color colorDeeperDarkWhite = new Color(245, 245, 245);
+	public static Color colorRed = new Color(255, 0, 0);
+	public static Color colorGreen = new Color(0, 255, 0);
+	public static Color colorBlue = new Color(0, 0, 255);
+	
+	public void addingComponentsInTheRightOrder() {
 		
 		menuFieldStandart.add(nameStandart);
 		menuFieldStandart.add(darkThemeButtonDefaultStandart);
 		menuFieldStandart.add(lightThemeButtonDefaultStandart);
-		//menuFieldStandart.add(darkThemeButtonDark);
-		//menuFieldStandart.add(lightThemeButtonDark);
-		
-		menuFieldStandart.setLayout(new GridLayout(1, 3));
-		
-					/*****************************************/
-					/**************Switch buttons*************/
-					/*****************************************/
-		
-		standartCalcButtonStandart.setText("Standart");
-		standartCalcButtonStandart.addActionListener(new StandartMenuPressed());
-		standartCalcButtonStandart.setFont(font18);
-		
-		scientificCalcButtonStandart.setText("Scientific");
-		scientificCalcButtonStandart.addActionListener(new ScientificMenuPressed());
-		scientificCalcButtonStandart.setFont(font18);
-
-		derivativesCalcButtonStandart.setText("Derivatives");
-		derivativesCalcButtonStandart.addActionListener(new DerivativesMenuPressed());
-		derivativesCalcButtonStandart.setFont(font18);
-
-		integralsCalcButtonStandart.setText("Integrals");
-		integralsCalcButtonStandart.addActionListener(new IntegralsMenuPressed());
-		integralsCalcButtonStandart.setFont(font18);
 		
 		switchPanelStandart.add(standartCalcButtonStandart);
 		switchPanelStandart.add(scientificCalcButtonStandart);
 		switchPanelStandart.add(derivativesCalcButtonStandart);
 		switchPanelStandart.add(integralsCalcButtonStandart);
-		switchPanelStandart.setLayout(new GridLayout(4, 1));
-	
-		/*Output field*/
-		outputFieldStandart.setBounds(30,100, 50, 50);
-		outputFieldStandart.setBackground(colorGreen);
-		outputFieldStandart.setFont(font20);
-		outputFieldStandart.setBorder(solidBorder);
-		outputFieldStandart.setVerticalAlignment(JLabel.CENTER);
-		outputFieldStandart.setHorizontalAlignment(JLabel.CENTER);
 		
 		mainPanelStandart.add(menuFieldStandart);
 		mainPanelStandart.add(switchPanelStandart);
 		mainPanelStandart.add(outputFieldStandart);
 		
-		/*All the calculation buttons*/
-		buttonsLabelStandart.setBounds(40, 50, 0, 0);
+		buttonsLabelStandart.add(deleteAllButton);
+		buttonsLabelStandart.add(deleteOneButton);
+		buttonsLabelStandart.add(persentButton);
+		buttonsLabelStandart.add(divideButton);
+				
+		buttonsLabelStandart.add(sevenButton);
+		buttonsLabelStandart.add(eightButton);
+		buttonsLabelStandart.add(nineButton);
+		buttonsLabelStandart.add(multipleButton);
+				
+		buttonsLabelStandart.add(fourButton);
+		buttonsLabelStandart.add(fiveButton);
+		buttonsLabelStandart.add(sixButton);
+		buttonsLabelStandart.add(minusButton);
+				
+		buttonsLabelStandart.add(oneButton);
+		buttonsLabelStandart.add(twoButton);
+		buttonsLabelStandart.add(threeButton);
+		buttonsLabelStandart.add(plusButton);
+				
+		buttonsLabelStandart.add(zeroButton);
+		buttonsLabelStandart.add(dotButton);
+		buttonsLabelStandart.add(changeSignButton);
+		buttonsLabelStandart.add(equalsButton);
+	}
+	
+	public void customizeComponents() throws IOException {
 		
+		mainPanelStandart.setLayout(new GridLayout(3, 1));
+		
+		nameStandart.setText("Standart Calc");
+		nameStandart.setFont(font20);
+		nameStandart.setVerticalAlignment(JLabel.CENTER);
+		nameStandart.setHorizontalAlignment(JLabel.CENTER);
+		BufferedImage buttonIconDark = ImageIO.read(new File("src/images/iconDarkTheme.png"));
+		buttonIconDark = resize(buttonIconDark, 50, 50);
+		darkThemeButtonDefaultStandart = new JButton(new ImageIcon(buttonIconDark));
+		darkThemeButtonDefaultStandart.setBorder(BorderFactory.createEmptyBorder());
+		darkThemeButtonDefaultStandart.setContentAreaFilled(false);	
+		BufferedImage buttonIconLight = ImageIO.read(new File("src/images/iconlightTheme.png"));
+		buttonIconLight = resize(buttonIconLight, 50, 50);
+		lightThemeButtonDefaultStandart = new JButton(new ImageIcon(buttonIconLight));
+		lightThemeButtonDefaultStandart.setBorder(BorderFactory.createEmptyBorder());
+		lightThemeButtonDefaultStandart.setContentAreaFilled(false);
+		menuFieldStandart.setLayout(new GridLayout(1, 3));
+		
+		standartCalcButtonStandart.setText("Standart");
+		standartCalcButtonStandart.setFont(font18);
+		scientificCalcButtonStandart.setText("Scientific");
+		scientificCalcButtonStandart.setFont(font18);
+		derivativesCalcButtonStandart.setText("Derivatives");
+		derivativesCalcButtonStandart.setFont(font18);
+		integralsCalcButtonStandart.setText("Integrals");
+		integralsCalcButtonStandart.setFont(font18);
+		switchPanelStandart.setLayout(new GridLayout(4, 1));
+		
+		outputFieldStandart.setBounds(30,100, 50, 50);
+		outputFieldStandart.setFont(font20);
+		outputFieldStandart.setBorder(solidBorder);
+		outputFieldStandart.setVerticalAlignment(JLabel.CENTER);
+		outputFieldStandart.setHorizontalAlignment(JLabel.CENTER);
+		
+		// Buttons started here  
 		deleteAllButton.setText("AC");
 		deleteAllButton.setName("deleteAll");
-		deleteAllButton.addActionListener(new DeletePressed());
 		deleteAllButton.setFont(font20);
 		
 		BufferedImage buttonIconDelete = ImageIO.read(new File("src/images/iconDelete.png"));
 		buttonIconDelete = resize(buttonIconDelete, 35, 35);
 		deleteOneButton = new JButton(new ImageIcon(buttonIconDelete));
-		//deleteOneButton.setBorder(BorderFactory.createEmptyBorder());
-		//deleteOneButton.setContentAreaFilled(false);
-		deleteOneButton.addActionListener(new DeletePressed());
 		deleteOneButton.setName("deleteOne");
 		
 		persentButton.setText("%");
 		persentButton.setName("%");
-		persentButton.addActionListener(new OperatorPressed());
 		persentButton.setFont(font20);
 
 		divideButton.setText("/");
 		divideButton.setName("/");
-		divideButton.addActionListener(new OperatorPressed());
 		divideButton.setFont(font20);
 	
 		sevenButton.setText("7");
 		sevenButton.setName("7");
-		sevenButton.addActionListener(new NumberPressed());
 		sevenButton.setFont(font20);
 		
 		eightButton.setText("8");
 		eightButton.setName("8");
-		eightButton.addActionListener(new NumberPressed());
 		eightButton.setFont(font20);
-		eightButton.setBackground(colorRed);
 		
 		nineButton.setText("9");
 		nineButton.setName("9");
-		nineButton.addActionListener(new NumberPressed());
 		nineButton.setFont(font20);
 		
 		multipleButton.setText("*");
 		multipleButton.setName("*");
-		multipleButton.addActionListener(new OperatorPressed());
 		multipleButton.setFont(font20);
 		
 		fourButton.setText("4");
 		fourButton.setName("4");
-		fourButton.addActionListener(new NumberPressed());
 		fourButton.setFont(font20);
 		
 		fiveButton.setText("5");
 		fiveButton.setName("5");
-		fiveButton.addActionListener(new NumberPressed());
 		fiveButton.setFont(font20);
 		
 		sixButton.setText("6");
 		sixButton.setName("6");
-		sixButton.addActionListener(new NumberPressed());
 		sixButton.setFont(font20);
 		
 		minusButton.setText("-");
 		minusButton.setName("-");
-		minusButton.addActionListener(new OperatorPressed());
 		minusButton.setFont(font20);
 	
 		oneButton.setText("1");
 		oneButton.setName("1");
-		oneButton.addActionListener(new NumberPressed());
 		oneButton.setFont(font20);
 		
 		twoButton.setText("2");
 		twoButton.setName("2");
-		twoButton.addActionListener(new NumberPressed());
 		twoButton.setFont(font20);
 		
 		threeButton.setText("3");
 		threeButton.setName("3");
-		threeButton.addActionListener(new NumberPressed());
 		threeButton.setFont(font20);
 	
 		plusButton.setText("+");
 		plusButton.setName("+");
-		plusButton.addActionListener(new OperatorPressed());
 		plusButton.setFont(font20);
 		
 		zeroButton.setText("0");
 		zeroButton.setName("0");
-		zeroButton.addActionListener(new NumberPressed());
 		zeroButton.setFont(font20);
 		
 		dotButton.setText(".");
 		dotButton.setName(".");
-		dotButton.addActionListener(new OperatorPressed());
 		dotButton.setFont(font20);
 		
 		changeSignButton.setText("+/-");
-		changeSignButton.addActionListener(new ChangeSignPressed());
 		changeSignButton.setFont(font20);
 		
 		equalsButton.setText("=");
-		equalsButton.addActionListener(new EqualsPressed());
 		equalsButton.setFont(font20);
-
-		//buttonsLabelStandart
-		buttonsLabelStandart.add(deleteAllButton);
-		buttonsLabelStandart.add(deleteOneButton);
-		buttonsLabelStandart.add(persentButton);
-		buttonsLabelStandart.add(divideButton);
 		
-		buttonsLabelStandart.add(sevenButton);
-		buttonsLabelStandart.add(eightButton);
-		buttonsLabelStandart.add(nineButton);
-		buttonsLabelStandart.add(multipleButton);
-		
-		buttonsLabelStandart.add(fourButton);
-		buttonsLabelStandart.add(fiveButton);
-		buttonsLabelStandart.add(sixButton);
-		buttonsLabelStandart.add(minusButton);
-		
-		buttonsLabelStandart.add(oneButton);
-		buttonsLabelStandart.add(twoButton);
-		buttonsLabelStandart.add(threeButton);
-		buttonsLabelStandart.add(plusButton);
-		
-		buttonsLabelStandart.add(zeroButton);
-		buttonsLabelStandart.add(dotButton);
-		buttonsLabelStandart.add(changeSignButton);
-		buttonsLabelStandart.add(equalsButton);
+		buttonsLabelStandart.setBounds(40, 50, 0, 0);
+		buttonsLabelStandart.setLayout(new GridLayout(5, 4, 3, 3));	
+	}
 	
-		buttonsLabelStandart.setLayout(new GridLayout(5, 4, 3, 3));
+	public void actionListeners() {
+		
+		darkThemeButtonDefaultStandart.addActionListener(new darkThemeButtonDefaultStandartPressed());
+		lightThemeButtonDefaultStandart.addActionListener(new lightThemeButtonDefaultStandartPressed());
+		standartCalcButtonStandart.addActionListener(new StandartMenuPressed());
+		scientificCalcButtonStandart.addActionListener(new ScientificMenuPressed());
+		derivativesCalcButtonStandart.addActionListener(new DerivativesMenuPressed());
+		integralsCalcButtonStandart.addActionListener(new IntegralsMenuPressed());
+		deleteAllButton.addActionListener(new DeletePressed());
+		deleteOneButton.addActionListener(new DeletePressed());
+		persentButton.addActionListener(new OperatorPressed());
+		divideButton.addActionListener(new OperatorPressed());
+		sevenButton.addActionListener(new NumberPressed());
+		eightButton.addActionListener(new NumberPressed());
+		nineButton.addActionListener(new NumberPressed());
+		multipleButton.addActionListener(new OperatorPressed());
+		fourButton.addActionListener(new NumberPressed());
+		fiveButton.addActionListener(new NumberPressed());
+		sixButton.addActionListener(new NumberPressed());
+		minusButton.addActionListener(new OperatorPressed());
+		oneButton.addActionListener(new NumberPressed());
+		twoButton.addActionListener(new NumberPressed());
+		plusButton.addActionListener(new OperatorPressed());
+		zeroButton.addActionListener(new NumberPressed());
+		dotButton.addActionListener(new OperatorPressed());
+		changeSignButton.addActionListener(new ChangeSignPressed());
+		equalsButton.addActionListener(new EqualsPressed());
+	}
+	
+	public void defaultWhiteMode() throws IOException {
 
-		/*Standart frame setup*/
-		standartFrame.setSize(450, 700);
-		standartFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		standartFrame.setLayout(new GridLayout(2, 0));
-		
-		standartFrame.add(mainPanelStandart);
-		standartFrame.add(buttonsLabelStandart);
-		
-		standartFrame.setVisible(true);
-		
-
-					/***********************************/
-					/*********Default white mode********/
-					/***********************************/
-		
-		/*background*/
 		menuFieldStandart.setBackground(colorDarkWhite);
 		nameStandart.setBackground(colorDarkWhite);
 		darkThemeButtonDefaultStandart.setBackground(colorDarkWhite);
@@ -375,7 +284,6 @@ public class Standart {
 		integralsCalcButtonStandart.setBackground(colorDarkWhite);
 		outputFieldStandart.setBackground(colorDarkWhite);
 		buttonsLabelStandart.setBackground(colorWhite);
-		
 		oneButton.setBackground(colorDarkWhite);
 		twoButton.setBackground(colorDarkWhite);
 		threeButton.setBackground(colorDarkWhite);
@@ -397,7 +305,6 @@ public class Standart {
 		multipleButton.setBackground(colorDarkWhite);
 		divideButton.setBackground(colorDarkWhite);
 		
-		/*font color*/
 		oneButton.setForeground(colorBlack);
 		twoButton.setForeground(colorBlack);
 		threeButton.setForeground(colorBlack);
@@ -418,7 +325,6 @@ public class Standart {
 		minusButton.setForeground(colorBlack);
 		multipleButton.setForeground(colorBlack);
 		divideButton.setForeground(colorBlack);
-		
 		menuFieldStandart.setForeground(colorBlack);
 		nameStandart.setForeground(colorBlack);
 		darkThemeButtonDefaultStandart.setForeground(colorBlack);
@@ -429,7 +335,16 @@ public class Standart {
 		derivativesCalcButtonStandart.setForeground(colorBlack);
 		integralsCalcButtonStandart.setForeground(colorBlack);
 		outputFieldStandart.setForeground(colorBlack);
+	}
+	
+	public void startAndShowCalc() {
 		
+		standartFrame.setSize(450, 700);
+		standartFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		standartFrame.setLayout(new GridLayout(2, 0));
+		standartFrame.add(mainPanelStandart);
+		standartFrame.add(buttonsLabelStandart);
+		standartFrame.setVisible(true);
 	}
 	
 	public static BufferedImage resize(BufferedImage img, int newW, int newH) {
@@ -504,7 +419,7 @@ class OperatorPressed extends Standart implements ActionListener{
 			
 			/*Adding first operation number*/
 			String lastChar = str.substring(str.length()-1);
-			double lastCharDouble = Double.parseDouble(lastChar);
+			//double lastCharDouble = Double.parseDouble(lastChar);
 			
 			/*provide problems with 'ChangeSign'*/
 			/*

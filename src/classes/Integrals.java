@@ -19,10 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Integrals extends Standart{
-	
-						/***************************/
-						/*IntegralsFrame components*/
-						/***************************/
 
 	public JPanel mainPanelIntegrals = new JPanel();
 	
@@ -39,9 +35,7 @@ public class Integrals extends Standart{
 	
 	public static JLabel outputFieldIntegrals = new JLabel("Type a function and then press 'Find integral'");
 	
-	/*Integrals workspace*/
 	public static JPanel buttonsPanelIntegrals = new JPanel();
-	
 	public static JPanel inputLabelIntegrals = new JPanel();
 	public static JLabel iconFuncIntegrals = new JLabel();
 	public static JPanel inputLabelFuncIntegrals = new JPanel();
@@ -55,78 +49,72 @@ public class Integrals extends Standart{
 	public static JLabel iconIntegral = new JLabel();
 	public static JLabel outputFuncIntegrals = new JLabel();
 	
-	public void createIntegralsCalc() throws IOException {
-
-		
-					/*********************************************/
-					/****************Name/mode menu***************/
-					/*********************************************/
-		
-		nameIntegrals.setText("Integrals Calc");
-		nameIntegrals.setFont(font20);
-		nameIntegrals.setVerticalAlignment(JLabel.CENTER);
-		nameIntegrals.setHorizontalAlignment(JLabel.CENTER);
-		
-		/*Default theme buttons*/
-		BufferedImage buttonIconDarkIntegrals = ImageIO.read(new File("src/images/iconDarkTheme.png"));
-		buttonIconDarkIntegrals = resize(buttonIconDarkIntegrals, 50, 50);
-		darkThemeButtonDefaultIntegrals = new JButton(new ImageIcon(buttonIconDarkIntegrals));
-		darkThemeButtonDefaultIntegrals.setBorder(BorderFactory.createEmptyBorder());
-		darkThemeButtonDefaultIntegrals.setContentAreaFilled(false);
-		darkThemeButtonDefaultIntegrals.addActionListener(new darkThemeButtonDefaultIntegralsPressed());
-				
-		BufferedImage buttonIconLight = ImageIO.read(new File("src/images/iconlightTheme.png"));
-		buttonIconLight = resize(buttonIconLight, 50, 50);
-		lightThemeButtonDefaultIntegrals = new JButton(new ImageIcon(buttonIconLight));
-		lightThemeButtonDefaultIntegrals.setBorder(BorderFactory.createEmptyBorder());
-		lightThemeButtonDefaultIntegrals.setContentAreaFilled(false);
-		lightThemeButtonDefaultIntegrals.addActionListener(new lightThemeButtonDefaultIntegralsPressed());
+	public void addingComponentsInTheRightOrder() {
 		
 		menuFieldIntegrals.add(nameIntegrals);
 		menuFieldIntegrals.add(darkThemeButtonDefaultIntegrals);
 		menuFieldIntegrals.add(lightThemeButtonDefaultIntegrals);
 		
-		menuFieldIntegrals.setLayout(new GridLayout(1, 3));
+		switchPanelIntegrals.add(standartCalcButtonIntegrals);
+		switchPanelIntegrals.add(scientificCalcButtonIntegrals);
+		switchPanelIntegrals.add(derivativesCalcButtonIntegrals);
+		switchPanelIntegrals.add(integralsCalcButtonIntegrals);
 		
+		mainPanelIntegrals.add(menuFieldIntegrals);
+		mainPanelIntegrals.add(switchPanelIntegrals);
+		mainPanelIntegrals.add(outputFieldIntegrals);
 		
-					/******************************************/
-					/****************Switch menu***************/
-					/******************************************/
+		inputLabelFuncIntegrals.add(inputFuncIntegrals);
+
+		inputLabelIntegrals.add(iconFuncIntegrals);
+		inputLabelIntegrals.add(inputLabelFuncIntegrals);
 		
-		mainPanelIntegrals.setBounds(30,100, 50, 50);
+		workButtonsPanel.add(solveButtonIntegrals);
+		workButtonsPanel.add(clearButtonIntegrals);
+		
+		outputLabelIntegrals.add(iconIntegral);
+		outputLabelIntegrals.add(outputFuncIntegrals);
+
+		buttonsPanelIntegrals.add(inputLabelIntegrals);
+		buttonsPanelIntegrals.add(workButtonsPanel);
+		buttonsPanelIntegrals.add(outputLabelIntegrals);
+	}
+	
+	public void customizeComponents() throws IOException {	
+		
 		mainPanelIntegrals.setLayout(new GridLayout(3,1));
 		
 		nameIntegrals.setText("Integrals Calc");
 		nameIntegrals.setFont(font20);
 		nameIntegrals.setVerticalAlignment(JLabel.CENTER);
 		nameIntegrals.setHorizontalAlignment(JLabel.CENTER);
-		
+		BufferedImage buttonIconDarkIntegrals = ImageIO.read(new File("src/images/iconDarkTheme.png"));
+		buttonIconDarkIntegrals = resize(buttonIconDarkIntegrals, 50, 50);
+		darkThemeButtonDefaultIntegrals = new JButton(new ImageIcon(buttonIconDarkIntegrals));
+		darkThemeButtonDefaultIntegrals.setBorder(BorderFactory.createEmptyBorder());
+		darkThemeButtonDefaultIntegrals.setContentAreaFilled(false);
+		darkThemeButtonDefaultIntegrals.addActionListener(new darkThemeButtonDefaultIntegralsPressed());
+		BufferedImage buttonIconLight = ImageIO.read(new File("src/images/iconlightTheme.png"));
+		buttonIconLight = resize(buttonIconLight, 50, 50);
+		lightThemeButtonDefaultIntegrals = new JButton(new ImageIcon(buttonIconLight));
+		lightThemeButtonDefaultIntegrals.setBorder(BorderFactory.createEmptyBorder());
+		lightThemeButtonDefaultIntegrals.setContentAreaFilled(false);
+		lightThemeButtonDefaultIntegrals.addActionListener(new lightThemeButtonDefaultIntegralsPressed());
+		menuFieldIntegrals.setLayout(new GridLayout(1, 3));
+				
 		standartCalcButtonIntegrals.setText("Standart");
 		standartCalcButtonIntegrals.addActionListener(new StandartMenuPressed());
 		standartCalcButtonIntegrals.setFont(font18);
-		
 		scientificCalcButtonIntegrals.setText("Scientific");
 		scientificCalcButtonIntegrals.addActionListener(new ScientificMenuPressed());
 		scientificCalcButtonIntegrals.setFont(font18);
-		
 		derivativesCalcButtonIntegrals.setText("Derivatives");
 		derivativesCalcButtonIntegrals.addActionListener(new DerivativesMenuPressed());
 		derivativesCalcButtonIntegrals.setFont(font18);
-		
 		integralsCalcButtonIntegrals.setText("Integrals");
 		integralsCalcButtonIntegrals.addActionListener(new IntegralsMenuPressed());
 		integralsCalcButtonIntegrals.setFont(font18);
-		
-		switchPanelIntegrals.add(standartCalcButtonIntegrals);
-		switchPanelIntegrals.add(scientificCalcButtonIntegrals);
-		switchPanelIntegrals.add(derivativesCalcButtonIntegrals);
-		switchPanelIntegrals.add(integralsCalcButtonIntegrals);
 		switchPanelIntegrals.setLayout(new GridLayout(4, 1));
-	
-		
-					/******************************************/
-					/****************Output menu***************/
-					/******************************************/
 		
 		outputFieldIntegrals.setBounds(30,100, 50, 50);
 		outputFieldIntegrals.setBackground(colorGreen);
@@ -134,14 +122,6 @@ public class Integrals extends Standart{
 		outputFieldIntegrals.setBorder(solidBorder);
 		outputFieldIntegrals.setVerticalAlignment(JLabel.CENTER);
 		outputFieldIntegrals.setHorizontalAlignment(JLabel.CENTER);
-		
-		mainPanelIntegrals.add(menuFieldIntegrals);
-		mainPanelIntegrals.add(switchPanelIntegrals);
-		mainPanelIntegrals.add(outputFieldIntegrals);
-		
-					/******************************************/
-					/*********Integrals workspace********/
-					/******************************************/
 
 		BufferedImage labelIconFunc = ImageIO.read(new File("src/images/iconFunc.png"));
 		labelIconFunc = resize(labelIconFunc, 100, 100);
@@ -149,16 +129,9 @@ public class Integrals extends Standart{
 		
 		inputFuncIntegrals.setMaximumSize( inputFuncIntegrals.getPreferredSize() );
 		inputFuncIntegrals.setFont(font25);
-		inputLabelFuncIntegrals.add(inputFuncIntegrals);
 		
-		/*Making better layout for TextField*/
-		inputLabelIntegrals.add(iconFuncIntegrals);
-		inputLabelIntegrals.add(inputLabelFuncIntegrals);
 		inputLabelIntegrals.setLayout(new GridLayout(0, 2));
-		//Add better style for TextField here 
-		
-		/**/
-		/*Two main buttons*/
+
 		solveButtonIntegrals.setText("Find Integral");
 		solveButtonIntegrals.addActionListener(new FindIntegralPressed());
 		solveButtonIntegrals.setFont(font20);
@@ -167,48 +140,24 @@ public class Integrals extends Standart{
 		clearButtonIntegrals.addActionListener(new ClearIntegralsPressed());
 		clearButtonIntegrals.setFont(font20);
 		
-		workButtonsPanel.add(solveButtonIntegrals);
-		workButtonsPanel.add(clearButtonIntegrals);
 		workButtonsPanel.setLayout(new GridLayout(0, 2));
 		
-		/*Third MenuItem*/
 		BufferedImage labelIconIntegral = ImageIO.read(new File("src/images/iconIntegral.png"));
 		labelIconIntegral = resize(labelIconIntegral, 180, 100);
 		iconIntegral = new JLabel(new ImageIcon(labelIconIntegral));
 		
 		outputFuncIntegrals.setFont(font20);
-		
-		outputLabelIntegrals.add(iconIntegral);
-		outputLabelIntegrals.add(outputFuncIntegrals);
 		outputLabelIntegrals.setLayout(new GridLayout(0, 2));
 		
-		buttonsPanelIntegrals.add(inputLabelIntegrals);
-		buttonsPanelIntegrals.add(workButtonsPanel);
-		buttonsPanelIntegrals.add(outputLabelIntegrals);
 		buttonsPanelIntegrals.setLayout(new GridLayout(3, 0));
+	}
+	
+	public void defaultWhiteMode() {
 		
-		
-					/************************************************/
-					/****************Main frame options**************/
-					/************************************************/
-		
-		integralsFrame.setSize(600, 700);
-		integralsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		integralsFrame.setLayout(new GridLayout(2, 0));
-		integralsFrame.add(mainPanelIntegrals);
-		integralsFrame.add(buttonsPanelIntegrals);
-		integralsFrame.setVisible(false);
-		
-		
-							/********************/
-							/*Default white mode*/
-							/********************/
-		/*background*/
 		menuFieldIntegrals.setBackground(colorDarkWhite);
 		nameIntegrals.setBackground(colorDarkWhite);
 		darkThemeButtonDefaultIntegrals.setBackground(colorDarkWhite);
 		lightThemeButtonDefaultIntegrals.setBackground(colorDarkWhite);
-		
 		switchPanelIntegrals.setBackground(colorDarkWhite);
 		standartCalcButtonIntegrals.setBackground(colorDarkWhite);
 		scientificCalcButtonIntegrals.setBackground(colorDarkWhite);
@@ -216,7 +165,6 @@ public class Integrals extends Standart{
 		integralsCalcButtonIntegrals.setBackground(colorDarkWhite);
 		outputFieldIntegrals.setBackground(colorDarkWhite);
 		
-		/*font*/
 		menuFieldIntegrals.setForeground(colorBlack);
 		nameIntegrals.setForeground(colorBlack);
 		darkThemeButtonDefaultIntegrals.setForeground(colorBlack);
@@ -228,9 +176,6 @@ public class Integrals extends Standart{
 		integralsCalcButtonIntegrals.setForeground(colorBlack);
 		outputFieldIntegrals.setForeground(colorBlack);
 		
-		/*Workspace*/
-		
-		/*background*/
 		buttonsPanelIntegrals.setBackground(colorDarkWhite);
 		inputLabelIntegrals.setBackground(colorDarkWhite);
 		iconFuncIntegrals.setBackground(colorDarkWhite);
@@ -243,7 +188,6 @@ public class Integrals extends Standart{
 		iconIntegral.setBackground(colorDarkWhite);
 		outputFuncIntegrals.setBackground(colorDarkWhite);
 		
-		/*font*/
 		buttonsPanelIntegrals.setForeground(colorBlack);
 		inputLabelIntegrals.setForeground(colorBlack);
 		iconFuncIntegrals.setForeground(colorBlack);
@@ -256,6 +200,16 @@ public class Integrals extends Standart{
 		iconIntegral.setForeground(colorBlack);
 		outputFuncIntegrals.setForeground(colorBlack);
 	}
+	
+	public void startAndShowCalc() {
+		
+		integralsFrame.setSize(600, 700);
+		integralsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		integralsFrame.setLayout(new GridLayout(2, 0));
+		integralsFrame.add(mainPanelIntegrals);
+		integralsFrame.add(buttonsPanelIntegrals);
+		integralsFrame.setVisible(false);
+	}
 }
 
 					/******************/
@@ -263,6 +217,11 @@ public class Integrals extends Standart{
 					/******************/
 
 class FindIntegralPressed extends Integrals implements ActionListener {
+	public FindIntegralPressed() throws IOException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		String str = inputFuncIntegrals.getText();
 		
@@ -319,6 +278,11 @@ class FindIntegralPressed extends Integrals implements ActionListener {
 }
 
 class ClearIntegralsPressed extends Integrals implements ActionListener {
+	public ClearIntegralsPressed() throws IOException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		inputFuncIntegrals.setText("");
 		outputFuncIntegrals.setText("");

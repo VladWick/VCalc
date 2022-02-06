@@ -2,11 +2,10 @@ package classes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Design {
-	Design(){
-		System.out.println("Design");
-	}
+	
 }
 
 /*Switching between calculators*/
@@ -31,7 +30,6 @@ class ScientificMenuPressed extends Standart implements ActionListener{
 	}
 }
 class DerivativesMenuPressed extends Standart implements ActionListener{
-
 	public void actionPerformed(ActionEvent e) { 
 		
 		standartFrame.setVisible(false);
@@ -42,7 +40,7 @@ class DerivativesMenuPressed extends Standart implements ActionListener{
 	}
 }
 class IntegralsMenuPressed extends Standart implements ActionListener{
-	
+
 	public void actionPerformed(ActionEvent e) { 
 		
 		standartFrame.setVisible(false);
@@ -52,13 +50,11 @@ class IntegralsMenuPressed extends Standart implements ActionListener{
 		integralsFrame.setVisible(true);
 	}
 }
-
-
 /*StandartCalc dark and light mode*/
 class darkThemeButtonDefaultStandartPressed extends Standart implements ActionListener {
+	
 	public void actionPerformed(ActionEvent e) {
 
-		/*Change background color*/
 		menuFieldStandart.setBackground(colorSlightlyDarkGrey);
 		nameStandart.setBackground(colorSlightlyDarkGrey);
 		darkThemeButtonDefaultStandart.setBackground(colorSlightlyDarkGrey);
@@ -93,8 +89,6 @@ class darkThemeButtonDefaultStandartPressed extends Standart implements ActionLi
 		multipleButton.setBackground(colorSlightlyDarkGrey);
 		divideButton.setBackground(colorSlightlyDarkGrey);
 		
-		
-		/*Change font color*/
 		oneButton.setForeground(colorDarkWhite);
 		twoButton.setForeground(colorDarkWhite);
 		threeButton.setForeground(colorDarkWhite);
@@ -125,15 +119,12 @@ class darkThemeButtonDefaultStandartPressed extends Standart implements ActionLi
 		scientificCalcButtonStandart.setForeground(colorDarkWhite);
 		derivativesCalcButtonStandart.setForeground(colorDarkWhite);
 		integralsCalcButtonStandart.setForeground(colorDarkWhite);
-		
-		/*Here is changing image colors...*/
-
 	}
 }
 class lightThemeButtonDefaultStandartPressed extends Standart implements ActionListener {
+	
 	public void actionPerformed(ActionEvent e) {
 		
-		/*Change background color*/
 		menuFieldStandart.setBackground(colorDarkWhite);
 		nameStandart.setBackground(colorDarkWhite);
 		darkThemeButtonDefaultStandart.setBackground(colorDarkWhite);
@@ -167,7 +158,6 @@ class lightThemeButtonDefaultStandartPressed extends Standart implements ActionL
 		multipleButton.setBackground(colorDarkWhite);
 		divideButton.setBackground(colorDarkWhite);
 		
-		/*Change font color*/
 		oneButton.setForeground(colorBlack);
 		twoButton.setForeground(colorBlack);
 		threeButton.setForeground(colorBlack);
@@ -199,24 +189,16 @@ class lightThemeButtonDefaultStandartPressed extends Standart implements ActionL
 		derivativesCalcButtonStandart.setForeground(colorBlack);
 		integralsCalcButtonStandart.setForeground(colorBlack);
 		outputFieldStandart.setForeground(colorBlack);
-	
 	}
 }
-
 /*Scientific Calc dark and light mode*/
 class darkThemeButtonDefaultScientificPressed extends Scientific implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
-		
-		//colorSlightlyDarkGrey
-		//colorDarkWhite
-		
-							/*Menu*/
-		/*background*/
+
 		menuFieldScientific.setBackground(colorSlightlyDarkGrey);
 		nameScientific.setBackground(colorSlightlyDarkGrey);
 		darkThemeButtonDefaultScientific.setBackground(colorSlightlyDarkGrey);
 		lightThemeButtonDefaultScientific.setBackground(colorSlightlyDarkGrey);
-		
 		switchPanelScientific.setBackground(colorSlightlyDarkGrey);
 		standartCalcButtonScientific.setBackground(colorSlightlyDarkGrey);
 		scientificCalcButtonScientific.setBackground(colorSlightlyDarkGrey);
@@ -224,7 +206,6 @@ class darkThemeButtonDefaultScientificPressed extends Scientific implements Acti
 		integralsCalcButtonScientific.setBackground(colorSlightlyDarkGrey);
 		outputFieldScientific.setBackground(colorSlightlyDarkGrey);
 		
-		/*font*/
 		menuFieldScientific.setForeground(colorDarkWhite);
 		nameScientific.setForeground(colorDarkWhite);
 		darkThemeButtonDefaultScientific.setForeground(colorDarkWhite);
@@ -234,12 +215,9 @@ class darkThemeButtonDefaultScientificPressed extends Scientific implements Acti
 		scientificCalcButtonScientific.setForeground(colorDarkWhite);
 		derivativesCalcButtonScientific.setForeground(colorDarkWhite);
 		integralsCalcButtonScientific.setForeground(colorDarkWhite);
-		//outputFieldScientific.setForeground(colorDarkWhite);
-		
-							/*Buttons*/
+
 		buttonsLabelScientific.setBackground(colorBlack);
 		
-		/* 1 line */
 		absButtonScientific.setBackground(colorSlightlyDarkGrey);
 		piButtonScientific.setBackground(colorSlightlyDarkGrey);
 		eButtonScientific.setBackground(colorSlightlyDarkGrey);
@@ -251,7 +229,6 @@ class darkThemeButtonDefaultScientificPressed extends Scientific implements Acti
 		deleteAllButtonScientific.setForeground(colorDarkWhite);
 		deleteOneButtonScientific.setForeground(colorDarkWhite);
 		
-		/* 2 line */
 		reverseButtonScientific.setBackground(colorSlightlyDarkGrey);
 		persentButtonScientific.setBackground(colorSlightlyDarkGrey);
 		sinButtonScientific.setBackground(colorSlightlyDarkGrey);
@@ -263,7 +240,6 @@ class darkThemeButtonDefaultScientificPressed extends Scientific implements Acti
 		cosButtonScientific.setForeground(colorDarkWhite);
 		tgButtonScientific.setForeground(colorDarkWhite);
 		
-		/* 3 line */
 		sqrtButtonScientific.setBackground(colorSlightlyDarkGrey);
 		leftParButtonScientific.setBackground(colorSlightlyDarkGrey);
 		rightParButtonScientific.setBackground(colorSlightlyDarkGrey);
@@ -275,7 +251,6 @@ class darkThemeButtonDefaultScientificPressed extends Scientific implements Acti
 		factorialButtonScientific.setForeground(colorDarkWhite);
 		divideButtonScientific.setForeground(colorDarkWhite);
 		
-		/* 4 line */
 		squareButtonScientific.setBackground(colorSlightlyDarkGrey);
 		sevenButtonScientific.setBackground(colorSlightlyDarkGrey);
 		eightButtonScientific.setBackground(colorSlightlyDarkGrey);
@@ -287,7 +262,6 @@ class darkThemeButtonDefaultScientificPressed extends Scientific implements Acti
 		nineButtonScientific.setForeground(colorDarkWhite);
 		multipleButtonScientific.setForeground(colorDarkWhite);
 		
-		/* 5 line */
 		exponentButtonScientific.setBackground(colorSlightlyDarkGrey);
 		fourButtonScientific.setBackground(colorSlightlyDarkGrey);
 		fiveButtonScientific.setBackground(colorSlightlyDarkGrey);
@@ -299,7 +273,6 @@ class darkThemeButtonDefaultScientificPressed extends Scientific implements Acti
 		sixButtonScientific.setForeground(colorDarkWhite);
 		minusButtonScientific.setForeground(colorDarkWhite);
 		
-		/* 6 line */
 		lnButtonScientific.setBackground(colorSlightlyDarkGrey);
 		oneButtonScientific.setBackground(colorSlightlyDarkGrey);
 		twoButtonScientific.setBackground(colorSlightlyDarkGrey);
@@ -310,8 +283,7 @@ class darkThemeButtonDefaultScientificPressed extends Scientific implements Acti
 		twoButtonScientific.setForeground(colorDarkWhite);
 		threeButtonScientific.setForeground(colorDarkWhite);
 		plusButtonScientific.setForeground(colorDarkWhite);
-		
-		/* 7 line */
+		 
 		lgButtonScientific.setBackground(colorSlightlyDarkGrey);
 		zeroButtonScientific.setBackground(colorSlightlyDarkGrey);
 		dotButtonScientific.setBackground(colorSlightlyDarkGrey);
@@ -322,10 +294,10 @@ class darkThemeButtonDefaultScientificPressed extends Scientific implements Acti
 		dotButtonScientific.setForeground(colorDarkWhite);
 		changeSignButtonScientific.setForeground(colorDarkWhite);
 		equalsButtonScientific.setForeground(colorDarkWhite);
-		
 	}
 }
 class lightThemeButtonDefaultScientificPressed extends Scientific implements ActionListener {
+	
 	public void actionPerformed(ActionEvent e) {
 		
 		/*background*/
@@ -353,10 +325,8 @@ class lightThemeButtonDefaultScientificPressed extends Scientific implements Act
 		integralsCalcButtonScientific.setForeground(colorBlack);
 		outputFieldScientific.setForeground(colorBlack);
 		
-		/*Buttons*/
 		buttonsLabelScientific.setBackground(colorDarkWhite);
 		
-		/* 1 line */
 		absButtonScientific.setBackground(colorDarkWhite);
 		piButtonScientific.setBackground(colorDarkWhite);
 		eButtonScientific.setBackground(colorDarkWhite);
@@ -368,7 +338,6 @@ class lightThemeButtonDefaultScientificPressed extends Scientific implements Act
 		deleteAllButtonScientific.setForeground(colorBlack);
 		deleteOneButtonScientific.setForeground(colorBlack);
 		
-		/* 2 line */
 		reverseButtonScientific.setBackground(colorDarkWhite);
 		persentButtonScientific.setBackground(colorDarkWhite);
 		sinButtonScientific.setBackground(colorDarkWhite);
@@ -380,7 +349,6 @@ class lightThemeButtonDefaultScientificPressed extends Scientific implements Act
 		cosButtonScientific.setForeground(colorBlack);
 		tgButtonScientific.setForeground(colorBlack);
 		
-		/* 3 line */
 		sqrtButtonScientific.setBackground(colorDarkWhite);
 		leftParButtonScientific.setBackground(colorDarkWhite);
 		rightParButtonScientific.setBackground(colorDarkWhite);
@@ -392,7 +360,6 @@ class lightThemeButtonDefaultScientificPressed extends Scientific implements Act
 		factorialButtonScientific.setForeground(colorBlack);
 		divideButtonScientific.setForeground(colorBlack);
 		
-		/* 4 line */
 		squareButtonScientific.setBackground(colorDarkWhite);
 		sevenButtonScientific.setBackground(colorDarkWhite);
 		eightButtonScientific.setBackground(colorDarkWhite);
@@ -404,7 +371,6 @@ class lightThemeButtonDefaultScientificPressed extends Scientific implements Act
 		nineButtonScientific.setForeground(colorBlack);
 		multipleButtonScientific.setForeground(colorBlack);
 		
-		/* 5 line */
 		exponentButtonScientific.setBackground(colorDarkWhite);
 		fourButtonScientific.setBackground(colorDarkWhite);
 		fiveButtonScientific.setBackground(colorDarkWhite);
@@ -416,7 +382,6 @@ class lightThemeButtonDefaultScientificPressed extends Scientific implements Act
 		sixButtonScientific.setForeground(colorBlack);
 		minusButtonScientific.setForeground(colorBlack);
 		
-		/* 6 line */
 		lnButtonScientific.setBackground(colorDarkWhite);
 		oneButtonScientific.setBackground(colorDarkWhite);
 		twoButtonScientific.setBackground(colorDarkWhite);
@@ -428,7 +393,6 @@ class lightThemeButtonDefaultScientificPressed extends Scientific implements Act
 		threeButtonScientific.setForeground(colorBlack);
 		plusButtonScientific.setForeground(colorBlack);
 		
-		/* 7 line */
 		lgButtonScientific.setBackground(colorDarkWhite);
 		zeroButtonScientific.setBackground(colorDarkWhite);
 		dotButtonScientific.setBackground(colorDarkWhite);
@@ -442,16 +406,11 @@ class lightThemeButtonDefaultScientificPressed extends Scientific implements Act
 	}
 }
 
-
-
 /*DerivativesCalc dark and light mode*/
 class darkThemeButtonDefaultDerivativesPressed extends Derivatives implements ActionListener {
+	
 	public void actionPerformed(ActionEvent e) {
-		
-		//colorSlightlyDarkGrey
-		//colorDarkWhite
-		
-		/*background*/
+
 		menuFieldDerivatives.setBackground(colorSlightlyDarkGrey);
 		nameDerivatives.setBackground(colorSlightlyDarkGrey);
 		darkThemeButtonDefaultDerivatives.setBackground(colorSlightlyDarkGrey);
@@ -464,7 +423,6 @@ class darkThemeButtonDefaultDerivativesPressed extends Derivatives implements Ac
 		integralsCalcButtonDerivatives.setBackground(colorSlightlyDarkGrey);
 		outputFieldDerivatives.setBackground(colorSlightlyDarkGrey);
 		
-		/*font*/
 		menuFieldDerivatives.setForeground(colorDarkWhite);
 		nameDerivatives.setForeground(colorDarkWhite);
 		darkThemeButtonDefaultDerivatives.setForeground(colorDarkWhite);
@@ -474,16 +432,11 @@ class darkThemeButtonDefaultDerivativesPressed extends Derivatives implements Ac
 		scientificCalcButtonDerivatives.setForeground(colorDarkWhite);
 		derivativesCalcButtonDerivatives.setForeground(colorDarkWhite);
 		integralsCalcButtonDerivatives.setForeground(colorDarkWhite);
-		//outputFieldDerivatives.setForeground(colorDarkWhite);
-		
-		
-			/*Workspace*/
-		/*background*/
+
 		buttonsPanelDerivatives.setBackground(colorSlightlyDarkGrey);
 		inputLabelDerivatives.setBackground(colorSlightlyDarkGrey);
 		iconFuncDerivatives.setBackground(colorSlightlyDarkGrey);
 		inputLabelFuncDerivatives.setBackground(colorSlightlyDarkGrey);
-		//inputFuncDerivatives.setBackground(colorSlightlyDarkGrey);
 		workButtonsPanel.setBackground(colorSlightlyDarkGrey);
 		solveButtonDerivatives.setBackground(colorSlightlyDarkGrey);
 		clearButtonDerivatives.setBackground(colorSlightlyDarkGrey);
@@ -491,26 +444,22 @@ class darkThemeButtonDefaultDerivativesPressed extends Derivatives implements Ac
 		iconDerivative.setBackground(colorSlightlyDarkGrey);
 		outputFuncDerivatives.setBackground(colorSlightlyDarkGrey);
 		
-		/*font*/
 		buttonsPanelDerivatives.setForeground(colorDarkWhite);
 		inputLabelDerivatives.setForeground(colorDarkWhite);
 		iconFuncDerivatives.setForeground(colorDarkWhite);
 		inputLabelFuncDerivatives.setForeground(colorDarkWhite);
-		//inputFuncDerivatives.setForeground(colorDarkWhite);
 		workButtonsPanel.setForeground(colorDarkWhite);
 		solveButtonDerivatives.setForeground(colorDarkWhite);
 		clearButtonDerivatives.setForeground(colorDarkWhite);
 		outputLabelDerivatives.setForeground(colorDarkWhite);
 		iconDerivative.setForeground(colorDarkWhite);
-		outputFuncDerivatives.setForeground(colorDarkWhite);
-		
-		
+		outputFuncDerivatives.setForeground(colorDarkWhite);	
 	}
 }
 class lightThemeButtonDefaultDerivativesPressed extends Derivatives implements ActionListener {
+	
 	public void actionPerformed(ActionEvent e) {
 		
-		/*background*/
 		menuFieldDerivatives.setBackground(colorDarkWhite);
 		nameDerivatives.setBackground(colorDarkWhite);
 		darkThemeButtonDefaultDerivatives.setBackground(colorDarkWhite);
@@ -523,7 +472,6 @@ class lightThemeButtonDefaultDerivativesPressed extends Derivatives implements A
 		integralsCalcButtonDerivatives.setBackground(colorDarkWhite);
 		outputFieldDerivatives.setBackground(colorDarkWhite);
 		
-		/*font*/
 		menuFieldDerivatives.setForeground(colorBlack);
 		nameDerivatives.setForeground(colorBlack);
 		darkThemeButtonDefaultDerivatives.setForeground(colorBlack);
@@ -535,8 +483,6 @@ class lightThemeButtonDefaultDerivativesPressed extends Derivatives implements A
 		integralsCalcButtonDerivatives.setForeground(colorBlack);
 		outputFieldDerivatives.setForeground(colorBlack);
 		
-		/*Workspace*/
-		/*background*/
 		buttonsPanelDerivatives.setBackground(colorDarkWhite);
 		inputLabelDerivatives.setBackground(colorDarkWhite);
 		iconFuncDerivatives.setBackground(colorDarkWhite);
@@ -549,7 +495,6 @@ class lightThemeButtonDefaultDerivativesPressed extends Derivatives implements A
 		iconDerivative.setBackground(colorDarkWhite);
 		outputFuncDerivatives.setBackground(colorDarkWhite);
 		
-		/*font*/
 		buttonsPanelDerivatives.setForeground(colorBlack);
 		inputLabelDerivatives.setForeground(colorBlack);
 		iconFuncDerivatives.setForeground(colorBlack);
@@ -564,16 +509,11 @@ class lightThemeButtonDefaultDerivativesPressed extends Derivatives implements A
 	}
 }
 
-
-
 /*Integrals Calc dark and light mode*/
 class darkThemeButtonDefaultIntegralsPressed extends Integrals implements ActionListener {
+	
 	public void actionPerformed(ActionEvent e) {
 		
-		//colorSlightlyDarkGrey
-		//colorDarkWhite
-		
-		/*background*/
 		menuFieldIntegrals.setBackground(colorSlightlyDarkGrey);
 		nameIntegrals.setBackground(colorSlightlyDarkGrey);
 		darkThemeButtonDefaultIntegrals.setBackground(colorSlightlyDarkGrey);
@@ -586,7 +526,6 @@ class darkThemeButtonDefaultIntegralsPressed extends Integrals implements Action
 		integralsCalcButtonIntegrals.setBackground(colorSlightlyDarkGrey);
 		outputFieldIntegrals.setBackground(colorSlightlyDarkGrey);
 		
-		/*font*/
 		menuFieldIntegrals.setForeground(colorDarkWhite);
 		nameIntegrals.setForeground(colorDarkWhite);
 		darkThemeButtonDefaultIntegrals.setForeground(colorDarkWhite);
@@ -596,30 +535,22 @@ class darkThemeButtonDefaultIntegralsPressed extends Integrals implements Action
 		scientificCalcButtonIntegrals.setForeground(colorDarkWhite);
 		derivativesCalcButtonIntegrals.setForeground(colorDarkWhite);
 		integralsCalcButtonIntegrals.setForeground(colorDarkWhite);
-		//outputFieldIntegrals.setForeground(colorDarkWhite);
 		
-		
-/*Workspace*/
-		
-		/*background*/
 		buttonsPanelIntegrals.setBackground(colorSlightlyDarkGrey);
 		inputLabelIntegrals.setBackground(colorSlightlyDarkGrey);
 		iconFuncIntegrals.setBackground(colorSlightlyDarkGrey);
 		inputLabelFuncIntegrals.setBackground(colorSlightlyDarkGrey);
-		//inputFuncIntegrals.setBackground(colorSlightlyDarkGrey);
 		workButtonsPanel.setBackground(colorSlightlyDarkGrey);
 		solveButtonIntegrals.setBackground(colorSlightlyDarkGrey);
 		clearButtonIntegrals.setBackground(colorSlightlyDarkGrey);
 		outputLabelIntegrals.setBackground(colorSlightlyDarkGrey);
 		iconIntegral.setBackground(colorSlightlyDarkGrey);
 		outputFuncIntegrals.setBackground(colorSlightlyDarkGrey);
-		
-		/*font*/
+
 		buttonsPanelIntegrals.setForeground(colorDarkWhite);
 		inputLabelIntegrals.setForeground(colorDarkWhite);
 		iconFuncIntegrals.setForeground(colorDarkWhite);
 		inputLabelFuncIntegrals.setForeground(colorDarkWhite);
-		//inputFuncIntegrals.setForeground(colorDarkWhite);
 		workButtonsPanel.setForeground(colorDarkWhite);
 		solveButtonIntegrals.setForeground(colorDarkWhite);
 		clearButtonIntegrals.setForeground(colorDarkWhite);
@@ -629,9 +560,9 @@ class darkThemeButtonDefaultIntegralsPressed extends Integrals implements Action
 	}
 }
 class lightThemeButtonDefaultIntegralsPressed extends Integrals implements ActionListener {
+	
 	public void actionPerformed(ActionEvent e) {
 		
-		/*background*/
 		menuFieldIntegrals.setBackground(colorDarkWhite);
 		nameIntegrals.setBackground(colorDarkWhite);
 		darkThemeButtonDefaultIntegrals.setBackground(colorDarkWhite);
@@ -644,7 +575,6 @@ class lightThemeButtonDefaultIntegralsPressed extends Integrals implements Actio
 		integralsCalcButtonIntegrals.setBackground(colorDarkWhite);
 		outputFieldIntegrals.setBackground(colorDarkWhite);
 		
-		/*font*/
 		menuFieldIntegrals.setForeground(colorBlack);
 		nameIntegrals.setForeground(colorBlack);
 		darkThemeButtonDefaultIntegrals.setForeground(colorBlack);
@@ -655,11 +585,7 @@ class lightThemeButtonDefaultIntegralsPressed extends Integrals implements Actio
 		derivativesCalcButtonIntegrals.setForeground(colorBlack);
 		integralsCalcButtonIntegrals.setForeground(colorBlack);
 		outputFieldIntegrals.setForeground(colorBlack);
-		
-		
-		/*Workspace*/
-		
-		/*background*/
+
 		buttonsPanelIntegrals.setBackground(colorDarkWhite);
 		inputLabelIntegrals.setBackground(colorDarkWhite);
 		iconFuncIntegrals.setBackground(colorDarkWhite);
@@ -671,8 +597,7 @@ class lightThemeButtonDefaultIntegralsPressed extends Integrals implements Actio
 		outputLabelIntegrals.setBackground(colorDarkWhite);
 		iconIntegral.setBackground(colorDarkWhite);
 		outputFuncIntegrals.setBackground(colorDarkWhite);
-		
-		/*font*/
+
 		buttonsPanelIntegrals.setForeground(colorBlack);
 		inputLabelIntegrals.setForeground(colorBlack);
 		iconFuncIntegrals.setForeground(colorBlack);
@@ -686,5 +611,3 @@ class lightThemeButtonDefaultIntegralsPressed extends Integrals implements Actio
 		outputFuncIntegrals.setForeground(colorBlack);
 	}
 }
-
-

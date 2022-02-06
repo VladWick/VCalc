@@ -15,32 +15,31 @@ public class Main {
 		Derivatives frameDerivatives = new Derivatives();
 		Integrals frameIntegrals = new Integrals();
 		
-		frameStandart.createStandartCalc();
-		frameScientific.createScientificCalc();
-		frameDerivatives.createDerivativesCalc();
-		frameIntegrals.createIntegralsCalc();
+		frameStandart.customizeComponents();
+		frameStandart.addingComponentsInTheRightOrder();
+		frameStandart.actionListeners();
+		frameStandart.defaultWhiteMode();
+		frameStandart.startAndShowCalc();
+		
+		frameScientific.customizeComponents();
+		frameScientific.addingComponentsInTheRightOrder();
+		frameScientific.actionListeners();
+		frameScientific.defaultWhiteMode();
+		frameScientific.startAndShowCalc();
+		
+		frameDerivatives.customizeComponents();
+		frameDerivatives.addingComponentsInTheRightOrder();
+		frameDerivatives.actionListeners();
+		frameDerivatives.defaultWhiteMode();
+		frameDerivatives.startAndShowCalc();
+		
+		frameIntegrals.customizeComponents();
+		frameIntegrals.addingComponentsInTheRightOrder();
+		frameIntegrals.actionListeners();
+		frameIntegrals.defaultWhiteMode();
+		frameIntegrals.startAndShowCalc();
+		
+		Design design = new Design();
 	}
+	
 }
-
-/*
- * 
- * name of the all variables 
- * 
- * we work only with one operation at a time
- * 
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

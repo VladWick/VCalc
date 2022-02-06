@@ -20,10 +20,6 @@ import javax.swing.JPanel;
 
 public class Scientific extends Standart{
 	
-						/***************************/
-						/*Scientific Frame components*/
-						/***************************/
-
 	public JPanel mainPanelScientific = new JPanel();
 	
 	public static JPanel menuFieldScientific = new JPanel();
@@ -40,8 +36,6 @@ public class Scientific extends Standart{
 	public static JLabel outputFieldScientific = new JLabel();
 	
 	public static JPanel buttonsLabelScientific = new JPanel();
-	
-	/*From Standart Calc*/
 	public static JButton deleteAllButtonScientific = new JButton();
 	public static JButton deleteOneButtonScientific = new JButton();
 	public static JButton persentButtonScientific = new JButton();
@@ -62,8 +56,6 @@ public class Scientific extends Standart{
 	public static JButton dotButtonScientific = new JButton();
 	public static JButton equalsButtonScientific = new JButton();
 	public static JButton changeSignButtonScientific = new JButton();
-	
-	/*New buttons*/
 	public static JButton lnButtonScientific = new JButton();
 	public static JButton lgButtonScientific = new JButton();
 	public static JButton sinButtonScientific = new JButton();
@@ -80,78 +72,35 @@ public class Scientific extends Standart{
 	public static JButton reverseButtonScientific = new JButton();
 	public static JButton exponentButtonScientific = new JButton();
 	
-	public void createScientificCalc() throws IOException {
-
+	public void customizeComponents() throws IOException {
 		
-					/*********************************************/
-					/************Upper name/mode menu*************/
-					/*********************************************/
-		
-		nameScientific.setText("Scientific Calc");
-		nameScientific.setFont(font20);
-		nameScientific.setVerticalAlignment(JLabel.CENTER);
-		nameScientific.setHorizontalAlignment(JLabel.CENTER);
-		
-		/*Default theme buttons*/
-		BufferedImage buttonIconDarkScientific = ImageIO.read(new File("src/images/iconDarkTheme.png"));
-		buttonIconDarkScientific = resize(buttonIconDarkScientific, 50, 50);
-		darkThemeButtonDefaultScientific = new JButton(new ImageIcon(buttonIconDarkScientific));
-		darkThemeButtonDefaultScientific.setBorder(BorderFactory.createEmptyBorder());
-		darkThemeButtonDefaultScientific.setContentAreaFilled(false);
-		darkThemeButtonDefaultScientific.addActionListener(new darkThemeButtonDefaultScientificPressed());
-				
-		BufferedImage buttonIconLight = ImageIO.read(new File("src/images/iconlightTheme.png"));
-		buttonIconLight = resize(buttonIconLight, 50, 50);
-		lightThemeButtonDefaultScientific = new JButton(new ImageIcon(buttonIconLight));
-		lightThemeButtonDefaultScientific.setBorder(BorderFactory.createEmptyBorder());
-		lightThemeButtonDefaultScientific.setContentAreaFilled(false);
-		lightThemeButtonDefaultScientific.addActionListener(new lightThemeButtonDefaultScientificPressed());
-		
-		menuFieldScientific.add(nameScientific);
-		menuFieldScientific.add(darkThemeButtonDefaultScientific);
-		menuFieldScientific.add(lightThemeButtonDefaultScientific);
-		
-		menuFieldScientific.setLayout(new GridLayout(1, 3));
-		
-		
-					/******************************************/
-					/****************Switch menu***************/
-					/******************************************/
-		
-		mainPanelScientific.setBounds(30,100, 50, 50);
 		mainPanelScientific.setLayout(new GridLayout(3,1));
 		
 		nameScientific.setText("Scientific Calc");
 		nameScientific.setFont(font20);
 		nameScientific.setVerticalAlignment(JLabel.CENTER);
 		nameScientific.setHorizontalAlignment(JLabel.CENTER);
+		BufferedImage buttonIconDarkScientific = ImageIO.read(new File("src/images/iconDarkTheme.png"));
+		buttonIconDarkScientific = resize(buttonIconDarkScientific, 50, 50);
+		darkThemeButtonDefaultScientific = new JButton(new ImageIcon(buttonIconDarkScientific));
+		darkThemeButtonDefaultScientific.setBorder(BorderFactory.createEmptyBorder());
+		darkThemeButtonDefaultScientific.setContentAreaFilled(false);
+		BufferedImage buttonIconLight = ImageIO.read(new File("src/images/iconlightTheme.png"));
+		buttonIconLight = resize(buttonIconLight, 50, 50);
+		lightThemeButtonDefaultScientific = new JButton(new ImageIcon(buttonIconLight));
+		lightThemeButtonDefaultScientific.setBorder(BorderFactory.createEmptyBorder());
+		lightThemeButtonDefaultScientific.setContentAreaFilled(false);
+		menuFieldScientific.setLayout(new GridLayout(1, 3));
 		
 		standartCalcButtonScientific.setText("Standart");
-		standartCalcButtonScientific.addActionListener(new StandartMenuPressed());
 		standartCalcButtonScientific.setFont(font18);
-		
 		scientificCalcButtonScientific.setText("Scientific");
-		scientificCalcButtonScientific.addActionListener(new ScientificMenuPressed());
 		scientificCalcButtonScientific.setFont(font18);
-		
 		derivativesCalcButtonScientific.setText("Derivatives");
-		derivativesCalcButtonScientific.addActionListener(new DerivativesMenuPressed());
 		derivativesCalcButtonScientific.setFont(font18);
-		
 		integralsCalcButtonScientific.setText("Integrals");
-		integralsCalcButtonScientific.addActionListener(new IntegralsMenuPressed());
 		integralsCalcButtonScientific.setFont(font18);
-		
-		switchPanelScientific.add(standartCalcButtonScientific);
-		switchPanelScientific.add(scientificCalcButtonScientific);
-		switchPanelScientific.add(derivativesCalcButtonScientific);
-		switchPanelScientific.add(integralsCalcButtonScientific);
 		switchPanelScientific.setLayout(new GridLayout(4, 1));
-	
-		
-					/******************************************/
-					/****************Output menu***************/
-					/******************************************/
 		
 		outputFieldScientific.setBounds(30,100, 50, 50);
 		outputFieldScientific.setBackground(colorGreen);
@@ -160,171 +109,139 @@ public class Scientific extends Standart{
 		outputFieldScientific.setVerticalAlignment(JLabel.CENTER);
 		outputFieldScientific.setHorizontalAlignment(JLabel.CENTER);
 		
-					/******************************************/
-					/****************Buttons menu**************/
-					/******************************************/
-		
-		/*All the calculation buttons*/
-		buttonsLabelScientific.setBounds(40, 50, 0, 0);
-		
 		deleteAllButtonScientific.setText("AC");
-		deleteAllButtonScientific.addActionListener(new DeleteAllPressedScientific());
 		deleteAllButtonScientific.setFont(font20);
 		
 		BufferedImage buttonIconDelete = ImageIO.read(new File("src/images/iconDelete.png"));
 		buttonIconDelete = resize(buttonIconDelete, 35, 35);
 		deleteOneButtonScientific = new JButton(new ImageIcon(buttonIconDelete));
-		//deleteOneButton.setBorder(BorderFactory.createEmptyBorder());
-		//deleteOneButton.setContentAreaFilled(false);
-		deleteOneButtonScientific.addActionListener(new DeleteOnePressedScientific());
+		deleteOneButtonScientific.setBackground(colorWhite);
 		
 		persentButtonScientific.setText("%");
-		persentButtonScientific.addActionListener(new PersentPressedScientific());
 		persentButtonScientific.setFont(font20);
-
+		
 		divideButtonScientific.setText("/");
-		divideButtonScientific.addActionListener(new DividePressedScientific());
 		divideButtonScientific.setFont(font20);
-	
+		
 		sevenButtonScientific.setText("7");
-		sevenButtonScientific.addActionListener(new SevenPressedScientific());
 		sevenButtonScientific.setFont(font20);
 		
 		eightButtonScientific.setText("8");
-		eightButtonScientific.addActionListener(new EightPressedScientific());
 		eightButtonScientific.setFont(font20);
-		eightButtonScientific.setBackground(colorRed);
 		
 		nineButtonScientific.setText("9");
-		nineButtonScientific.addActionListener(new NinePressedScientific());
 		nineButtonScientific.setFont(font20);
 		
 		multipleButtonScientific.setText("*");
-		multipleButtonScientific.addActionListener(new MultiplyPressedScientific());
 		multipleButtonScientific.setFont(font20);
 		
 		fourButtonScientific.setText("4");
-		fourButtonScientific.addActionListener(new FourPressedScientific());
 		fourButtonScientific.setFont(font20);
 		
 		fiveButtonScientific.setText("5");
-		fiveButtonScientific.addActionListener(new FivePressedScientific());
 		fiveButtonScientific.setFont(font20);
 		
 		sixButtonScientific.setText("6");
-		sixButtonScientific.addActionListener(new SixPressedScientific());
 		sixButtonScientific.setFont(font20);
 		
 		minusButtonScientific.setText("-");
-		minusButtonScientific.addActionListener(new MinusPressedScientific());
 		minusButtonScientific.setFont(font20);
-	
+		
 		oneButtonScientific.setText("1");
-		oneButtonScientific.addActionListener(new OnePressedScientific());
 		oneButtonScientific.setFont(font20);
 		
 		twoButtonScientific.setText("2");
-		twoButtonScientific.addActionListener(new TwoPressedScientific());
 		twoButtonScientific.setFont(font20);
 		
 		threeButtonScientific.setText("3");
-		threeButtonScientific.addActionListener(new ThreePressedScientific());
 		threeButtonScientific.setFont(font20);
-	
+		
 		plusButtonScientific.setText("+");
-		plusButtonScientific.addActionListener(new PlusPressedScientific());
 		plusButtonScientific.setFont(font20);
 		
 		zeroButtonScientific.setText("0");
-		zeroButtonScientific.addActionListener(new ZeroPressedScientific());
 		zeroButtonScientific.setFont(font20);
 		
 		dotButtonScientific.setText(".");
-		dotButtonScientific.addActionListener(new DotPressedScientific());
 		dotButtonScientific.setFont(font20);
 		
 		changeSignButtonScientific.setText("+/-");
-		changeSignButtonScientific.addActionListener(new ChangeSignPressedScientific());
 		changeSignButtonScientific.setFont(font20);
 		
 		equalsButtonScientific.setText("=");
-		equalsButtonScientific.addActionListener(new EqualsPressedScientific());
 		equalsButtonScientific.setFont(font20);
 		
-		/*Scientific buttons*/
 		lnButtonScientific.setText("ln");
-		lnButtonScientific.addActionListener(new LnPressed());
 		lnButtonScientific.setFont(font20);
 		
 		lgButtonScientific.setText("lg");
-		lgButtonScientific.addActionListener(new LgPressed());
 		lgButtonScientific.setFont(font20);
 		
 		sinButtonScientific.setText("sin");
-		sinButtonScientific.addActionListener(new SinPressed());
 		sinButtonScientific.setFont(font20);
 		
 		cosButtonScientific.setText("cos");
-		cosButtonScientific.addActionListener(new CosPressed());
 		cosButtonScientific.setFont(font20);
 		
 		tgButtonScientific.setText("tg");
-		tgButtonScientific.addActionListener(new TgPressed());
 		tgButtonScientific.setFont(font20);
 		
 		piButtonScientific.setText("pi");
-		piButtonScientific.addActionListener(new PiPressed());
 		piButtonScientific.setFont(font20);
 		
 		eButtonScientific.setText("e");
-		eButtonScientific.addActionListener(new EPressed());
 		eButtonScientific.setFont(font20);
 		
 		absButtonScientific.setText("abs");
-		absButtonScientific.addActionListener(new AbsPressed());
 		absButtonScientific.setFont(font20);
 		
 		factorialButtonScientific.setText("!");
-		factorialButtonScientific.addActionListener(new FactorialPressed());
 		factorialButtonScientific.setFont(font20);
 		
 		leftParButtonScientific.setText("(");
-		leftParButtonScientific.addActionListener(new LeftParPressed());
 		leftParButtonScientific.setFont(font20);
 		
 		rightParButtonScientific.setText(")");
-		rightParButtonScientific.addActionListener(new RightParPressed());
 		rightParButtonScientific.setFont(font20);
 		
 		sqrtButtonScientific.setText("sqrt(x)");
-		sqrtButtonScientific.addActionListener(new LgPressed());
 		sqrtButtonScientific.setFont(font20);
 		
 		reverseButtonScientific.setText("1/x");
-		reverseButtonScientific.addActionListener(new ReversePressed());
 		reverseButtonScientific.setFont(font20);
 		
 		squareButtonScientific.setText("x^2");
-		squareButtonScientific.addActionListener(new SquarePressed());
 		squareButtonScientific.setFont(font20);
 		
 		exponentButtonScientific.setText("x^y");
-		exponentButtonScientific.addActionListener(new ExponentPressed());
 		exponentButtonScientific.setFont(font20);
+		
+		buttonsLabelScientific.setLayout(new GridLayout(7, 5, 3, 3));
+	}
+	
+	public void addingComponentsInTheRightOrder() {
+		
+		menuFieldScientific.add(nameScientific);
+		menuFieldScientific.add(darkThemeButtonDefaultScientific);
+		menuFieldScientific.add(lightThemeButtonDefaultScientific);
+		
+		switchPanelScientific.add(standartCalcButtonScientific);
+		switchPanelScientific.add(scientificCalcButtonScientific);
+		switchPanelScientific.add(derivativesCalcButtonScientific);
+		switchPanelScientific.add(integralsCalcButtonScientific);
 
-		//buttonsLabelStandart
 		buttonsLabelScientific.add(absButtonScientific);
 		buttonsLabelScientific.add(piButtonScientific);
 		buttonsLabelScientific.add(eButtonScientific);
 		buttonsLabelScientific.add(deleteAllButtonScientific);
 		buttonsLabelScientific.add(deleteOneButtonScientific);
-		
+				
 		buttonsLabelScientific.add(reverseButtonScientific);
 		buttonsLabelScientific.add(persentButtonScientific);
 		buttonsLabelScientific.add(sinButtonScientific);
 		buttonsLabelScientific.add(cosButtonScientific);
 		buttonsLabelScientific.add(tgButtonScientific);
-		
+				
 		buttonsLabelScientific.add(sqrtButtonScientific);
 		buttonsLabelScientific.add(leftParButtonScientific);
 		buttonsLabelScientific.add(rightParButtonScientific);
@@ -336,13 +253,13 @@ public class Scientific extends Standart{
 		buttonsLabelScientific.add(eightButtonScientific);
 		buttonsLabelScientific.add(nineButtonScientific);
 		buttonsLabelScientific.add(multipleButtonScientific);
-		
+				
 		buttonsLabelScientific.add(exponentButtonScientific);
 		buttonsLabelScientific.add(fourButtonScientific);
 		buttonsLabelScientific.add(fiveButtonScientific);
 		buttonsLabelScientific.add(sixButtonScientific);
 		buttonsLabelScientific.add(minusButtonScientific);
-		
+				
 		buttonsLabelScientific.add(lnButtonScientific);
 		buttonsLabelScientific.add(oneButtonScientific);
 		buttonsLabelScientific.add(twoButtonScientific);
@@ -354,38 +271,66 @@ public class Scientific extends Standart{
 		buttonsLabelScientific.add(dotButtonScientific);
 		buttonsLabelScientific.add(changeSignButtonScientific);
 		buttonsLabelScientific.add(equalsButtonScientific);
-	
-		buttonsLabelScientific.setLayout(new GridLayout(7, 5, 3, 3));
-		
-		/************************************************/
 		
 		mainPanelScientific.add(menuFieldScientific);
 		mainPanelScientific.add(switchPanelScientific);
 		mainPanelScientific.add(outputFieldScientific);
 		mainPanelScientific.add(buttonsLabelScientific);
+	}
+	
+	public void actionListeners() {
 		
+		darkThemeButtonDefaultScientific.addActionListener(new darkThemeButtonDefaultScientificPressed());
+		lightThemeButtonDefaultScientific.addActionListener(new lightThemeButtonDefaultScientificPressed());
+
+		standartCalcButtonScientific.addActionListener(new StandartMenuPressed());
+		scientificCalcButtonScientific.addActionListener(new ScientificMenuPressed());
+		derivativesCalcButtonScientific.addActionListener(new DerivativesMenuPressed());
+		integralsCalcButtonScientific.addActionListener(new IntegralsMenuPressed());
 		
-					/************************************************/
-					/****************Main frame options**************/
-					/************************************************/
+		//deleteAllButtonScientific.addActionListener(new DeleteAllPressedScientific());
+		//deleteOneButtonScientific.addActionListener(new DeleteOnePressedScientific());
+		//persentButtonScientific.addActionListener(new PersentPressedScientific());
+		//divideButtonScientific.addActionListener(new DividePressedScientific());
+		//sevenButtonScientific.addActionListener(new SevenPressedScientific());
+		//eightButtonScientific.addActionListener(new EightPressedScientific());
+		//nineButtonScientific.addActionListener(new NinePressedScientific());
+		//multipleButtonScientific.addActionListener(new MultiplyPressedScientific());
+		//fourButtonScientific.addActionListener(new FourPressedScientific());
+		//fiveButtonScientific.addActionListener(new FivePressedScientific());
+		//sixButtonScientific.addActionListener(new SixPressedScientific());
+		//minusButtonScientific.addActionListener(new MinusPressedScientific());
+		//oneButtonScientific.addActionListener(new OnePressedScientific());
+		//twoButtonScientific.addActionListener(new TwoPressedScientific());
+		//threeButtonScientific.addActionListener(new ThreePressedScientific());
+		//plusButtonScientific.addActionListener(new PlusPressedScientific());
+		//zeroButtonScientific.addActionListener(new ZeroPressedScientific());
+		//dotButtonScientific.addActionListener(new DotPressedScientific());
+		//changeSignButtonScientific.addActionListener(new ChangeSignPressedScientific());
+		//equalsButtonScientific.addActionListener(new EqualsPressedScientific());
+		//lnButtonScientific.addActionListener(new LnPressed());
+		//lgButtonScientific.addActionListener(new LgPressed());
+		//sinButtonScientific.addActionListener(new SinPressed());
+		//cosButtonScientific.addActionListener(new CosPressed());
+		//tgButtonScientific.addActionListener(new TgPressed());
+		//piButtonScientific.addActionListener(new PiPressed());
+		//eButtonScientific.addActionListener(new EPressed());
+		//absButtonScientific.addActionListener(new AbsPressed());
+		//factorialButtonScientific.addActionListener(new FactorialPressed());
+		//leftParButtonScientific.addActionListener(new LeftParPressed());
+		//rightParButtonScientific.addActionListener(new RightParPressed());
+		//sqrtButtonScientific.addActionListener(new LgPressed());
+		//reverseButtonScientific.addActionListener(new ReversePressed());
+		//squareButtonScientific.addActionListener(new SquarePressed());
+		//exponentButtonScientific.addActionListener(new ExponentPressed());
+	}
+	
+	public void defaultWhiteMode() {
 		
-		scientificFrame.setSize(500, 700);
-		scientificFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		scientificFrame.setLayout(new GridLayout(2, 0));
-		scientificFrame.add(mainPanelScientific);
-		scientificFrame.add(buttonsLabelScientific);
-		scientificFrame.setVisible(false);
-		
-		
-							/********************/
-							/*Default white mode*/
-							/********************/
-		/*background*/
 		menuFieldScientific.setBackground(colorDarkWhite);
 		nameScientific.setBackground(colorDarkWhite);
 		darkThemeButtonDefaultScientific.setBackground(colorDarkWhite);
 		lightThemeButtonDefaultScientific.setBackground(colorDarkWhite);
-		
 		switchPanelScientific.setBackground(colorDarkWhite);
 		standartCalcButtonScientific.setBackground(colorDarkWhite);
 		scientificCalcButtonScientific.setBackground(colorDarkWhite);
@@ -393,7 +338,6 @@ public class Scientific extends Standart{
 		integralsCalcButtonScientific.setBackground(colorDarkWhite);
 		outputFieldScientific.setBackground(colorDarkWhite);
 		
-		/*font*/
 		menuFieldScientific.setForeground(colorBlack);
 		nameScientific.setForeground(colorBlack);
 		darkThemeButtonDefaultScientific.setForeground(colorBlack);
@@ -405,10 +349,7 @@ public class Scientific extends Standart{
 		integralsCalcButtonScientific.setForeground(colorBlack);
 		outputFieldScientific.setForeground(colorBlack);
 		
-		/*Buttons*/
 		buttonsLabelScientific.setBackground(colorDarkWhite);
-		
-		/* 1 line */
 		absButtonScientific.setBackground(colorDarkWhite);
 		piButtonScientific.setBackground(colorDarkWhite);
 		eButtonScientific.setBackground(colorDarkWhite);
@@ -420,7 +361,6 @@ public class Scientific extends Standart{
 		deleteAllButtonScientific.setForeground(colorBlack);
 		deleteOneButtonScientific.setForeground(colorBlack);
 		
-		/* 2 line */
 		reverseButtonScientific.setBackground(colorDarkWhite);
 		persentButtonScientific.setBackground(colorDarkWhite);
 		sinButtonScientific.setBackground(colorDarkWhite);
@@ -432,7 +372,6 @@ public class Scientific extends Standart{
 		cosButtonScientific.setForeground(colorBlack);
 		tgButtonScientific.setForeground(colorBlack);
 		
-		/* 3 line */
 		sqrtButtonScientific.setBackground(colorDarkWhite);
 		leftParButtonScientific.setBackground(colorDarkWhite);
 		rightParButtonScientific.setBackground(colorDarkWhite);
@@ -444,7 +383,6 @@ public class Scientific extends Standart{
 		factorialButtonScientific.setForeground(colorBlack);
 		divideButtonScientific.setForeground(colorBlack);
 		
-		/* 4 line */
 		squareButtonScientific.setBackground(colorDarkWhite);
 		sevenButtonScientific.setBackground(colorDarkWhite);
 		eightButtonScientific.setBackground(colorDarkWhite);
@@ -456,7 +394,6 @@ public class Scientific extends Standart{
 		nineButtonScientific.setForeground(colorBlack);
 		multipleButtonScientific.setForeground(colorBlack);
 		
-		/* 5 line */
 		exponentButtonScientific.setBackground(colorDarkWhite);
 		fourButtonScientific.setBackground(colorDarkWhite);
 		fiveButtonScientific.setBackground(colorDarkWhite);
@@ -468,7 +405,6 @@ public class Scientific extends Standart{
 		sixButtonScientific.setForeground(colorBlack);
 		minusButtonScientific.setForeground(colorBlack);
 		
-		/* 6 line */
 		lnButtonScientific.setBackground(colorDarkWhite);
 		oneButtonScientific.setBackground(colorDarkWhite);
 		twoButtonScientific.setBackground(colorDarkWhite);
@@ -480,7 +416,6 @@ public class Scientific extends Standart{
 		threeButtonScientific.setForeground(colorBlack);
 		plusButtonScientific.setForeground(colorBlack);
 		
-		/* 7 line */
 		lgButtonScientific.setBackground(colorDarkWhite);
 		zeroButtonScientific.setBackground(colorDarkWhite);
 		dotButtonScientific.setBackground(colorDarkWhite);
@@ -492,6 +427,15 @@ public class Scientific extends Standart{
 		changeSignButtonScientific.setForeground(colorBlack);
 		equalsButtonScientific.setForeground(colorBlack);
 	}
+	
+	public void startAndShowCalc() {
+		scientificFrame.setSize(500, 700);
+		scientificFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		scientificFrame.setLayout(new GridLayout(2, 0));
+		scientificFrame.add(mainPanelScientific);
+		scientificFrame.add(buttonsLabelScientific);
+		scientificFrame.setVisible(false);
+	}
 }
 
 					/******************/
@@ -500,6 +444,7 @@ public class Scientific extends Standart{
 
 /*from Scientific Calc*/
 /*Numbers*/
+/*
 class NinePressedScientific extends Scientific implements ActionListener{
 	public void actionPerformed(ActionEvent e) { 
 		String str = outputFieldScientific.getText();
@@ -619,7 +564,9 @@ class ZeroPressedScientific extends Scientific implements ActionListener{
 		}
 	}
 }
+*/
 /*Operators*/
+/*
 class PlusPressedScientific extends Scientific implements ActionListener{
 	public void actionPerformed(ActionEvent e) { 
 		String str = outputFieldScientific.getText();
@@ -721,8 +668,9 @@ class DotPressedScientific extends Scientific implements ActionListener{
 		}
 	}
 }
-
+*/
 /*Scientific operators*/
+/*
 class LnPressed extends Scientific implements ActionListener{
 	public void actionPerformed(ActionEvent e) { 
 		String str = outputFieldScientific.getText();
@@ -836,9 +784,10 @@ class FactorialPressed extends Scientific implements ActionListener{
 		Scientific.outputFieldScientific.setText(str + "!");
 	}
 }
-
+*/
 /*Main workspace*/
 /**/
+/*
 class ChangeSignPressedScientific extends Scientific implements ActionListener{
 	public void actionPerformed(ActionEvent e) { 
 		
@@ -859,61 +808,56 @@ class ChangeSignPressedScientific extends Scientific implements ActionListener{
 		}
 	}
 }
+*/
+
+/*
+ * +
+ * -
+ * *
+ * divide 
+ * %
+ * 
+ * 1/x
+ * sqrt
+ * x^2
+ * x^y
+ * ln
+ * lg
+ * pi
+ * e
+ * 
+ * sin
+ * cos
+ * tg
+ * 
+ * ()
+ * 
+ * !
+ *
+ */
+
+/*, 
+"x^n", "x^2", "sqrt(x)", "1/x", "ln(x)", "log(x)", 
+"e^(x)", "a^(x)",  
+"sin(x)", "cos(x)", "tg(x)", "ctg(x)", 
+"arcsin(x)", "arccos(x)", "arctg(x)", "arcctg(x)", 
+"sh(x)", "ch(x)", "th()", "cth()");*/
+
+/*
 class EqualsPressedScientific extends Scientific implements ActionListener{
 	public void actionPerformed(ActionEvent e) { 
-
-		/*
-		 * +
-		 * -
-		 * *
-		 * divide 
-		 * %
-		 * 
-		 * 1/x
-		 * sqrt
-		 * x^2
-		 * x^y
-		 * ln
-		 * lg
-		 * pi
-		 * e
-		 * 
-		 * sin
-		 * cos
-		 * tg
-		 * 
-		 * ()
-		 * 
-		 * !
-		 *
-		 */
-		
-		//"sin("
-		//find ")"
-		//put it into the arrayOfNumbers 
-		//solve it 
-		
-		//for now just one char argument 
-		//
 		
 		String fullStringOfInput = outputFieldScientific.getText();
 		char charAtEnd = fullStringOfInput.charAt(fullStringOfInput.length() - 1);
 		
 		
-		List<String> subStrings = Arrays.asList("+", "-", "*", "/",  "%"); /*, 
-												"x^n", "x^2", "sqrt(x)", "1/x", "ln(x)", "log(x)", 
-												"e^(x)", "a^(x)",  
-												"sin(x)", "cos(x)", "tg(x)", "ctg(x)", 
-												"arcsin(x)", "arccos(x)", "arctg(x)", "arcctg(x)", 
-												"sh(x)", "ch(x)", "th()", "cth()");*/
+		List<String> subStrings = Arrays.asList("+", "-", "*", "/",  "%");
 		
 		if(charAtEnd != '%' && charAtEnd != '*' && charAtEnd != '/' && charAtEnd != '+' && charAtEnd != '-') {
 			
 			ArrayList<String> arrayOfNumbers = new ArrayList<String>();
 			ArrayList<String> arrayOfOperators = new ArrayList<String>();
 
-			
-			/*Firstly - simplify string*/
 			if(fullStringOfInput.contains("sin(")) {
 				int it1 = fullStringOfInput.indexOf("sin(");
 				int it2 = fullStringOfInput.indexOf(")");
@@ -1081,5 +1025,5 @@ class EqualsPressedScientific extends Scientific implements ActionListener{
 		
 	}
 }
-
+*/
 /**/

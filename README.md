@@ -1,8 +1,8 @@
-# VCalc 0.2
+# VCalc 0.3
 ---------------------------------------
 Handy calculator with useful features for math students.
 
-<i>Version: 0.2</i> <br>
+<i>Version: 0.3</i> <br>
 <i>Author: VladWick</i>
 
 ---------------------------------------
@@ -59,4 +59,10 @@ Every single button has its own ActionListener class that doing the same thing i
 &emsp; - Dark and white mode move to another new class called "Design"<br>
 &emsp; - Move switching classes to the "Design"<br>
 &emsp; - Made a Calc with the same functionality. but with one operation at a time in StandartCalc<br>
-	
+
+---------------------------------------
+<h2>UPDATE VCalc0.3</h2>
+&emsp; - Update whole programm with the ideas of "Clean Code" <br>
+&emsp; - all classes is divided into functions in a right and readable way  <br>
+&emsp; - all the design details into the class "Design" => dark and white mode  <br>
+&emsp; - less comments - better code layout  <br>
