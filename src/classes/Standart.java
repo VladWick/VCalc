@@ -264,15 +264,16 @@ public class Standart {
 		minusButton.addActionListener(new OperatorPressed());
 		oneButton.addActionListener(new NumberPressed());
 		twoButton.addActionListener(new NumberPressed());
+		threeButton.addActionListener(new NumberPressed());
 		plusButton.addActionListener(new OperatorPressed());
 		zeroButton.addActionListener(new NumberPressed());
-		dotButton.addActionListener(new OperatorPressed());
+		dotButton.addActionListener(new DotPressed());
 		changeSignButton.addActionListener(new ChangeSignPressed());
 		equalsButton.addActionListener(new EqualsPressed());
+		
 	}
 	
 	public void defaultWhiteMode() throws IOException {
-
 		menuFieldStandart.setBackground(colorDarkWhite);
 		nameStandart.setBackground(colorDarkWhite);
 		darkThemeButtonDefaultStandart.setBackground(colorDarkWhite);
@@ -363,83 +364,51 @@ public class Standart {
 					/*Action Listeners*/
 					/******************/
 
-class NumberPressed extends Standart implements ActionListener{
+class DotPressed extends Standart implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
-		
 		String str = outputFieldStandart.getText();
 		
-		/*Get the number of the button*/
-		JButton o = (JButton)e.getSource();
-		String name = o.getName();
-		int nameInt = Integer.parseInt(name);
-		
-		//Crutch
-		int ref = 0;
-		
-		/*Clear string if operator was pressed in the previous move*/
-		if(!str.isEmpty()) {
+		if(str.isEmpty()) {
+			System.out.println("Can`t start expression with dot.");
+		} else {
+			
+			// Checking last char  
 			char lastChar = str.charAt(str.length()-1);
+			boolean accept = true;
+			String acceptString = "accept";
 			for(int i = 0 ; i < operators.size(); ++i) {
 				if(lastChar == operators.get(i)) {
-					currentOperator = operators.get(i);
-					//Crutch
-					ref = 1;
-					//System.out.println(currentOperator);
-					
-					/*Adding first operation here to prevent problems in 'ChangeSign'*/
-					String substr = str.substring(0, str.length()-1);
-					double firstOperation = Double.parseDouble(substr); 
-					operations[0] = firstOperation;
+					acceptString = "operator";
+					break;
+				} else if(lastChar == '.') {
+					acceptString = "dot";
 					break;
 				}
 			}
-		}
-
-		/*Write number*/
-		for(int i = 0 ; i < numbers.size(); ++i) {
-			if(nameInt == numbers.get(i)) {
-				if(ref == 0) {
-					Standart.outputFieldStandart.setText(str + numbers.get(i));
-				} else if (ref == 1){
-					Standart.outputFieldStandart.setText(Integer.toString(numbers.get(i)));
+			
+			if(acceptString.equals("accept")) {
+				
+				// Checking whole string for 'dots'
+				boolean accept2 = true;
+				for(int i = 0 ; i < str.length()-1; i++) {
+					char currentChar = str.charAt(i);
+					if(currentChar == '.') {
+						accept2 = false;
+						System.out.print("Dot was already been pressed.");
+						break;
+					}
 				}
-			} 
-		}
-	}
-}
-class OperatorPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) {
-		
-		String str = outputFieldStandart.getText();
-		
-		JButton o = (JButton)e.getSource();
-		String name = o.getName();
-		
-		if(!str.isEmpty()) {
-			
-			/*Adding first operation number*/
-			String lastChar = str.substring(str.length()-1);
-			//double lastCharDouble = Double.parseDouble(lastChar);
-			
-			/*provide problems with 'ChangeSign'*/
-			/*
-			for(int i = 0 ; i < numbers.size(); ++i) {
-				if(lastCharDouble == numbers.get(i)) {
-					String substr = str.substring(0, str.length());
-					double firstOperation = Double.parseDouble(substr); 
-					operations[0] = firstOperation;
-					break;
+				
+				if(accept2) {
+					Standart.outputFieldStandart.setText(str + ".");
 				}
+			} else if(acceptString.equals("dot")) {
+				System.out.println("Unacceptable. Dot + dot");
+			} else if(acceptString.equals("operator")) {
+				System.out.println("Unacceptable. Operator + dot.");
+			} else {
+				System.out.println("Something went wrong.");
 			}
-			*/
-			
-			for(int i = 0 ; i < operators.size(); ++i) {
-				if(name.charAt(0) == operators.get(i)) {
-					Standart.outputFieldStandart.setText(str + operators.get(i));
-				} 
-			}
-		} else {
-			System.out.println("Expression can`t start with the operator.");
 		}
 	}
 }
@@ -460,101 +429,206 @@ class DeletePressed extends Standart implements ActionListener{
 		}
 	}
 }
+class NumberPressed extends Standart implements ActionListener{
+	public void actionPerformed(ActionEvent e) {
+		
+		String str = outputFieldStandart.getText();
+		
+		/*Get the number of the button*/
+		JButton o = (JButton)e.getSource();
+		String name = o.getName();
+		int nameInt = Integer.parseInt(name);
+		
+		String type = "number";
+		/*if operator was pressed in the previous move -> change 'type' to operator to clear string at the end*/
+		if(!str.isEmpty()) {
+			char lastChar = str.charAt(str.length()-1);
+			
+			if(!str.equals("-")) {
+				for(int i = 0 ; i < operators.size(); ++i) {
+					if(lastChar == operators.get(i)) {
+						type = "operator";
+						currentOperator = operators.get(i);
+						// Adding first operation here to prevent problems in 'ChangeSign'
+						String substr = str.substring(0, str.length()-1);
+						double firstOperation = Double.parseDouble(substr); 
+						operations[0] = firstOperation;
+						break;
+					}
+				}
+			}
+		}
+
+		/*Write number*/
+		for(int i = 0 ; i < numbers.size(); ++i) {
+			if(nameInt == numbers.get(i)) {
+				if(type.equals("number")) {
+					Standart.outputFieldStandart.setText(str + numbers.get(i));
+				} else if (type.equals("operator")){
+					Standart.outputFieldStandart.setText(Integer.toString(numbers.get(i)));
+				}
+			} 
+		}
+	}
+}
+class OperatorPressed extends Standart implements ActionListener{
+	public void actionPerformed(ActionEvent e) {
+		
+		String str = outputFieldStandart.getText();
+		JButton o = (JButton)e.getSource();
+		String name = o.getName();
+		char nameChar = name.charAt(0);
+		
+		if(str.isEmpty()) {
+			if(name.equals("-")) {
+				Standart.outputFieldStandart.setText("-");
+			} else {
+				System.out.println("Expression can`t start with the operator rather than minus.");
+			}
+		} else if(str.length() == 1) {
+			char lastChar = str.charAt(str.length()-1);
+			
+			if(lastChar == '-') {
+				if(name.equals("-")) {
+					System.out.println("Two minuses at the start. Wrong.");
+				} else {
+					System.out.println("Minus + operator at the start. Wrong.");
+				}
+			} else {
+				boolean accept = true;
+				for(int i = 0; i < operators.size(); ++i) {
+					if(lastChar == operators.get(i)) {
+						accept = false;
+						break;
+					}
+				}
+				if(!accept) {
+					System.out.println("Operator + operator. Wrong.");
+				} else {
+					for(int i = 0; i < operators.size(); ++i) {
+						if(nameChar == operators.get(i)) {
+							Standart.outputFieldStandart.setText(str + operators.get(i));
+							break;
+						}
+					}
+				}
+			}
+		} else {
+			char lastChar = str.charAt(str.length()-1);	
+			
+			if(lastChar == '.') {
+				System.out.println("Dot + operator. Unacceptable.");
+			} else {
+				boolean operatorLastChar = false;
+				for(int i = 0; i < operators.size(); ++i) {
+					if(lastChar == operators.get(i)) {
+						operatorLastChar = true;
+					}
+				}
+				
+				if(!operatorLastChar) {
+					Standart.outputFieldStandart.setText(str + name);
+				} else {
+					System.out.println("Operator + operator. Wrong.");
+				}
+			}
+		}
+	}
+}
 class EqualsPressed extends Standart implements ActionListener{
 	public void actionPerformed(ActionEvent e) { 
 		String str = outputFieldStandart.getText();
 		
-		String lastChar = str.substring(str.length()-1);
-		double lastCharDouble = Double.parseDouble(lastChar);
-		
-		/*Adding second operation number*/
-		for(int i = 0 ; i < numbers.size(); ++i) {
-			if(lastCharDouble == numbers.get(i)) {
-				
-				String substr = str.substring(0, str.length());
-				double secondOperation = Double.parseDouble(substr); 
-				operations[1] = secondOperation;
-				
-				break;
+		if(str.isEmpty()) {
+			System.out.println("Nothing to solve.");
+		} else {
+			String lastChar = str.substring(str.length()-1);
+			double lastCharDouble = Double.parseDouble(lastChar);
+			
+			/*Adding second operation number*/
+			for(int i = 0 ; i < numbers.size(); ++i) {
+				if(lastCharDouble == numbers.get(i)) {
+					
+					String substr = str.substring(0, str.length());
+					double secondOperation = Double.parseDouble(substr); 
+					operations[1] = secondOperation;
+					
+					break;
+				}
+			}
+			
+			/*Solving the Calc*/
+			double x = operations[0];
+			double y = operations[1];
+			Double answer = 0.0;
+			
+			switch(currentOperator) {
+				case '*': {
+					answer = x*y;
+					operations[0] = answer;
+					operations[1] = 0.0;
+					break;
+				}
+				case '/': {
+					answer = x/y;
+					operations[0] = answer;
+					operations[1] = 0.0;
+					break;
+				}
+				case '+': {
+					answer = x+y;
+					operations[0] = answer;
+					operations[1] = 0.0;
+					break;
+				}
+				case '-': {
+					answer = x-y;
+					operations[0] = answer;
+					operations[1] = 0.0;
+					break;
+				}
+				case '%': {
+					answer = x%y;
+					operations[0] = answer;
+					operations[1] = 0.0;
+					break;
+				}
+			}
+			
+			if(answer == Math.floor(answer)) {
+				int answerInt = answer.intValue();			
+				Standart.outputFieldStandart.setText(Integer.toString(answerInt));
+			} else {
+				Standart.outputFieldStandart.setText(Double.toString(answer));
 			}
 		}
-		
-		/*Solving the Calc*/
-		switch(currentOperator) {
-			case '*': {
-				double x = operations[0];
-				double y = operations[1];
-				double answer = x*y;
-				Standart.outputFieldStandart.setText(Double.toString(answer));
-				
-				operations[0] = answer;
-				operations[1] = 0.0;
-	
-				break;
-			}
-			case '/': {
-				double x = operations[0];
-				double y = operations[1];
-				double answer = x/y;
-				Standart.outputFieldStandart.setText(Double.toString(answer));
-				
-				operations[0] = answer;
-				operations[1] = 0.0;
-				
-				break;
-			}
-			case '+': {
-				double x = operations[0];
-				double y = operations[1];
-				double answer = x+y;
-				Standart.outputFieldStandart.setText(Double.toString(answer));
-				
-				operations[0] = answer;
-				operations[1] = 0.0;
-				
-				break;
-			}
-			case '-': {
-				double x = operations[0];
-				double y = operations[1];
-				double answer = x-y;
-				Standart.outputFieldStandart.setText(Double.toString(answer));
-				
-				operations[0] = answer;
-				operations[1] = 0.0;
-				
-				break;
-			}
-			case '%': {
-				double x = operations[0];
-				double y = operations[1];
-				double answer = x%y;
-				Standart.outputFieldStandart.setText(Double.toString(answer));
-				
-				operations[0] = answer;
-				operations[1] = 0.0;
-				
-				break;
-			}
-		}
-		
 	}
 }
 
 class ChangeSignPressed extends Standart implements ActionListener{
 	public void actionPerformed(ActionEvent e) { 
+		
 		String str = outputFieldStandart.getText();
-		
-		String firstChar = str.substring(0,1);
-		
-		if(!firstChar.equals("-")) {
-			Standart.outputFieldStandart.setText("-" + str);
+		if(str.isEmpty()) {
+			Standart.outputFieldStandart.setText("-");
 		} else {
-			Standart.outputFieldStandart.setText(str.substring(1, str.length()));
-		} 
+			char lastChar = str.charAt(str.length()-1);
+			char firstChar = str.charAt(0);
+			if(lastChar == '-' && str.length() == 1) {
+				Standart.outputFieldStandart.setText("");
+			} else {
+				if(firstChar != '-') {
+					Standart.outputFieldStandart.setText("-" + str);
+				} else {
+					Standart.outputFieldStandart.setText(str.substring(1, str.length()));
+				} 
+			}
+		}
 	}
 }
 
+
+/*One string solution*/
 /**/
 /*
 class ChangeSignPressed extends Standart implements ActionListener{

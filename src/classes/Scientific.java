@@ -72,6 +72,20 @@ public class Scientific extends Standart{
 	public static JButton reverseButtonScientific = new JButton();
 	public static JButton exponentButtonScientific = new JButton();
 	
+	// Calculation variables
+	public static List<Character> operators = Arrays.asList('+', '-', '*', '/', '%');
+	public static List<Integer> numbers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+	public static List<String> functions = Arrays.asList("sin", "cos", "tg", "sqrt", "reverse", "exponent", 
+															"square", "factorial", "abs", "lg", "ln");
+
+	public static double[] operations = {0.0, 0.0};
+	public static char currentOperator = ' ';
+	
+	public static double[] exponentOperations = {0.0, 0.0};
+	
+	public final Double PI = 3.14159265359;
+	public final Double E = 2.71828;
+	
 	public void customizeComponents() throws IOException {
 		
 		mainPanelScientific.setLayout(new GridLayout(3,1));
@@ -109,6 +123,7 @@ public class Scientific extends Standart{
 		outputFieldScientific.setVerticalAlignment(JLabel.CENTER);
 		outputFieldScientific.setHorizontalAlignment(JLabel.CENTER);
 		
+		deleteAllButtonScientific.setName("deleteAll");
 		deleteAllButtonScientific.setText("AC");
 		deleteAllButtonScientific.setFont(font20);
 		
@@ -116,103 +131,139 @@ public class Scientific extends Standart{
 		buttonIconDelete = resize(buttonIconDelete, 35, 35);
 		deleteOneButtonScientific = new JButton(new ImageIcon(buttonIconDelete));
 		deleteOneButtonScientific.setBackground(colorWhite);
+		deleteOneButtonScientific.setName("deleteOne");
 		
+		persentButtonScientific.setName("%");
 		persentButtonScientific.setText("%");
 		persentButtonScientific.setFont(font20);
 		
+		divideButtonScientific.setName("/");
 		divideButtonScientific.setText("/");
 		divideButtonScientific.setFont(font20);
 		
+		sevenButtonScientific.setName("7");
 		sevenButtonScientific.setText("7");
 		sevenButtonScientific.setFont(font20);
 		
+		eightButtonScientific.setName("8");
 		eightButtonScientific.setText("8");
 		eightButtonScientific.setFont(font20);
 		
+		nineButtonScientific.setName("9");
 		nineButtonScientific.setText("9");
 		nineButtonScientific.setFont(font20);
 		
+		multipleButtonScientific.setName("*");
 		multipleButtonScientific.setText("*");
 		multipleButtonScientific.setFont(font20);
 		
+		fourButtonScientific.setName("4");
 		fourButtonScientific.setText("4");
 		fourButtonScientific.setFont(font20);
 		
+		fiveButtonScientific.setName("5");
 		fiveButtonScientific.setText("5");
 		fiveButtonScientific.setFont(font20);
 		
+		sixButtonScientific.setName("6");
 		sixButtonScientific.setText("6");
 		sixButtonScientific.setFont(font20);
 		
+		minusButtonScientific.setName("-");
 		minusButtonScientific.setText("-");
 		minusButtonScientific.setFont(font20);
 		
+		oneButtonScientific.setName("1");
 		oneButtonScientific.setText("1");
 		oneButtonScientific.setFont(font20);
 		
+		twoButtonScientific.setName("2");
 		twoButtonScientific.setText("2");
 		twoButtonScientific.setFont(font20);
 		
+		threeButtonScientific.setName("3");
 		threeButtonScientific.setText("3");
 		threeButtonScientific.setFont(font20);
 		
+		plusButtonScientific.setName("+");
 		plusButtonScientific.setText("+");
 		plusButtonScientific.setFont(font20);
 		
+		zeroButtonScientific.setName("0");
 		zeroButtonScientific.setText("0");
 		zeroButtonScientific.setFont(font20);
 		
+		dotButtonScientific.setName(".");
 		dotButtonScientific.setText(".");
 		dotButtonScientific.setFont(font20);
 		
+		changeSignButtonScientific.setName("changeSign");
 		changeSignButtonScientific.setText("+/-");
 		changeSignButtonScientific.setFont(font20);
 		
+		equalsButtonScientific.setText("equals");
 		equalsButtonScientific.setText("=");
 		equalsButtonScientific.setFont(font20);
 		
+		lnButtonScientific.setName("ln");
 		lnButtonScientific.setText("ln");
 		lnButtonScientific.setFont(font20);
 		
+		lgButtonScientific.setName("lg");
 		lgButtonScientific.setText("lg");
 		lgButtonScientific.setFont(font20);
 		
+		sinButtonScientific.setName("sin");
 		sinButtonScientific.setText("sin");
 		sinButtonScientific.setFont(font20);
 		
+		cosButtonScientific.setName("cos");
 		cosButtonScientific.setText("cos");
 		cosButtonScientific.setFont(font20);
 		
+		tgButtonScientific.setName("tg");
 		tgButtonScientific.setText("tg");
 		tgButtonScientific.setFont(font20);
 		
+		piButtonScientific.setName("pi");
 		piButtonScientific.setText("pi");
 		piButtonScientific.setFont(font20);
 		
+		eButtonScientific.setName("e");
 		eButtonScientific.setText("e");
 		eButtonScientific.setFont(font20);
 		
+		absButtonScientific.setName("abs");
 		absButtonScientific.setText("abs");
 		absButtonScientific.setFont(font20);
 		
+		factorialButtonScientific.setName("factorial");
 		factorialButtonScientific.setText("!");
 		factorialButtonScientific.setFont(font20);
 		
+		leftParButtonScientific.setName("(");
 		leftParButtonScientific.setText("(");
 		leftParButtonScientific.setFont(font20);
+		leftParButtonScientific.setEnabled(false);
 		
+		rightParButtonScientific.setName(")");
 		rightParButtonScientific.setText(")");
 		rightParButtonScientific.setFont(font20);
+		rightParButtonScientific.setEnabled(false);
 		
-		sqrtButtonScientific.setText("sqrt(x)");
+		sqrtButtonScientific.setName("sqrt");
+		sqrtButtonScientific.setText("sqrt");
 		sqrtButtonScientific.setFont(font20);
 		
+		reverseButtonScientific.setName("reverse");
 		reverseButtonScientific.setText("1/x");
 		reverseButtonScientific.setFont(font20);
 		
+		squareButtonScientific.setName("square");
 		squareButtonScientific.setText("x^2");
 		squareButtonScientific.setFont(font20);
 		
+		exponentButtonScientific.setName("exponent");
 		exponentButtonScientific.setText("x^y");
 		exponentButtonScientific.setFont(font20);
 		
@@ -230,22 +281,22 @@ public class Scientific extends Standart{
 		switchPanelScientific.add(derivativesCalcButtonScientific);
 		switchPanelScientific.add(integralsCalcButtonScientific);
 
-		buttonsLabelScientific.add(absButtonScientific);
-		buttonsLabelScientific.add(piButtonScientific);
-		buttonsLabelScientific.add(eButtonScientific);
+		buttonsLabelScientific.add(factorialButtonScientific);
+		buttonsLabelScientific.add(leftParButtonScientific);
+		buttonsLabelScientific.add(rightParButtonScientific);
 		buttonsLabelScientific.add(deleteAllButtonScientific);
 		buttonsLabelScientific.add(deleteOneButtonScientific);
 				
 		buttonsLabelScientific.add(reverseButtonScientific);
-		buttonsLabelScientific.add(persentButtonScientific);
+		buttonsLabelScientific.add(tgButtonScientific);
 		buttonsLabelScientific.add(sinButtonScientific);
 		buttonsLabelScientific.add(cosButtonScientific);
-		buttonsLabelScientific.add(tgButtonScientific);
+		buttonsLabelScientific.add(persentButtonScientific);
 				
 		buttonsLabelScientific.add(sqrtButtonScientific);
-		buttonsLabelScientific.add(leftParButtonScientific);
-		buttonsLabelScientific.add(rightParButtonScientific);
-		buttonsLabelScientific.add(factorialButtonScientific);
+		buttonsLabelScientific.add(absButtonScientific);
+		buttonsLabelScientific.add(piButtonScientific);
+		buttonsLabelScientific.add(eButtonScientific);
 		buttonsLabelScientific.add(divideButtonScientific);
 
 		buttonsLabelScientific.add(squareButtonScientific);
@@ -278,7 +329,7 @@ public class Scientific extends Standart{
 		mainPanelScientific.add(buttonsLabelScientific);
 	}
 	
-	public void actionListeners() {
+	public void actionListenersScientific() {
 		
 		darkThemeButtonDefaultScientific.addActionListener(new darkThemeButtonDefaultScientificPressed());
 		lightThemeButtonDefaultScientific.addActionListener(new lightThemeButtonDefaultScientificPressed());
@@ -288,41 +339,48 @@ public class Scientific extends Standart{
 		derivativesCalcButtonScientific.addActionListener(new DerivativesMenuPressed());
 		integralsCalcButtonScientific.addActionListener(new IntegralsMenuPressed());
 		
-		//deleteAllButtonScientific.addActionListener(new DeleteAllPressedScientific());
-		//deleteOneButtonScientific.addActionListener(new DeleteOnePressedScientific());
-		//persentButtonScientific.addActionListener(new PersentPressedScientific());
-		//divideButtonScientific.addActionListener(new DividePressedScientific());
-		//sevenButtonScientific.addActionListener(new SevenPressedScientific());
-		//eightButtonScientific.addActionListener(new EightPressedScientific());
-		//nineButtonScientific.addActionListener(new NinePressedScientific());
-		//multipleButtonScientific.addActionListener(new MultiplyPressedScientific());
-		//fourButtonScientific.addActionListener(new FourPressedScientific());
-		//fiveButtonScientific.addActionListener(new FivePressedScientific());
-		//sixButtonScientific.addActionListener(new SixPressedScientific());
-		//minusButtonScientific.addActionListener(new MinusPressedScientific());
-		//oneButtonScientific.addActionListener(new OnePressedScientific());
-		//twoButtonScientific.addActionListener(new TwoPressedScientific());
-		//threeButtonScientific.addActionListener(new ThreePressedScientific());
-		//plusButtonScientific.addActionListener(new PlusPressedScientific());
-		//zeroButtonScientific.addActionListener(new ZeroPressedScientific());
-		//dotButtonScientific.addActionListener(new DotPressedScientific());
-		//changeSignButtonScientific.addActionListener(new ChangeSignPressedScientific());
-		//equalsButtonScientific.addActionListener(new EqualsPressedScientific());
-		//lnButtonScientific.addActionListener(new LnPressed());
-		//lgButtonScientific.addActionListener(new LgPressed());
-		//sinButtonScientific.addActionListener(new SinPressed());
-		//cosButtonScientific.addActionListener(new CosPressed());
-		//tgButtonScientific.addActionListener(new TgPressed());
-		//piButtonScientific.addActionListener(new PiPressed());
-		//eButtonScientific.addActionListener(new EPressed());
-		//absButtonScientific.addActionListener(new AbsPressed());
-		//factorialButtonScientific.addActionListener(new FactorialPressed());
+		zeroButtonScientific.addActionListener(new NumberPressedScientific());
+		oneButtonScientific.addActionListener(new NumberPressedScientific());
+		twoButtonScientific.addActionListener(new NumberPressedScientific());
+		threeButtonScientific.addActionListener(new NumberPressedScientific());
+		fourButtonScientific.addActionListener(new NumberPressedScientific());
+		fiveButtonScientific.addActionListener(new NumberPressedScientific());
+		sixButtonScientific.addActionListener(new NumberPressedScientific());
+		sevenButtonScientific.addActionListener(new NumberPressedScientific());
+		eightButtonScientific.addActionListener(new NumberPressedScientific());
+		nineButtonScientific.addActionListener(new NumberPressedScientific());
+		
+		piButtonScientific.addActionListener(new ConstPressed());
+		eButtonScientific.addActionListener(new ConstPressed());
+		
+		deleteAllButtonScientific.addActionListener(new DeletePressedScientific());
+		deleteOneButtonScientific.addActionListener(new DeletePressedScientific());
+		
+		dotButtonScientific.addActionListener(new DotPressedScientific());
+
+		changeSignButtonScientific.addActionListener(new ChangeSignPressedScientific());
+		equalsButtonScientific.addActionListener(new EqualsPressedScientific());
+		
 		//leftParButtonScientific.addActionListener(new LeftParPressed());
 		//rightParButtonScientific.addActionListener(new RightParPressed());
-		//sqrtButtonScientific.addActionListener(new LgPressed());
-		//reverseButtonScientific.addActionListener(new ReversePressed());
-		//squareButtonScientific.addActionListener(new SquarePressed());
-		//exponentButtonScientific.addActionListener(new ExponentPressed());
+		
+		persentButtonScientific.addActionListener(new OperatorPressedScientific());
+		divideButtonScientific.addActionListener(new OperatorPressedScientific());
+		multipleButtonScientific.addActionListener(new OperatorPressedScientific());
+		plusButtonScientific.addActionListener(new OperatorPressedScientific());
+		minusButtonScientific.addActionListener(new OperatorPressedScientific());
+
+		lnButtonScientific.addActionListener(new FunctionPressedScientific());
+		lgButtonScientific.addActionListener(new FunctionPressedScientific());
+		sinButtonScientific.addActionListener(new FunctionPressedScientific());
+		cosButtonScientific.addActionListener(new FunctionPressedScientific());
+		tgButtonScientific.addActionListener(new FunctionPressedScientific());		
+		absButtonScientific.addActionListener(new FunctionPressedScientific());
+		factorialButtonScientific.addActionListener(new FunctionPressedScientific());
+		sqrtButtonScientific.addActionListener(new FunctionPressedScientific());
+		reverseButtonScientific.addActionListener(new FunctionPressedScientific());
+		squareButtonScientific.addActionListener(new FunctionPressedScientific());
+		exponentButtonScientific.addActionListener(new FunctionPressedScientific());
 	}
 	
 	public void defaultWhiteMode() {
@@ -441,6 +499,390 @@ public class Scientific extends Standart{
 					/******************/
 					/*Action Listeners*/
 					/******************/
+
+
+//ChangeSignPressed
+//EqualsPressed
+
+//NumberPressed
+//OperatorPressed
+
+//DeletePressed
+//DotPressed
+
+// functions = ("sin", "cos", "tg", "sqrt", "reverse", "exponent",  "square", "factorial", "abs", "lg", "ln");
+
+class DotPressedScientific extends Scientific implements ActionListener {
+	public void actionPerformed(ActionEvent e) {
+		
+		String str = outputFieldScientific.getText();
+		
+		if(str.isEmpty()) {
+			System.out.println("Can`t start expression with dot.");
+		} else {
+			
+			// Checking last char  
+			char lastChar = str.charAt(str.length()-1);
+			String acceptString = "accept";
+			for(int i = 0 ; i < operators.size(); ++i) {
+				if(lastChar == operators.get(i)) {
+					acceptString = "operator";
+					break;
+				} else if(lastChar == '.') {
+					acceptString = "dot";
+					break;
+				}
+			}
+			
+			if(acceptString.equals("accept")) {
+				
+				// Checking whole string for 'dots'
+				boolean accept2 = true;
+				for(int i = 0 ; i < str.length()-1; i++) {
+					char currentChar = str.charAt(i);
+					if(currentChar == '.') {
+						accept2 = false;
+						System.out.print("Dot was already been pressed.");
+						break;
+					}
+				}
+				
+				if(accept2) {
+					Scientific.outputFieldScientific.setText(str + ".");
+				}
+				
+			} else if(acceptString.equals("dot")) {
+				System.out.println("Unacceptable. Dot + dot");
+			} else if(acceptString.equals("operator")) {
+				System.out.println("Unacceptable. Operator + dot.");
+			} else {
+				System.out.println("Something went wrong.");
+			}
+		}
+	}
+}
+
+class DeletePressedScientific extends Scientific implements ActionListener{
+	public void actionPerformed(ActionEvent e) { 
+		String str = outputFieldScientific.getText();
+		
+		JButton o = (JButton)e.getSource();
+		String name = o.getName();
+		
+		if(name.equals("deleteAll")) {
+			Scientific.outputFieldScientific.setText("");
+		} else if (name.equals("deleteOne")) {
+			Scientific.outputFieldScientific.setText(str.substring(0, str.length()-1));
+		} else {
+			System.out.println("Something went wrong.");
+		}
+	}
+}
+
+class NumberPressedScientific extends Scientific implements ActionListener{
+	public void actionPerformed(ActionEvent e) {
+		
+		String str = outputFieldScientific.getText();
+		
+		/*Get the number of the button*/
+		JButton o = (JButton)e.getSource();
+		String name = o.getName();
+		int nameInt = Integer.parseInt(name);
+
+		String type = "number";
+		/*if operator was pressed in the previous move -> change 'type' to operator to clear string at the end*/
+		if(!str.isEmpty()) {
+			char lastChar = str.charAt(str.length()-1);
+			
+			if(!str.equals("-")) {
+				for(int i = 0 ; i < operators.size(); ++i) {
+					if(lastChar == operators.get(i)) {
+						type = "operator";
+						currentOperator = operators.get(i);
+						// Adding first operation here to prevent problems in 'ChangeSign'
+						String substr = str.substring(0, str.length()-1);
+						double firstOperation = Double.parseDouble(substr); 
+						operations[0] = firstOperation;
+						break;
+					}
+				}
+			}
+		}
+
+		/*Write number*/
+		for(int i = 0 ; i < numbers.size(); ++i) {
+			if(nameInt == numbers.get(i)) {
+				if(type.equals("number")) {
+					Scientific.outputFieldScientific.setText(str + numbers.get(i));
+				} else if (type.equals("operator")){
+					Scientific.outputFieldScientific.setText(Integer.toString(numbers.get(i)));
+				}
+			} 
+		}
+		
+	}
+}
+class ConstPressed extends Scientific implements ActionListener{
+	public void actionPerformed(ActionEvent e) {
+		String str = outputFieldScientific.getText();
+		
+		/*Get the number of the button*/
+		JButton o = (JButton)e.getSource();
+		String nameString = o.getName();
+		
+		if(nameString.equals("e")) {
+			Scientific.outputFieldScientific.setText(str + E);
+			
+		} else if(nameString.equals("pi")) {
+			Scientific.outputFieldScientific.setText(str + PI);
+			
+		} else {
+			System.out.println("Something went wrong.");
+		}
+	}
+}
+
+class OperatorPressedScientific extends Scientific implements ActionListener{
+	public void actionPerformed(ActionEvent e) {
+		
+		String str = outputFieldScientific.getText();
+		
+		/*Get the number of the button*/
+		JButton o = (JButton)e.getSource();
+		String name = o.getName();
+		char nameChar = name.charAt(0);
+		
+		if(exponentOperations[0] != 0.0 && str.charAt(0) == '^') {
+			System.out.println("Exponent is in progress. Press enter firstly.");
+		} else {
+			//Main wave of the programm
+			if(str.isEmpty()) {
+				if(name.equals("-")) {
+					Scientific.outputFieldScientific.setText("-");
+				} else {
+					System.out.println("Expression can`t start with the operator rather than minus.");
+				}
+			} else if(str.length() == 1) {
+				char lastChar = str.charAt(str.length()-1);
+				
+				if(lastChar == '-') {
+					if(name.equals("-")) {
+						System.out.println("Two minuses at the start. Wrong.");
+					} else {
+						System.out.println("Minus + operator at the start. Wrong.");
+					}
+				} else {
+					boolean accept = true;
+					for(int i = 0; i < operators.size(); ++i) {
+						if(lastChar == operators.get(i)) {
+							accept = false;
+							break;
+						}
+					}
+					if(!accept) {
+						System.out.println("Operator + operator. Wrong.");
+					} else {
+						for(int i = 0; i < operators.size(); ++i) {
+							if(nameChar == operators.get(i)) {
+								Scientific.outputFieldScientific.setText(str + operators.get(i));
+								break;
+							}
+						}
+					}
+				}
+			} else {
+				char lastChar = str.charAt(str.length()-1);	
+				if(lastChar == '.') {
+					System.out.println("Dot + operator. Unacceptable.");
+				} else {
+					boolean operatorLastChar = false;
+					for(int i = 0; i < operators.size(); ++i) {
+						if(lastChar == operators.get(i)) {
+							operatorLastChar = true;
+						}
+					}
+					if(!operatorLastChar) {
+						Scientific.outputFieldScientific.setText(str + name);
+					} else {
+						System.out.println("Operator + operator. Wrong.");
+					}
+				}
+			}
+		}
+	}
+}
+
+class FunctionPressedScientific extends Scientific implements ActionListener{
+	public void actionPerformed(ActionEvent e) {
+		
+		String str = outputFieldScientific.getText();
+		
+		/*Get the number of the button*/
+		JButton o = (JButton)e.getSource();
+		String nameString = o.getName();
+		
+		Double value = Double.parseDouble(str);
+		Double answer = 0.0;
+		if(nameString.equals("sin")) {
+			answer = Math.sin(value);
+		} else if(nameString.equals("cos")) {
+			answer = Math.cos(value);
+		} else if(nameString.equals("tg")) {
+			answer = Math.tan(value);
+		} else if(nameString.equals("sqrt")) {
+			answer = Math.sqrt(value);
+		} else if(nameString.equals("square")) {
+			answer = Math.pow(value, 2);
+		} else if(nameString.equals("reverse")) {
+			answer = Math.pow(value, -1);
+		} else if(nameString.equals("ln")) {
+			answer = Math.log(value);
+		} else if(nameString.equals("lg")) {
+			answer = Math.log10(value);
+		} else if(nameString.equals("abs")) {
+			answer = Math.abs(value);
+		} else if(nameString.equals("exponent")) {
+			exponentOperations[0] = value;
+			Scientific.outputFieldScientific.setText("^");
+			
+		} else if(nameString.equals("factorial")) {
+			if(Math.floor(value) == value) {
+				
+				int valueInt = Integer.parseInt(str);
+				int finalAnswer = 1;
+				for(int i = valueInt; i > 0; i--) {
+					finalAnswer = finalAnswer * i;
+				}
+				answer = Double.valueOf(finalAnswer);
+			} else {
+				System.out.println("Number mast be INTEGER, not DOUBLE.");
+			}
+		}
+
+		operations[0] = answer;
+		
+		if(!nameString.equals("exponent")) {
+			if(answer == Math.floor(answer)) {
+				int answerInt = answer.intValue();			
+				Scientific.outputFieldScientific.setText(Integer.toString(answerInt));
+			} else {
+				Scientific.outputFieldScientific.setText(Double.toString(answer));
+			}
+		}
+	}
+}
+
+class EqualsPressedScientific extends Scientific implements ActionListener{
+	public void actionPerformed(ActionEvent e) { 
+		String str = outputFieldScientific.getText();
+		
+		if(exponentOperations[0] != 0.0 && str.charAt(0) == '^') {
+			String substr = str.substring(1, str.length());
+			Double exp = Double.parseDouble(substr);
+			
+			exponentOperations[1] = exp;
+			
+			Double answer = Math.pow(exponentOperations[0], exponentOperations[1]);
+			
+			if(answer == Math.floor(answer)) {
+				int answerInt = answer.intValue();			
+				Scientific.outputFieldScientific.setText(Integer.toString(answerInt));
+			} else {
+				Scientific.outputFieldScientific.setText(Double.toString(answer));
+			}
+			
+			exponentOperations[0] = 0.0;
+			exponentOperations[1] = 0.0;
+
+		} else {
+			if(str.isEmpty()) {
+				System.out.println("Nothing to solve.");
+			} else {
+				String lastChar = str.substring(str.length()-1);
+				double lastCharDouble = Double.parseDouble(lastChar);
+				
+				/*Adding second operation number*/
+				for(int i = 0 ; i < numbers.size(); ++i) {
+					if(lastCharDouble == numbers.get(i)) {
+						
+						String substr = str.substring(0, str.length());
+						double secondOperation = Double.parseDouble(substr); 
+						operations[1] = secondOperation;
+						
+						break;
+					}
+				}
+				
+				/*Solving the Calc*/
+				double x = operations[0];
+				double y = operations[1];
+				Double answer = 0.0;
+				
+				switch(currentOperator) {
+					case '*': {
+						answer = x*y;
+						operations[0] = answer;
+						operations[1] = 0.0;
+						break;
+					}
+					case '/': {
+						answer = x/y;
+						operations[0] = answer;
+						operations[1] = 0.0;
+						break;
+					}
+					case '+': {
+						answer = x+y;
+						operations[0] = answer;
+						operations[1] = 0.0;
+						break;
+					}
+					case '-': {
+						answer = x-y;
+						operations[0] = answer;
+						operations[1] = 0.0;
+						break;
+					}
+					case '%': {
+						answer = x%y;
+						operations[0] = answer;
+						operations[1] = 0.0;
+						break;
+					}
+				}
+				
+				if(answer == Math.floor(answer)) {
+					int answerInt = answer.intValue();			
+					Scientific.outputFieldScientific.setText(Integer.toString(answerInt));
+				} else {
+					Scientific.outputFieldScientific.setText(Double.toString(answer));
+				}
+			}
+		}
+	}
+}
+
+class ChangeSignPressedScientific extends Scientific implements ActionListener{
+	public void actionPerformed(ActionEvent e) { 
+		
+		String str = outputFieldScientific.getText();
+		if(str.isEmpty()) {
+			Scientific.outputFieldScientific.setText("-");
+		} else {
+			char lastChar = str.charAt(str.length()-1);
+			char firstChar = str.charAt(0);
+			if(lastChar == '-' && str.length() == 1) {
+				Scientific.outputFieldScientific.setText("");
+			} else {
+				if(firstChar != '-') {
+					Scientific.outputFieldScientific.setText("-" + str);
+				} else {
+					Scientific.outputFieldScientific.setText(str.substring(1, str.length()));
+				} 
+			}
+		}
+	}
+}
 
 /*from Scientific Calc*/
 /*Numbers*/
@@ -823,6 +1265,8 @@ class ChangeSignPressedScientific extends Scientific implements ActionListener{
  * x^y
  * ln
  * lg
+ * 
+ * abs
  * pi
  * e
  * 

@@ -11,31 +11,30 @@ public class Main {
 	public static void createCalc() throws IOException {
 		
 		Standart frameStandart = new Standart();
-		Scientific frameScientific = new Scientific();
-		Derivatives frameDerivatives = new Derivatives();
-		Integrals frameIntegrals = new Integrals();
-		
 		frameStandart.customizeComponents();
 		frameStandart.addingComponentsInTheRightOrder();
 		frameStandart.actionListeners();
 		frameStandart.defaultWhiteMode();
 		frameStandart.startAndShowCalc();
 		
+		Scientific frameScientific = new Scientific();
 		frameScientific.customizeComponents();
 		frameScientific.addingComponentsInTheRightOrder();
-		frameScientific.actionListeners();
+		frameScientific.actionListenersScientific();
 		frameScientific.defaultWhiteMode();
 		frameScientific.startAndShowCalc();
 		
+		Derivatives frameDerivatives = new Derivatives();
 		frameDerivatives.customizeComponents();
 		frameDerivatives.addingComponentsInTheRightOrder();
-		frameDerivatives.actionListeners();
+		frameDerivatives.actionListenersDerivatives();
 		frameDerivatives.defaultWhiteMode();
 		frameDerivatives.startAndShowCalc();
 		
+		Integrals frameIntegrals = new Integrals();
 		frameIntegrals.customizeComponents();
 		frameIntegrals.addingComponentsInTheRightOrder();
-		frameIntegrals.actionListeners();
+		frameIntegrals.actionListenersIntegrals();
 		frameIntegrals.defaultWhiteMode();
 		frameIntegrals.startAndShowCalc();
 		

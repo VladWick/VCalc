@@ -152,6 +152,10 @@ public class Integrals extends Standart{
 		buttonsPanelIntegrals.setLayout(new GridLayout(3, 0));
 	}
 	
+	public void actionListenersIntegrals() {	
+		
+	}
+
 	public void defaultWhiteMode() {
 		
 		menuFieldIntegrals.setBackground(colorDarkWhite);

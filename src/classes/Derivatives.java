@@ -146,6 +146,11 @@ public class Derivatives extends Standart{
 
 	}
 	
+
+	public void actionListenersDerivatives() {	
+		
+	}
+	
 	public void defaultWhiteMode() {
 
 		menuFieldDerivatives.setBackground(colorDarkWhite);
