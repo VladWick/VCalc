@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -500,27 +499,12 @@ public class Scientific extends Standart{
 					/*Action Listeners*/
 					/******************/
 
-
-//ChangeSignPressed
-//EqualsPressed
-
-//NumberPressed
-//OperatorPressed
-
-//DeletePressed
-//DotPressed
-
-// functions = ("sin", "cos", "tg", "sqrt", "reverse", "exponent",  "square", "factorial", "abs", "lg", "ln");
-
 class DotPressedScientific extends Scientific implements ActionListener {
-	public void actionPerformed(ActionEvent e) {
-		
-		String str = outputFieldScientific.getText();
-		
+	
+	void writeDot(String str) {
 		if(str.isEmpty()) {
 			System.out.println("Can`t start expression with dot.");
 		} else {
-			
 			// Checking last char  
 			char lastChar = str.charAt(str.length()-1);
 			String acceptString = "accept";
@@ -560,6 +544,11 @@ class DotPressedScientific extends Scientific implements ActionListener {
 			}
 		}
 	}
+	
+	public void actionPerformed(ActionEvent e) {
+		String str = outputFieldScientific.getText();
+		writeDot(str);
+	}
 }
 
 class DeletePressedScientific extends Scientific implements ActionListener{
@@ -580,20 +569,25 @@ class DeletePressedScientific extends Scientific implements ActionListener{
 }
 
 class NumberPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) {
-		
-		String str = outputFieldScientific.getText();
-		
-		/*Get the number of the button*/
-		JButton o = (JButton)e.getSource();
-		String name = o.getName();
-		int nameInt = Integer.parseInt(name);
-
-		String type = "number";
-		/*if operator was pressed in the previous move -> change 'type' to operator to clear string at the end*/
+	
+	//type = checkTypeOfInput(str, type);
+	//writeNumber(str, nameInt, type);
+	
+	void writeNumber(String str, int nameInt, String type) {
+		for(int i = 0 ; i < numbers.size(); ++i) {
+			if(nameInt == numbers.get(i)) {
+				if(type.equals("number")) {
+					Scientific.outputFieldScientific.setText(str + numbers.get(i));
+				} else if (type.equals("operator")){
+					Scientific.outputFieldScientific.setText(Integer.toString(numbers.get(i)));
+				}
+			} 
+		}
+	}
+	
+	String checkTypeOfInput(String str, String type) {
 		if(!str.isEmpty()) {
 			char lastChar = str.charAt(str.length()-1);
-			
 			if(!str.equals("-")) {
 				for(int i = 0 ; i < operators.size(); ++i) {
 					if(lastChar == operators.get(i)) {
@@ -608,25 +602,28 @@ class NumberPressedScientific extends Scientific implements ActionListener{
 				}
 			}
 		}
-
-		/*Write number*/
-		for(int i = 0 ; i < numbers.size(); ++i) {
-			if(nameInt == numbers.get(i)) {
-				if(type.equals("number")) {
-					Scientific.outputFieldScientific.setText(str + numbers.get(i));
-				} else if (type.equals("operator")){
-					Scientific.outputFieldScientific.setText(Integer.toString(numbers.get(i)));
-				}
-			} 
-		}
+		return type;
+	}
+	
+	
+	public void actionPerformed(ActionEvent e) {
+		String str = outputFieldScientific.getText();
 		
+		JButton o = (JButton)e.getSource();
+		String name = o.getName();
+		int nameInt = Integer.parseInt(name);
+
+		String type = "number";
+		type = checkTypeOfInput(str, type);
+		
+		writeNumber(str, nameInt, type);
 	}
 }
+
 class ConstPressed extends Scientific implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String str = outputFieldScientific.getText();
 		
-		/*Get the number of the button*/
 		JButton o = (JButton)e.getSource();
 		String nameString = o.getName();
 		
@@ -643,15 +640,8 @@ class ConstPressed extends Scientific implements ActionListener{
 }
 
 class OperatorPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) {
-		
-		String str = outputFieldScientific.getText();
-		
-		/*Get the number of the button*/
-		JButton o = (JButton)e.getSource();
-		String name = o.getName();
-		char nameChar = name.charAt(0);
-		
+	
+	void writeOperator(String str, String name, char nameChar) {
 		if(exponentOperations[0] != 0.0 && str.charAt(0) == '^') {
 			System.out.println("Exponent is in progress. Press enter firstly.");
 		} else {
@@ -710,9 +700,22 @@ class OperatorPressedScientific extends Scientific implements ActionListener{
 			}
 		}
 	}
+	
+	public void actionPerformed(ActionEvent e) {
+		
+		String str = outputFieldScientific.getText();
+		
+		/*Get the number of the button*/
+		JButton o = (JButton)e.getSource();
+		String name = o.getName();
+		char nameChar = name.charAt(0);
+		
+		writeOperator(str, name, nameChar);
+	}
 }
 
 class FunctionPressedScientific extends Scientific implements ActionListener{
+	
 	public void actionPerformed(ActionEvent e) {
 		
 		String str = outputFieldScientific.getText();
@@ -761,6 +764,10 @@ class FunctionPressedScientific extends Scientific implements ActionListener{
 
 		operations[0] = answer;
 		
+		computeFunction(answer, nameString);
+	}
+	
+	void computeFunction(Double answer, String nameString) {
 		if(!nameString.equals("exponent")) {
 			if(answer == Math.floor(answer)) {
 				int answerInt = answer.intValue();			
@@ -770,12 +777,18 @@ class FunctionPressedScientific extends Scientific implements ActionListener{
 			}
 		}
 	}
+	
+	
 }
 
 class EqualsPressedScientific extends Scientific implements ActionListener{
+	
 	public void actionPerformed(ActionEvent e) { 
 		String str = outputFieldScientific.getText();
-		
+		solve(str);
+	}
+	
+	void solve(String str) {
 		if(exponentOperations[0] != 0.0 && str.charAt(0) == '^') {
 			String substr = str.substring(1, str.length());
 			Double exp = Double.parseDouble(substr);
@@ -863,9 +876,8 @@ class EqualsPressedScientific extends Scientific implements ActionListener{
 }
 
 class ChangeSignPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		
-		String str = outputFieldScientific.getText();
+	
+	void change(String str) {
 		if(str.isEmpty()) {
 			Scientific.outputFieldScientific.setText("-");
 		} else {
@@ -882,592 +894,9 @@ class ChangeSignPressedScientific extends Scientific implements ActionListener{
 			}
 		}
 	}
-}
-
-/*from Scientific Calc*/
-/*Numbers*/
-/*
-class NinePressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "9";
-			Scientific.outputFieldScientific.setText(str);
-		} else {
-			Scientific.outputFieldScientific.setText(str + "9");
-		}
-	}
-}
-class EightPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "8";
-			Scientific.outputFieldScientific.setText(str);
-		} else {
-			Scientific.outputFieldScientific.setText(str + "8");
-		}
-	}
-}
-class SevenPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "7";
-			Scientific.outputFieldScientific.setText(str);
-		} else {
-			Scientific.outputFieldScientific.setText(str + "7");
-		}
-	}
-}
-class SixPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "6";
-			Scientific.outputFieldScientific.setText(str);
-		} else {
-			Scientific.outputFieldScientific.setText(str + "6");
-		}
-	}
-}
-class FivePressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "5";
-			Scientific.outputFieldScientific.setText(str);
-		} else {
-			Scientific.outputFieldScientific.setText(str + "5");
-		}
-	}
-}
-class FourPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "4";
-			Scientific.outputFieldScientific.setText(str);
-		} else {
-			Scientific.outputFieldScientific.setText(str + "4");
-		}
-	}
-}
-class ThreePressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "3";
-			Scientific.outputFieldScientific.setText(str);
-		} else {
-			Scientific.outputFieldScientific.setText(str + "3");
-		}
-	}
-}
-class TwoPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "2";
-			Scientific.outputFieldScientific.setText(str);
-		} else {
-			Scientific.outputFieldScientific.setText(str + "2");
-		}
-	}
-}
-class OnePressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "1";
-			Scientific.outputFieldScientific.setText(str);
-		} else {
-			Scientific.outputFieldScientific.setText(str + "1");
-		}
-	}
-}
-class ZeroPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		if(!str.isEmpty() && str.charAt(0) == '0') {
-			System.out.println("Double zero. Incorrect.");
-		} else {
-			Scientific.outputFieldScientific.setText(str + "0");
-		}
-	}
-}
-*/
-/*Operators*/
-/*
-class PlusPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		if(!str.isEmpty()) {
-			char lastChar = str.charAt(str.length()-1);
-			if(lastChar == '+' && lastChar == '-' && lastChar == '*' && lastChar == '/' && lastChar == '%' && lastChar == '.') {
-				System.out.println("Incorrect. Double operator.");
-			} else {
-				Scientific.outputFieldScientific.setText(str + "+");
-			}
-		} else {
-			System.out.println("Wrong start of input");
-		}
-	}
-}
-class MinusPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		if(!str.isEmpty()) {
-			char lastChar = str.charAt(str.length()-1);
-			if(lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/' || lastChar == '%' || lastChar == '.') {
-				System.out.println("Incorrect. Double operator.");
-			} else {
-				Scientific.outputFieldScientific.setText(str + "-");
-			}
-		} else {
-			System.out.println("Wrong start of input");
-		}
-	}
-}
-class MultiplyPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		if(!str.isEmpty()) {
-			char lastChar = str.charAt(str.length()-1);
-			if(lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/' || lastChar == '%' || lastChar == '.') {
-				System.out.println("Incorrect. Double operator.");
-			} else {
-				Scientific.outputFieldScientific.setText(str + "*");
-			}
-		} else {
-			System.out.println("Wrong start of input");
-		}
-	}
-}
-class DividePressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		if(!str.isEmpty()) {
-			char lastChar = str.charAt(str.length()-1);
-			if(lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/' || lastChar == '%' || lastChar == '.') {
-				System.out.println("Incorrect. Double operator.");
-			} else {
-				Scientific.outputFieldScientific.setText(str + "/");
-			}
-		} else {
-			System.out.println("Wrong start of input");
-		}
-	}
-}
-class PersentPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		if(!str.isEmpty()) {
-			char lastChar = str.charAt(str.length()-1);
-			if(lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/' || lastChar == '%' || lastChar == '.') {
-				System.out.println("Incorrect. Double operator.");
-			} else {
-				Scientific.outputFieldScientific.setText(str + "%");
-			}
-		} else {
-			System.out.println("Wrong start of input");
-		}
-	}
-}
-class DeleteOnePressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		Scientific.outputFieldScientific.setText(str.substring(0, str.length()-1));
-	}
-}
-class DeleteAllPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		Scientific.outputFieldScientific.setText("");
-	}
-}
-class DotPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		if(!str.isEmpty()) {
-			char lastChar = str.charAt(str.length()-1);
-			if(lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/' || lastChar == '%' || lastChar == '.') {
-				System.out.println("Incorrect. Double operator.");
-			} else {
-				Scientific.outputFieldScientific.setText(str + ".");
-			}
-		} else {
-			System.out.println("Wrong start of input");
-		}
-	}
-}
-*/
-/*Scientific operators*/
-/*
-class LnPressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-
-		Scientific.outputFieldScientific.setText(str + "ln");
-	}
-}
-class LgPressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		Scientific.outputFieldScientific.setText(str + "lg");
-
-	}
-}
-class SinPressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-
-		Scientific.outputFieldScientific.setText(str + "sin");
-	}
-}
-class CosPressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		Scientific.outputFieldScientific.setText(str + "cos");
-
-	}
-}
-class TgPressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		
-		String str = outputFieldScientific.getText();
-
-		Scientific.outputFieldScientific.setText(str + "tg");
-	}
-}
-class PiPressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-
-		Scientific.outputFieldScientific.setText(str + "pi");
-	}
-}
-class EPressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		
-		String str = outputFieldScientific.getText();
-
-		Scientific.outputFieldScientific.setText(str + "e");
-
-	}
-}
-class LeftParPressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		Scientific.outputFieldScientific.setText(str + "(");
-	}
-}
-class RightParPressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-
-		Scientific.outputFieldScientific.setText(str + ")");
-
-	}
-}
-class ReversePressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-
-		Scientific.outputFieldScientific.setText(str + "^(-1)");
-
-	}
-}
-class AbsPressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		Scientific.outputFieldScientific.setText(str + "abs");
-	}
-}
-class SquarePressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		Scientific.outputFieldScientific.setText(str + "^(2)");
-	}
-}
-class SqrtPressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		Scientific.outputFieldScientific.setText(str + "sqrt");
-
-	}
-}
-class ExponentPressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-		
-		Scientific.outputFieldScientific.setText(str + "^");
-	}
-}
-class FactorialPressed extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldScientific.getText();
-
-		Scientific.outputFieldScientific.setText(str + "!");
-	}
-}
-*/
-/*Main workspace*/
-/**/
-/*
-class ChangeSignPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		
-		String str = outputFieldScientific.getText();
-		
-		char charAtEnd = str.charAt(str.length() - 1);
-		
-		if(!str.isEmpty() && !(str.contains("%") || str.contains("*") || str.contains("/") || str.contains("-") || str.contains("+")) ) {
-
-			if(charAtEnd != '%' && charAtEnd != '*' && charAtEnd != '/' && charAtEnd != '+' && charAtEnd != '-') {
-				Scientific.outputFieldScientific.setText("-" + str);
-			} 
-			
-		} else if(str.length() == 1 && charAtEnd != '%' && charAtEnd != '*' && charAtEnd != '/' && charAtEnd != '+' && charAtEnd != '-') {
-			Scientific.outputFieldScientific.setText("-" + str);
-		} else {
-			Scientific.outputFieldScientific.setText("-");
-		}
-	}
-}
-*/
-
-/*
- * +
- * -
- * *
- * divide 
- * %
- * 
- * 1/x
- * sqrt
- * x^2
- * x^y
- * ln
- * lg
- * 
- * abs
- * pi
- * e
- * 
- * sin
- * cos
- * tg
- * 
- * ()
- * 
- * !
- *
- */
-
-/*, 
-"x^n", "x^2", "sqrt(x)", "1/x", "ln(x)", "log(x)", 
-"e^(x)", "a^(x)",  
-"sin(x)", "cos(x)", "tg(x)", "ctg(x)", 
-"arcsin(x)", "arccos(x)", "arctg(x)", "arcctg(x)", 
-"sh(x)", "ch(x)", "th()", "cth()");*/
-
-/*
-class EqualsPressedScientific extends Scientific implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		
-		String fullStringOfInput = outputFieldScientific.getText();
-		char charAtEnd = fullStringOfInput.charAt(fullStringOfInput.length() - 1);
-		
-		
-		List<String> subStrings = Arrays.asList("+", "-", "*", "/",  "%");
-		
-		if(charAtEnd != '%' && charAtEnd != '*' && charAtEnd != '/' && charAtEnd != '+' && charAtEnd != '-') {
-			
-			ArrayList<String> arrayOfNumbers = new ArrayList<String>();
-			ArrayList<String> arrayOfOperators = new ArrayList<String>();
-
-			if(fullStringOfInput.contains("sin(")) {
-				int it1 = fullStringOfInput.indexOf("sin(");
-				int it2 = fullStringOfInput.indexOf(")");
-				
-				//int k = it2 - it1;
-				String argument = null;
-				for(int iter = 0; iter < it2 - it1; ++iter) {
-					argument += fullStringOfInput.charAt(it1 + iter);
-				}
-				double argumentDouble = Double.parseDouble(argument);
-				double equationToNumber = 0.0;
-				equationToNumber = Math.sin(argumentDouble);
-				
-				String simpleReplace = Double.toString(equationToNumber);
-				
-				int length = fullStringOfInput.length();
-				fullStringOfInput = fullStringOfInput.substring(0, it1) + simpleReplace + fullStringOfInput.substring(it2+1, length);
-
-			}
-			
-			System.out.println("flag");
-			
-			int i = 0;
-			if(fullStringOfInput.charAt(0) == '-') {
-				i = 1;
-			}
-			for(; i < fullStringOfInput.length(); ++i) {
-				
-				String substr = fullStringOfInput.substring(i, i+1); 
-				
-				for(int j = 0; j < subStrings.size(); ++i) {
-					String substr2 = fullStringOfInput.substring(0,i);
-					
-					if(subStrings.equals(substr2)) {
-						
-						arrayOfNumbers.add(substr2);
-						arrayOfOperators.add(substr);
-						
-						fullStringOfInput = fullStringOfInput.substring(i+1, fullStringOfInput.length());
-						i = 0;
-					}
-				}
-			}
-			arrayOfNumbers.add(fullStringOfInput);
-			
-			System.out.println(arrayOfNumbers);
-			System.out.println(arrayOfOperators);
 	
-			Double answer = 0.0;
-			
-			while(!arrayOfNumbers.isEmpty() || !arrayOfOperators.isEmpty() ) {
-				//System.out.println(arrayOfNumbers.isEmpty());
-				//System.out.println(arrayOfOperators.isEmpty());
-				
-				if(arrayOfOperators.contains("%") || arrayOfOperators.contains("*") || arrayOfOperators.contains("/")) {
-					
-					//System.out.println(arrayOfOperators.contains("%"));
-					
-					int index1 = 1000, index2 = 1000, index3 = 1000;
-					
-					if(arrayOfOperators.contains("%")) {
-						index1 = arrayOfOperators.indexOf("%");
-					}
-					if(arrayOfOperators.contains("*")) {
-						index2 = arrayOfOperators.indexOf("*");
-					}
-					if(arrayOfOperators.contains("/")) {
-						index3 = arrayOfOperators.indexOf("/");
-					}
-					
-					if(index1 < index2) {
-						if(index1 < index3) {
-							
-							double x = Double.parseDouble(arrayOfNumbers.get(index1));
-							double y = Double.parseDouble(arrayOfNumbers.get(index1+1));
-
-							arrayOfNumbers.set(index1, Double.toString(x%y));
-							arrayOfNumbers.remove(index1+1);
-							
-							arrayOfOperators.remove(index1);
-							
-						} else {
-							double x = Double.parseDouble(arrayOfNumbers.get(index3));
-							double y = Double.parseDouble(arrayOfNumbers.get(index3+1));
-
-							arrayOfNumbers.set(index3, Double.toString(x/y));
-							arrayOfNumbers.remove(index3+1);
-							
-							arrayOfOperators.remove(index3);
-						}
-					} else {
-						if(index2 < index3) {
-							double x = Double.parseDouble(arrayOfNumbers.get(index2));
-							double y = Double.parseDouble(arrayOfNumbers.get(index2+1));
-
-							arrayOfNumbers.set(index2, Double.toString(x*y));
-							arrayOfNumbers.remove(index2+1);
-							
-							arrayOfOperators.remove(index2);
-						} else {
-							double x = Double.parseDouble(arrayOfNumbers.get(index3));
-							double y = Double.parseDouble(arrayOfNumbers.get(index3+1));
-
-							arrayOfNumbers.set(index3, Double.toString(x/y));
-							arrayOfNumbers.remove(index3+1);
-							
-							arrayOfOperators.remove(index3);
-						}
-					}
-				} else if(arrayOfOperators.contains("+") || arrayOfOperators.contains("-")) {
-					
-					int index1 = 1000, index2 = 1000;
-					
-					if(arrayOfOperators.contains("+")) {
-						index1 = arrayOfOperators.indexOf("+");
-					}
-					if(arrayOfOperators.contains("-")) {
-						index2 = arrayOfOperators.indexOf("-");
-					}
-					
-					if(index1 < index2) {
-						double x = Double.parseDouble(arrayOfNumbers.get(index1));
-						double y = Double.parseDouble(arrayOfNumbers.get(index1+1));
-
-						arrayOfNumbers.set(index1, Double.toString(x+y));
-						arrayOfNumbers.remove(index1+1);
-						arrayOfOperators.remove(index1);
-						
-					} else {
-						double x = Double.parseDouble(arrayOfNumbers.get(index2));
-						double y = Double.parseDouble(arrayOfNumbers.get(index2+1));
-						
-						arrayOfNumbers.set(index2, Double.toString(x-y));
-						arrayOfNumbers.remove(index2+1);
-						arrayOfOperators.remove(index2);
-					}
-
-					//System.out.println(index);
-					//System.out.println("current array: " + arrayOfNumbers);
-					
-				} else {
-					//System.out.println("Something went wrong. Or we good.");
-					
-					answer = Double.parseDouble(arrayOfNumbers.get(0));
-					
-					arrayOfNumbers.remove(0);
-				}
-			}
-		
-			//System.out.println(arrayOfNumbers);
-			
-			if(answer == Math.floor(answer)) {
-				int answerFinal = answer.intValue();
-				System.out.println(answerFinal);
-				outputFieldScientific.setText(Integer.toString(answerFinal));
-				System.out.println("------");
-			} else {
-				System.out.println(answer);
-				outputFieldScientific.setText(Double.toString(answer));
-				System.out.println("------");
-			}
-		} else {
-			System.out.println("Wrong end of input (after press equals)");
-		}
-		
+	public void actionPerformed(ActionEvent e) { 
+		String str = outputFieldScientific.getText();
+		change(str);
 	}
 }
-*/
-/**/

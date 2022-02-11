@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class Derivatives extends Standart{
 	public static JPanel inputLabelDerivatives = new JPanel();
 	public static JLabel iconFuncDerivatives = new JLabel();
 	public static JPanel inputLabelFuncDerivatives = new JPanel();
-	public static JTextField inputFuncDerivatives = new JTextField(12);
+	public static JTextField inputFuncDerivatives = new JTextField(20);
 	public static JPanel workButtonsPanel = new JPanel();
 	public static JButton solveButtonDerivatives = new JButton();
 	public static JButton clearButtonDerivatives = new JButton();
@@ -116,12 +117,13 @@ public class Derivatives extends Standart{
 		integralsCalcButtonDerivatives.setFont(font18);
 		switchPanelDerivatives.setLayout(new GridLayout(4, 1));
 		
-		outputFieldDerivatives.setBounds(30,100, 50, 50);
-		outputFieldDerivatives.setBackground(colorGreen);
+		//outputFieldDerivatives.setBounds(30,100, 50, 50);
+		//outputFieldDerivatives.setBackground(colorGreen);
 		outputFieldDerivatives.setFont(font20);
-		outputFieldDerivatives.setBorder(solidBorder);
+		//outputFieldDerivatives.setBorder(solidBorder);
 		outputFieldDerivatives.setVerticalAlignment(JLabel.CENTER);
 		outputFieldDerivatives.setHorizontalAlignment(JLabel.CENTER);
+		//outputFieldDerivatives.
 		
 		BufferedImage labelIconFunc = ImageIO.read(new File("src/images/iconFunc.png"));
 		labelIconFunc = resize(labelIconFunc, 100, 100);
@@ -143,7 +145,6 @@ public class Derivatives extends Standart{
 		iconDerivative = new JLabel(new ImageIcon(labelIconDeriv));
 		
 		outputFuncDerivatives.setFont(font20);
-
 	}
 	
 
@@ -152,7 +153,6 @@ public class Derivatives extends Standart{
 	}
 	
 	public void defaultWhiteMode() {
-
 		menuFieldDerivatives.setBackground(colorDarkWhite);
 		nameDerivatives.setBackground(colorDarkWhite);
 		darkThemeButtonDefaultDerivatives.setBackground(colorDarkWhite);
@@ -202,7 +202,7 @@ public class Derivatives extends Standart{
 	
 	public void startAndShowCalc() {
 		
-		derivativesFrame.setSize(600, 700);
+		derivativesFrame.setSize(1350, 700);
 		derivativesFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		derivativesFrame.setLayout(new GridLayout(2, 0));
 		derivativesFrame.add(mainPanelDerivatives);
@@ -215,73 +215,155 @@ public class Derivatives extends Standart{
 					/*Action Listeners*/
 					/******************/
 
-/*Literal Workspace*/
-class FindDerivativePressed extends Derivatives implements ActionListener {
-	public FindDerivativePressed() throws IOException {
-		super();
-	}
-
-	public void actionPerformed(ActionEvent e) {
-		String str = inputFuncDerivatives.getText();
-		
-		/*Stupid table for now*/
-		List<String> subStrings = Arrays.asList("x^n", "x^2", "sqrt(x)", "1/x", "ln(x)", "log(x)", 
-												"e^(x)", "a^(x)",  
-												"sin(x)", "cos(x)", "tg(x)", "ctg(x)", 
-												"arcsin(x)", "arccos(x)", "arctg(x)", "arcctg(x)", 
-												"sh(x)", "ch(x)", "th()", "cth()");
-		
-		List<String> answers =    Arrays.asList("n*x^(n-1)", "2x", "-1/sqrt(x)", "-1/x^2", "1/x", "1/(x*ln(a))", 
-												"e^(x)", "a^(x)*ln(a)", 
-												"cos(x)", "-sin(x)", "1/(cos(x))^(2)", "-1/(sin(x))^(2)" ,
-												"1/(sqrt(1-x^(2)))", "-1/(sqrt(1-x^(2)))", "1/(1+x^(2))", "-1/(1+x^(2))",
-												"ch(x)", "sh(x)", "1/(ch(x))^(2)", "-1/(sh(x))^(2)");
-		
-		int len = subStrings.size();
-
-		for(int i = 0 ; i < len; ++i) {
-			String substr = subStrings.get(i);
-			if(substr.equals(str)) {
-				outputFuncDerivatives.setText(answers.get(i));
-			}
-		}
-		if((outputFuncDerivatives.getText()).isEmpty()) {
-			outputFuncDerivatives.setText("Inappropriate input");
-		}
-		
-		/*A little bit advanced*/
-		/*
-		if(!str.contains("x")) {
-			outputFuncDerivatives.setText("0");
-		} else if(str.contains("x^")) {
-			
-			int j = str.indexOf("x");
-			int k = str.indexOf("^");
-			int f = str.indexOf("x");
-			
-			String str1 = str.substring(0, j);
-			
-			if(str.charAt(k+1) == '1') {
-				...
-			}
-			
-			outputFuncDerivatives.setText(str1 + );
-		}
-		*/	
-	}
-}
-
 class ClearDerivativesPressed extends Derivatives implements ActionListener {
-	public ClearDerivativesPressed() throws IOException {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	public void actionPerformed(ActionEvent e) {
 		inputFuncDerivatives.setText("");
 		outputFuncDerivatives.setText("");
+		
 	}
 }
 
+class FindDerivativePressed extends Derivatives implements ActionListener {
+	
+	ArrayList<String> expressions = new ArrayList<String>();
+	ArrayList<Character> operators = new ArrayList<Character>();
+	
+	void breakIntoPieces(String str) {
+		
+		//5.6*(9*x-4)^(123.123)+5.6*(9*x-4)^(123.123)
+		for(int i = 0 ; i < str.length(); ++i) {
+		
+			if(str.charAt(i) == '+') {
+				operators.add(str.charAt(i));
+				
+				String numberBeforeString = str.substring(0, i);
+				expressions.add(numberBeforeString);
+				
+				str = str.substring(i+1, str.length());
+				i = 0;
+			}
+		}
+		
+		expressions.add(str);
+		str = "";
+		
+		System.out.println(expressions);
+		System.out.println(operators);
+	}
+	
+	String solve(String str) {
+		
+		int amountOfParentheses = 0;
+		for(int j = 0; j < str.length(); ++j) {
+			if(str.charAt(j) == '(') {
+				amountOfParentheses += 1;
+			}
+		}
+		
+		int indexOfX = str.indexOf("x");
+		int indexOfExp = str.indexOf("^");
+		int indexOfLeftPar = str.indexOf("(");
+		
+		String answer = "";
+		
+		if(amountOfParentheses == 2) {
+			if(indexOfX-1 != indexOfLeftPar) {
+				//5.6*(9*x-4)^(123.123)
+				//C*(Bx-a)^(number)
+				String newX = str.substring(indexOfLeftPar, indexOfExp);
+				
+				String exponentString = str.substring(indexOfExp+2, str.length()-1);
+				Double exponent = Double.parseDouble(exponentString);
+				String coefficientString = str.substring(0, indexOfLeftPar-1);
+				Double coefficient = Double.parseDouble(coefficientString);
+				
+				String coefficientOfXString = str.substring(indexOfLeftPar+1 ,indexOfX-1);
+				Double coefficientOfX = Double.parseDouble(coefficientOfXString);
+				
+				Double newCoefficient = (exponent*coefficient*coefficientOfX);
 
+				answer = newCoefficient + "*" + newX + "^(" + (exponent-1) + ")";
+				if(newCoefficient == Math.floor(newCoefficient)) {
+					int newCoefficientInt = newCoefficient.intValue();	
+					answer = newCoefficientInt + "*" + newX;
+				}
+				if(exponent == Math.floor(exponent)) {
+					int exponentInt = exponent.intValue();			
+					answer += "^(" + (exponentInt-1) + ")";
+				} 
+			} else {
+				//5.6*(x-4)^(123.123)
+				//C*(x-a)^(number)
+				String newX = str.substring(indexOfLeftPar, indexOfExp);
+				
+				String exponentString = str.substring(indexOfExp+2, str.length()-1);
+				Double exponent = Double.parseDouble(exponentString);
+				String coefficientString = str.substring(0, indexOfX-2);
+				Double coefficient = Double.parseDouble(coefficientString);
+				Double newCoefficient = (exponent*coefficient);
+				
+				answer = newCoefficient + "*" + newX + "^(" + (exponent-1) + ")";
+				if(newCoefficient == Math.floor(newCoefficient)) {
+					int newCoefficientInt = newCoefficient.intValue();	
+					answer = newCoefficientInt + "*" + newX;
+				}
+				if(exponent == Math.floor(exponent)) {
+					int exponentInt = exponent.intValue();			
+					answer += "^(" + (exponentInt-1) + ")";
+				} 
+			}
+		} else if (amountOfParentheses == 1) {
+			//7*x^(456)
+			//C*x^(number)
+			String coefficientString = str.substring(0, indexOfX-1);
+			Double coefficient = Double.parseDouble(coefficientString);
+			String exponentString = str.substring(indexOfX+3, str.length()-1);
+			Double exponent = Double.parseDouble(exponentString);
+			
+			Double newCoefficient = (exponent*coefficient);
+			
+			answer = newCoefficient + "*" + "x^(" + (exponent-1) + ")";
+			if(newCoefficient == Math.floor(newCoefficient)) {
+				int newCoefficientInt = newCoefficient.intValue();			
+				answer = newCoefficientInt + "*" + "x^";
+			}
+			if(exponent == Math.floor(exponent)) {
+				int exponentInt = exponent.intValue();			
+				answer += "(" + (exponentInt-1) + ")";
+			} 				
+		} else {
+			System.out.println("Something went wrong.");
+		}
+		return answer;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		
+		String str = inputFuncDerivatives.getText();
+		
+		if(str.contains("x") && str.contains("^") && str.contains("(") && str.contains(")")) {
+			
+			// Filling 'expressions' and 'operators' 
+			breakIntoPieces(str);
 
+			String finalAnswer = "";
+			for(int i = 0 ; i < expressions.size(); ++i) {
+				finalAnswer += solve(expressions.get(i)) + "+";
+			}
+			 
+			// Fix the bug with '+' at the end
+			System.out.println(finalAnswer);
+			if(finalAnswer.contains("+")) {
+				finalAnswer = finalAnswer.substring(0, finalAnswer.length()-1);
+				outputFuncDerivatives.setText(finalAnswer);
+			} else {
+				outputFuncDerivatives.setText(finalAnswer);
+			}
+			
+			expressions.clear();
+			operators.clear();
+		} else {
+			System.out.println("Unappropriate input. Missing 'x' or '^' of '(' of ')' " );
+		}
+	}
+}

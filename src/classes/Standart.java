@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -243,13 +242,14 @@ public class Standart {
 	}
 	
 	public void actionListeners() {
-		
 		darkThemeButtonDefaultStandart.addActionListener(new darkThemeButtonDefaultStandartPressed());
 		lightThemeButtonDefaultStandart.addActionListener(new lightThemeButtonDefaultStandartPressed());
+		
 		standartCalcButtonStandart.addActionListener(new StandartMenuPressed());
 		scientificCalcButtonStandart.addActionListener(new ScientificMenuPressed());
 		derivativesCalcButtonStandart.addActionListener(new DerivativesMenuPressed());
 		integralsCalcButtonStandart.addActionListener(new IntegralsMenuPressed());
+		
 		deleteAllButton.addActionListener(new DeletePressed());
 		deleteOneButton.addActionListener(new DeletePressed());
 		persentButton.addActionListener(new OperatorPressed());
@@ -269,8 +269,7 @@ public class Standart {
 		zeroButton.addActionListener(new NumberPressed());
 		dotButton.addActionListener(new DotPressed());
 		changeSignButton.addActionListener(new ChangeSignPressed());
-		equalsButton.addActionListener(new EqualsPressed());
-		
+		equalsButton.addActionListener(new EqualsPressed());	
 	}
 	
 	public void defaultWhiteMode() throws IOException {
@@ -365,16 +364,18 @@ public class Standart {
 					/******************/
 
 class DotPressed extends Standart implements ActionListener {
+	
 	public void actionPerformed(ActionEvent e) {
 		String str = outputFieldStandart.getText();
-		
+		writeDot(str);
+	}
+	
+	public void writeDot(String str) {
 		if(str.isEmpty()) {
 			System.out.println("Can`t start expression with dot.");
 		} else {
-			
-			// Checking last char  
+			// Checking last char
 			char lastChar = str.charAt(str.length()-1);
-			boolean accept = true;
 			String acceptString = "accept";
 			for(int i = 0 ; i < operators.size(); ++i) {
 				if(lastChar == operators.get(i)) {
@@ -430,8 +431,8 @@ class DeletePressed extends Standart implements ActionListener{
 	}
 }
 class NumberPressed extends Standart implements ActionListener{
+	
 	public void actionPerformed(ActionEvent e) {
-		
 		String str = outputFieldStandart.getText();
 		
 		/*Get the number of the button*/
@@ -440,7 +441,12 @@ class NumberPressed extends Standart implements ActionListener{
 		int nameInt = Integer.parseInt(name);
 		
 		String type = "number";
-		/*if operator was pressed in the previous move -> change 'type' to operator to clear string at the end*/
+		
+		type = checkTypeOfInput(str, type);
+		writeNumber(str, nameInt, type);	
+	}
+	
+	public String checkTypeOfInput(String str, String type) {
 		if(!str.isEmpty()) {
 			char lastChar = str.charAt(str.length()-1);
 			
@@ -458,8 +464,10 @@ class NumberPressed extends Standart implements ActionListener{
 				}
 			}
 		}
-
-		/*Write number*/
+		return type;
+	}
+	
+	public void writeNumber(String str, int nameInt, String type) {
 		for(int i = 0 ; i < numbers.size(); ++i) {
 			if(nameInt == numbers.get(i)) {
 				if(type.equals("number")) {
@@ -471,14 +479,19 @@ class NumberPressed extends Standart implements ActionListener{
 		}
 	}
 }
+
 class OperatorPressed extends Standart implements ActionListener{
+	
 	public void actionPerformed(ActionEvent e) {
-		
 		String str = outputFieldStandart.getText();
 		JButton o = (JButton)e.getSource();
 		String name = o.getName();
 		char nameChar = name.charAt(0);
 		
+		writeOperator(str, name, nameChar);
+	}
+	
+	public void writeOperator(String str, String name, char nameChar) {
 		if(str.isEmpty()) {
 			if(name.equals("-")) {
 				Standart.outputFieldStandart.setText("-");
@@ -535,9 +548,15 @@ class OperatorPressed extends Standart implements ActionListener{
 		}
 	}
 }
+
 class EqualsPressed extends Standart implements ActionListener{
+	
 	public void actionPerformed(ActionEvent e) { 
 		String str = outputFieldStandart.getText();
+		solve(str);
+	}
+	
+	public void solve(String str) {
 		
 		if(str.isEmpty()) {
 			System.out.println("Nothing to solve.");
@@ -606,9 +625,8 @@ class EqualsPressed extends Standart implements ActionListener{
 }
 
 class ChangeSignPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		
-		String str = outputFieldStandart.getText();
+	
+	void change(String str) {
 		if(str.isEmpty()) {
 			Standart.outputFieldStandart.setText("-");
 		} else {
@@ -624,6 +642,11 @@ class ChangeSignPressed extends Standart implements ActionListener{
 				} 
 			}
 		}
+	}
+	
+	public void actionPerformed(ActionEvent e) { 
+		String str = outputFieldStandart.getText();
+		change(str);
 	}
 }
 
@@ -804,228 +827,6 @@ class EqualsPressed extends Standart implements ActionListener{
 			}
 		} else {
 			System.out.println("Wrong end of input (after press equals)");
-		}
-	}
-}
-*/
-
-/*Clac 0.1*/
-/*
-class OnePressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) {
-		String str = outputFieldStandart.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "1";
-			Standart.outputFieldStandart.setText(str);
-		} else {
-			Standart.outputFieldStandart.setText(str + "1");
-		}
-	}
-}
-class TwoPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldStandart.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "2";
-			Standart.outputFieldStandart.setText(str);
-		} else {
-			Standart.outputFieldStandart.setText(str + "2");
-		}
-	}
-}
-class ThreePressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldStandart.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "3";
-			Standart.outputFieldStandart.setText(str);
-		} else {
-			Standart.outputFieldStandart.setText(str + "3");
-		}
-	}
-}
-class FourPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldStandart.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "4";
-			Standart.outputFieldStandart.setText(str);
-		} else {
-			Standart.outputFieldStandart.setText(str + "4");
-		}
-	}
-}
-class FivePressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldStandart.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "5";
-			Standart.outputFieldStandart.setText(str);
-		} else {
-			Standart.outputFieldStandart.setText(str + "5");
-		}
-	}
-}
-class SixPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldStandart.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "6";
-			Standart.outputFieldStandart.setText(str);
-		} else {
-			Standart.outputFieldStandart.setText(str + "6");
-		}
-	}
-}
-class SevenPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldStandart.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "7";
-			Standart.outputFieldStandart.setText(str);
-		} else {
-			Standart.outputFieldStandart.setText(str + "7");
-		}
-	}
-}
-class EightPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldStandart.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "8";
-			Standart.outputFieldStandart.setText(str);
-		} else {
-			Standart.outputFieldStandart.setText(str + "8");
-		}
-	}
-}
-class NinePressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldStandart.getText();
-		
-		if(!str.isEmpty() && str.length() == 1 && str.charAt(0) == '0') {
-			str = "9";
-			Standart.outputFieldStandart.setText(str);
-		} else {
-			Standart.outputFieldStandart.setText(str + "9");
-		}
-	}
-}
-class ZeroPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldStandart.getText();
-		
-		if(!str.isEmpty() && str.charAt(0) == '0') {
-			System.out.println("Double zero. Incorrect.");
-		} else {
-			Standart.outputFieldStandart.setText(str + "0");
-		}
-	}
-}
-*/
-/*Operators*/
-/*
-class PlusPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-
-		String str = outputFieldStandart.getText();
-		if(!str.isEmpty()) {
-			char lastChar = str.charAt(str.length()-1);
-			if(lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/' || lastChar == '%' || lastChar == '.') {
-				System.out.println("Incorrect. Double operator.");
-			} else {
-				Standart.outputFieldStandart.setText(str + "+");
-			}
-		} else {
-			System.out.println("Wrong start of input");
-		}
-	}
-}
-class MinusPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-
-		String str = outputFieldStandart.getText();
-		if(!str.isEmpty()) {
-			char lastChar = str.charAt(str.length()-1);
-			if(lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/' || lastChar == '%' || lastChar == '.') {
-				System.out.println("Incorrect. Double operator.");
-			} else {
-				Standart.outputFieldStandart.setText(str + "-");
-			}
-		} else {
-			System.out.println("Wrong start of input");
-		}
-	}
-}
-class MultiplyPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-
-		String str = outputFieldStandart.getText();
-		if(!str.isEmpty()) {
-			char lastChar = str.charAt(str.length()-1);
-			if(lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/' || lastChar == '%' || lastChar == '.') {
-				System.out.println("Incorrect. Double operator.");
-			} else {
-				Standart.outputFieldStandart.setText(str + "*");
-			}
-		} else {
-			System.out.println("Wrong start of input");
-		}
-	}
-}
-class DividePressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) {
-		
-		String str = outputFieldStandart.getText();
-		if(!str.isEmpty()) {
-			char lastChar = str.charAt(str.length()-1);
-			if(lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/' || lastChar == '%' || lastChar == '.') {
-				System.out.println("Incorrect. Double operator.");
-			} else {
-				Standart.outputFieldStandart.setText(str + "/");
-			}
-		} else {
-			System.out.println("Wrong start of input");
-		}
-	}
-}
-class PersentPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		
-		String str = outputFieldStandart.getText();
-		if(!str.isEmpty()) {
-			char lastChar = str.charAt(str.length()-1);
-			if(lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/' || lastChar == '%' || lastChar == '.') {
-				System.out.println("Incorrect. Double operator.");
-			} else {
-				Standart.outputFieldStandart.setText(str + "%");
-			}
-		} else {
-			System.out.println("Wrong start of input");
-		}
-	}
-}
-class DotPressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-
-		String str = outputFieldStandart.getText();
-		if(!str.isEmpty()) {
-			char lastChar = str.charAt(str.length()-1);
-			if(lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/' || lastChar == '%' || lastChar == '.') {
-				System.out.println("Incorrect. Double operator.");
-			} else {
-				Standart.outputFieldStandart.setText(str + ".");
-			}
-		} else {
-			System.out.println("Wrong start of input");
 		}
 	}
 }

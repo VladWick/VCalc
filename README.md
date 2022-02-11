@@ -1,8 +1,8 @@
-# VCalc 0.4
+# VCalc 0.5
 ---------------------------------------
 Handy calculator with useful features for math students.
 
-<i>Version: 0.4</i> <br>
+<i>Version: 0.5</i> <br>
 <i>Author: VladWick</i>
 
 ---------------------------------------
@@ -45,3 +45,15 @@ Derivatives and Integrals provide JTextField in which you can paste expression a
 &emsp; - full support of Scientific<br>
 &emsp;&emsp;&emsp;&emsp; added new entity = functions<br>
 &emsp;&emsp;&emsp;&emsp; Scientific inherit everything from Standart and extend it<br>
+
+---------------------------------------
+<h2>UPDATE VCalc0.5</h2>
+&emsp; - Standart`s and Scientific`s ActionListener classes was rebuild in more readable and accessable way.<br>
+&emsp;&emsp;&emsp;&emsp;  <br>
+&emsp; - Make Derivatives from scratch <br>
+&emsp; - Delete basic table derivatives <br>
+&emsp; - Insted of it full support derivatives of three types of polynoms <br>
+&emsp;&emsp;&emsp;&emsp; C*x^(number) <br>
+&emsp;&emsp;&emsp;&emsp; C*(x-a)^(number) <br>
+&emsp;&emsp;&emsp;&emsp; C*(Bx-a)^(number) <br>
+&emsp; - And all their combinations/sums <br>
