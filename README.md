@@ -1,9 +1,9 @@
-# VCalc 0.5
+# VCalc 0.6
 ---------------------------------------
 Handy calculator with useful features for math students.
 
-<i>Version: 0.5</i> <br>
-<i>Author: VladWick</i>
+<i>Version: 0.6 </i> <br>
+<i>Author: VladWick </i>
 
 ---------------------------------------
 
@@ -55,5 +55,17 @@ Derivatives and Integrals provide JTextField in which you can paste expression a
 &emsp; - Insted of it full support derivatives of three types of polynoms <br>
 &emsp;&emsp;&emsp;&emsp; C*x^(number) <br>
 &emsp;&emsp;&emsp;&emsp; C*(x-a)^(number) <br>
-&emsp;&emsp;&emsp;&emsp; C*(Bx-a)^(number) <br>
+&emsp;&emsp;&emsp;&emsp; C*(B*x-a)^(number) <br>
 &emsp; - And all their combinations/sums <br>
+
+---------------------------------------
+<h2>UPDATE VCalc0.6</h2>
+&emsp; - Make Integrals from scratch <br>
+&emsp; - Delete basic table integrals <br>
+&emsp; - Insted of it full support integrals of three types of polynoms <br>
+&emsp;&emsp;&emsp;&emsp; C*x^(number) <br>
+&emsp;&emsp;&emsp;&emsp; C*(x-a)^(number) <br>
+&emsp;&emsp;&emsp;&emsp; C*(B*x-a)^(number) <br>
+&emsp; - And all their combinations/sums <br>
+
+---------------------------------------

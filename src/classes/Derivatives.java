@@ -7,8 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -49,7 +47,6 @@ public class Derivatives extends Standart{
 	public static JLabel outputFuncDerivatives = new JLabel();
 	
 	public void addingComponentsInTheRightOrder() {
-		
 		menuFieldDerivatives.add(nameDerivatives);
 		menuFieldDerivatives.add(darkThemeButtonDefaultDerivatives);
 		menuFieldDerivatives.add(lightThemeButtonDefaultDerivatives);
@@ -82,7 +79,6 @@ public class Derivatives extends Standart{
 	}
 	
 	public void customizeComponents() throws IOException {
-		
 		mainPanelDerivatives.setLayout(new GridLayout(3,1));
 		
 		nameDerivatives.setText("Derivatives Calc");
@@ -104,16 +100,12 @@ public class Derivatives extends Standart{
 		menuFieldDerivatives.setLayout(new GridLayout(1, 3));
 		
 		standartCalcButtonDerivatives.setText("Standart");
-		standartCalcButtonDerivatives.addActionListener(new StandartMenuPressed());
 		standartCalcButtonDerivatives.setFont(font18);
 		scientificCalcButtonDerivatives.setText("Scientific");
-		scientificCalcButtonDerivatives.addActionListener(new ScientificMenuPressed());
 		scientificCalcButtonDerivatives.setFont(font18);
 		derivativesCalcButtonDerivatives.setText("Derivatives");
-		derivativesCalcButtonDerivatives.addActionListener(new DerivativesMenuPressed());
 		derivativesCalcButtonDerivatives.setFont(font18);
 		integralsCalcButtonDerivatives.setText("Integrals");
-		integralsCalcButtonDerivatives.addActionListener(new IntegralsMenuPressed());
 		integralsCalcButtonDerivatives.setFont(font18);
 		switchPanelDerivatives.setLayout(new GridLayout(4, 1));
 		
@@ -133,10 +125,8 @@ public class Derivatives extends Standart{
 		inputLabelDerivatives.setLayout(new GridLayout(0, 2));
 		
 		solveButtonDerivatives.setText("Find Derivative");
-		solveButtonDerivatives.addActionListener(new FindDerivativePressed());
 		solveButtonDerivatives.setFont(font20);
 		clearButtonDerivatives.setText("Clear");
-		clearButtonDerivatives.addActionListener(new ClearDerivativesPressed());
 		clearButtonDerivatives.setFont(font20);
 		workButtonsPanel.setLayout(new GridLayout(0, 2));
 		
@@ -149,7 +139,13 @@ public class Derivatives extends Standart{
 	
 
 	public void actionListenersDerivatives() {	
+		standartCalcButtonDerivatives.addActionListener(new StandartMenuPressed());
+		scientificCalcButtonDerivatives.addActionListener(new ScientificMenuPressed());
+		derivativesCalcButtonDerivatives.addActionListener(new DerivativesMenuPressed());
+		integralsCalcButtonDerivatives.addActionListener(new IntegralsMenuPressed());
 		
+		solveButtonDerivatives.addActionListener(new FindDerivativePressed());
+		clearButtonDerivatives.addActionListener(new ClearDerivativesPressed());
 	}
 	
 	public void defaultWhiteMode() {
@@ -219,7 +215,6 @@ class ClearDerivativesPressed extends Derivatives implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		inputFuncDerivatives.setText("");
 		outputFuncDerivatives.setText("");
-		
 	}
 }
 
