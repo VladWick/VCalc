@@ -1,14 +1,15 @@
-package classes;
+package ssdi;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 public class Design {
-	
+	public Design () {
+		System.out.println("design provided");
+	}
 }
 
-/*Switching between calculators*/
+// Switching between calculators
 class StandartMenuPressed extends Standart implements ActionListener{
 	public void actionPerformed(ActionEvent e) { 
 		

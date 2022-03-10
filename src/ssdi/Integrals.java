@@ -1,4 +1,4 @@
-package classes;
+package ssdi;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -7,8 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -87,13 +85,13 @@ public class Integrals extends Standart{
 		nameIntegrals.setFont(font20);
 		nameIntegrals.setVerticalAlignment(JLabel.CENTER);
 		nameIntegrals.setHorizontalAlignment(JLabel.CENTER);
-		BufferedImage buttonIconDarkIntegrals = ImageIO.read(new File("src/images/iconDarkTheme.png"));
+		BufferedImage buttonIconDarkIntegrals = ImageIO.read(new File("src/ssdi/images/iconDarkTheme.png"));
 		buttonIconDarkIntegrals = resize(buttonIconDarkIntegrals, 50, 50);
 		darkThemeButtonDefaultIntegrals = new JButton(new ImageIcon(buttonIconDarkIntegrals));
 		darkThemeButtonDefaultIntegrals.setBorder(BorderFactory.createEmptyBorder());
 		darkThemeButtonDefaultIntegrals.setContentAreaFilled(false);
 		darkThemeButtonDefaultIntegrals.addActionListener(new darkThemeButtonDefaultIntegralsPressed());
-		BufferedImage buttonIconLight = ImageIO.read(new File("src/images/iconlightTheme.png"));
+		BufferedImage buttonIconLight = ImageIO.read(new File("src/ssdi/images/iconlightTheme.png"));
 		buttonIconLight = resize(buttonIconLight, 50, 50);
 		lightThemeButtonDefaultIntegrals = new JButton(new ImageIcon(buttonIconLight));
 		lightThemeButtonDefaultIntegrals.setBorder(BorderFactory.createEmptyBorder());
@@ -119,7 +117,7 @@ public class Integrals extends Standart{
 		outputFieldIntegrals.setVerticalAlignment(JLabel.CENTER);
 		outputFieldIntegrals.setHorizontalAlignment(JLabel.CENTER);
 
-		BufferedImage labelIconFunc = ImageIO.read(new File("src/images/iconFunc.png"));
+		BufferedImage labelIconFunc = ImageIO.read(new File("src/ssdi/images/iconFunc.png"));
 		labelIconFunc = resize(labelIconFunc, 100, 100);
 		iconFuncIntegrals = new JLabel(new ImageIcon(labelIconFunc));
 		inputFuncIntegrals.setMaximumSize( inputFuncIntegrals.getPreferredSize() );
@@ -132,7 +130,7 @@ public class Integrals extends Standart{
 		clearButtonIntegrals.setFont(font20);
 		workButtonsPanel.setLayout(new GridLayout(0, 2));
 		
-		BufferedImage labelIconIntegral = ImageIO.read(new File("src/images/iconIntegral.png"));
+		BufferedImage labelIconIntegral = ImageIO.read(new File("src/ssdi/images/iconIntegral.png"));
 		labelIconIntegral = resize(labelIconIntegral, 180, 100);
 		iconIntegral = new JLabel(new ImageIcon(labelIconIntegral));
 		

@@ -1,4 +1,4 @@
-package classes;
+package ssdi;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,7 +20,7 @@ public class Standart {
 	public static JFrame derivativesFrame = new JFrame();
 	public static JFrame integralsFrame = new JFrame(); 
 
-	public JPanel mainPanelStandart = new JPanel();
+	public static JPanel mainPanelStandart = new JPanel();
 	
 	public static JPanel menuFieldStandart = new JPanel();
 	public static JLabel nameStandart = new JLabel("Standart");
@@ -129,12 +129,12 @@ public class Standart {
 		nameStandart.setFont(font20);
 		nameStandart.setVerticalAlignment(JLabel.CENTER);
 		nameStandart.setHorizontalAlignment(JLabel.CENTER);
-		BufferedImage buttonIconDark = ImageIO.read(new File("src/images/iconDarkTheme.png"));
+		BufferedImage buttonIconDark = ImageIO.read(new File("src/ssdi/images/iconDarkTheme.png"));
 		buttonIconDark = resize(buttonIconDark, 50, 50);
 		darkThemeButtonDefaultStandart = new JButton(new ImageIcon(buttonIconDark));
 		darkThemeButtonDefaultStandart.setBorder(BorderFactory.createEmptyBorder());
 		darkThemeButtonDefaultStandart.setContentAreaFilled(false);	
-		BufferedImage buttonIconLight = ImageIO.read(new File("src/images/iconlightTheme.png"));
+		BufferedImage buttonIconLight = ImageIO.read(new File("src/ssdi/images/iconlightTheme.png"));
 		buttonIconLight = resize(buttonIconLight, 50, 50);
 		lightThemeButtonDefaultStandart = new JButton(new ImageIcon(buttonIconLight));
 		lightThemeButtonDefaultStandart.setBorder(BorderFactory.createEmptyBorder());
@@ -162,7 +162,7 @@ public class Standart {
 		deleteAllButton.setName("deleteAll");
 		deleteAllButton.setFont(font20);
 		
-		BufferedImage buttonIconDelete = ImageIO.read(new File("src/images/iconDelete.png"));
+		BufferedImage buttonIconDelete = ImageIO.read(new File("src/ssdi/images/iconDelete.png"));
 		buttonIconDelete = resize(buttonIconDelete, 35, 35);
 		deleteOneButton = new JButton(new ImageIcon(buttonIconDelete));
 		deleteOneButton.setName("deleteOne");

@@ -1,4 +1,4 @@
-package classes;
+package ssdi;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -93,12 +93,12 @@ public class Scientific extends Standart{
 		nameScientific.setFont(font20);
 		nameScientific.setVerticalAlignment(JLabel.CENTER);
 		nameScientific.setHorizontalAlignment(JLabel.CENTER);
-		BufferedImage buttonIconDarkScientific = ImageIO.read(new File("src/images/iconDarkTheme.png"));
+		BufferedImage buttonIconDarkScientific = ImageIO.read(new File("src/ssdi/images/iconDarkTheme.png"));
 		buttonIconDarkScientific = resize(buttonIconDarkScientific, 50, 50);
 		darkThemeButtonDefaultScientific = new JButton(new ImageIcon(buttonIconDarkScientific));
 		darkThemeButtonDefaultScientific.setBorder(BorderFactory.createEmptyBorder());
 		darkThemeButtonDefaultScientific.setContentAreaFilled(false);
-		BufferedImage buttonIconLight = ImageIO.read(new File("src/images/iconlightTheme.png"));
+		BufferedImage buttonIconLight = ImageIO.read(new File("src/ssdi/images/iconlightTheme.png"));
 		buttonIconLight = resize(buttonIconLight, 50, 50);
 		lightThemeButtonDefaultScientific = new JButton(new ImageIcon(buttonIconLight));
 		lightThemeButtonDefaultScientific.setBorder(BorderFactory.createEmptyBorder());
@@ -126,7 +126,7 @@ public class Scientific extends Standart{
 		deleteAllButtonScientific.setText("AC");
 		deleteAllButtonScientific.setFont(font20);
 		
-		BufferedImage buttonIconDelete = ImageIO.read(new File("src/images/iconDelete.png"));
+		BufferedImage buttonIconDelete = ImageIO.read(new File("src/ssdi/images/iconDelete.png"));
 		buttonIconDelete = resize(buttonIconDelete, 35, 35);
 		deleteOneButtonScientific = new JButton(new ImageIcon(buttonIconDelete));
 		deleteOneButtonScientific.setBackground(colorWhite);

@@ -1,4 +1,4 @@
-package classes;
+package ssdi;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -85,13 +85,13 @@ public class Derivatives extends Standart{
 		nameDerivatives.setFont(font20);
 		nameDerivatives.setVerticalAlignment(JLabel.CENTER);
 		nameDerivatives.setHorizontalAlignment(JLabel.CENTER);
-		BufferedImage buttonIconDarkDerivatives = ImageIO.read(new File("src/images/iconDarkTheme.png"));
+		BufferedImage buttonIconDarkDerivatives = ImageIO.read(new File("src/ssdi/images/iconDarkTheme.png"));
 		buttonIconDarkDerivatives = resize(buttonIconDarkDerivatives, 50, 50);
 		darkThemeButtonDefaultDerivatives = new JButton(new ImageIcon(buttonIconDarkDerivatives));
 		darkThemeButtonDefaultDerivatives.setBorder(BorderFactory.createEmptyBorder());
 		darkThemeButtonDefaultDerivatives.setContentAreaFilled(false);
 		darkThemeButtonDefaultDerivatives.addActionListener(new darkThemeButtonDefaultDerivativesPressed());	
-		BufferedImage buttonIconLight = ImageIO.read(new File("src/images/iconlightTheme.png"));
+		BufferedImage buttonIconLight = ImageIO.read(new File("src/ssdi/images/iconlightTheme.png"));
 		buttonIconLight = resize(buttonIconLight, 50, 50);
 		lightThemeButtonDefaultDerivatives = new JButton(new ImageIcon(buttonIconLight));
 		lightThemeButtonDefaultDerivatives.setBorder(BorderFactory.createEmptyBorder());
@@ -117,7 +117,7 @@ public class Derivatives extends Standart{
 		outputFieldDerivatives.setHorizontalAlignment(JLabel.CENTER);
 		//outputFieldDerivatives.
 		
-		BufferedImage labelIconFunc = ImageIO.read(new File("src/images/iconFunc.png"));
+		BufferedImage labelIconFunc = ImageIO.read(new File("src/ssdi/images/iconFunc.png"));
 		labelIconFunc = resize(labelIconFunc, 100, 100);
 		iconFuncDerivatives = new JLabel(new ImageIcon(labelIconFunc));
 		inputFuncDerivatives.setMaximumSize( inputFuncDerivatives.getPreferredSize() );
@@ -130,7 +130,7 @@ public class Derivatives extends Standart{
 		clearButtonDerivatives.setFont(font20);
 		workButtonsPanel.setLayout(new GridLayout(0, 2));
 		
-		BufferedImage labelIconDeriv = ImageIO.read(new File("src/images/iconDeriv.png"));
+		BufferedImage labelIconDeriv = ImageIO.read(new File("src/ssdi/images/iconDeriv.png"));
 		labelIconDeriv = resize(labelIconDeriv, 100, 100);
 		iconDerivative = new JLabel(new ImageIcon(labelIconDeriv));
 		

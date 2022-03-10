@@ -1,14 +1,27 @@
 import java.io.IOException;
 
-import classes.*;
+import ssdi.*;
 
+/*VCalc
+ * 
+ * 1_VCalc_SSDI
+ * 2_VCalc_2
+ * 
+*/
 public class Main {
 	
 	public static void main(String[] args) throws IOException {
-		createCalc();
+
+		// first attempt
+		VCalcSSDI();
+		
+		// mmm?
+		
+		
+		
 	}
 	
-	public static void createCalc() throws IOException {
+	public static void VCalcSSDI() throws IOException {
 		
 		Standart frameStandart = new Standart();
 		frameStandart.customizeComponents();
@@ -38,7 +51,6 @@ public class Main {
 		frameIntegrals.defaultWhiteMode();
 		frameIntegrals.startAndShowCalc();
 		
-		Design design = new Design();
 	}
 	
 }
