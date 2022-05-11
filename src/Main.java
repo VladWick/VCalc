@@ -1,27 +1,24 @@
 import java.io.IOException;
 
-import ssdi.*;
+import derivatives.Derivatives;
+import diagram.equation.DiagramEquation;
+import diagram.points.DiagramPoints;
+import integrals.Integrals;
+import scientific.Scientific;
+import standart.Standart;
 
-/*VCalc
- * 
- * 1_VCalc_SSDI
- * 2_VCalc_2
+/*VCalc 2.0
  * 
 */
 public class Main {
 	
 	public static void main(String[] args) throws IOException {
 
-		// first attempt
-		VCalcSSDI();
-		
-		// mmm?
-		
-		
-		
+		VCalc();
+
 	}
 	
-	public static void VCalcSSDI() throws IOException {
+	public static void VCalc() throws IOException {
 		
 		Standart frameStandart = new Standart();
 		frameStandart.customizeComponents();
@@ -50,6 +47,20 @@ public class Main {
 		frameIntegrals.actionListenersIntegrals();
 		frameIntegrals.defaultWhiteMode();
 		frameIntegrals.startAndShowCalc();
+		
+		DiagramPoints frameDiagramPoints = new DiagramPoints();
+		frameDiagramPoints.customizeComponents();
+		frameDiagramPoints.addingComponentsInTheRightOrder();
+		frameDiagramPoints.actionListeners();
+		frameDiagramPoints.defaultWhiteMode();
+		frameDiagramPoints.startAndShowCalc();
+		
+		DiagramEquation frameDiagramEquation = new DiagramEquation();
+		frameDiagramEquation.customizeComponents();
+		frameDiagramEquation.addingComponentsInTheRightOrder();
+		frameDiagramEquation.actionListeners();
+		frameDiagramEquation.defaultWhiteMode();
+		frameDiagramEquation.startAndShowCalc();
 		
 	}
 	
