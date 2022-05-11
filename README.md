@@ -17,3 +17,4 @@ This programm contains following features: <br>
 	&emsp;Draw a diagram based on x and y coordinates from TextField<br>
 <h3>DiagramEquation</h3>
 	&emsp;Draw a diagram based on equation in one variable<br>
+	&emsp;&emsp;&emsp; only (y = kx+b) supported

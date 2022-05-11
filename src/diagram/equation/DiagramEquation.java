@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,7 +34,7 @@ public class DiagramEquation extends Standart {
 	public static JTextField equationInput = new JTextField(25);
 	public static JLabel equationException = new JLabel();
 	
-	public static JPanel menuButtons_EquationDiagram = new JPanel();
+	public static JPanel menuButtons_EquationDiagram = new JPanel(); 
 	public static JButton clearButton_EquationDiagram = new JButton();
 	public static JButton drawButton_EquationDiagram = new JButton();
 	
@@ -60,7 +62,7 @@ public class DiagramEquation extends Standart {
 		menuModesText_EquationDiagram.setHorizontalAlignment(SwingConstants.CENTER);
 		menuModesText_EquationDiagram.setFont(font20);
 		
-		equationLabel.setText("Enter equation here:");
+		equationLabel.setText("Enter equation int the (kx+b) form:");
 		equationLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		equationLabel.setFont(font20);
 		
@@ -130,6 +132,7 @@ public class DiagramEquation extends Standart {
 		diagramEquationFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		diagramEquationFrame.setLayout(new GridLayout(0, 2));
 		diagramEquationFrame.add(optionsPanel_EquationDiagram);
+		graphPanel_EquationDiagram = new DiagramPanel(dataX, dataY);
 		diagramEquationFrame.add(graphPanel_EquationDiagram);
 		diagramEquationFrame.setVisible(false);
 	}
@@ -174,8 +177,102 @@ class PointsDiagramButtonPressed extends DiagramEquation implements ActionListen
 class DrawButtonPressed extends DiagramEquation implements ActionListener{
 	public void actionPerformed(ActionEvent e) { 
 		String str = equationInput.getText();
-		System.out.println(str);
 		
+		List<Integer> dataX_new =  new ArrayList<>();
+		int amountOfPoints = 10;
+		for(int i = 0 ; i < amountOfPoints; ++i) {
+			dataX_new.add(i);
+		}
+		
+		List<Integer> dataY_new =  new ArrayList<>();
+		int xIndex = str.indexOf('x');
+		if(xIndex == 0) {
+			if(str.length() == 1) {
+				for(int i = 0 ; i < amountOfPoints; ++i) {
+					dataY_new.add(i);
+				}
+				dataX.clear();
+				dataY.clear();
+				dataX = dataX_new;
+				dataY = dataY_new;
+				diagramEquationFrame.remove(graphPanel_EquationDiagram);
+				startAndShowCalc();
+				diagramEquationFrame.setVisible(true);
+			} else {
+				char operatorAfterX = str.charAt(xIndex+1);
+				int numberAfterOperator = Integer.parseInt(str.substring(xIndex+2, str.length()));
+				for(int i = 0 ; i < amountOfPoints; ++i) {
+					int yPoint = i;
+					if(operatorAfterX == '+') {
+						yPoint += numberAfterOperator;
+					} else if(operatorAfterX == '-') {
+						yPoint -= numberAfterOperator;
+					} else if(operatorAfterX == '*') {
+						yPoint *= numberAfterOperator;
+					} else if(operatorAfterX == '/') {
+						yPoint /= numberAfterOperator;
+					} else {
+						System.out.println("Something went wrong");
+					}
+					dataY_new.add(yPoint);
+				}
+				dataX.clear();
+				dataY.clear();
+				dataX = dataX_new;
+				dataY = dataY_new;
+				diagramEquationFrame.remove(graphPanel_EquationDiagram);
+				startAndShowCalc();
+				diagramEquationFrame.setVisible(true);
+			}
+		} else {
+			int coefBeforeX = Integer.parseInt(str.substring(0, xIndex));
+			if(xIndex == str.length()-1) {
+				for(int i = 0 ; i < amountOfPoints; ++i) {
+					dataY_new.add(coefBeforeX*i);
+				}
+				dataX.clear();
+				dataY.clear();
+				dataX = dataX_new;
+				dataY = dataY_new;
+				diagramEquationFrame.remove(graphPanel_EquationDiagram);
+				startAndShowCalc();
+				diagramEquationFrame.setVisible(true);
+			} else {
+				char operatorAfterX = str.charAt(xIndex+1);
+				int numberAfterOperator = Integer.parseInt(str.substring(xIndex+2, str.length()));
+				for(int i = 0 ; i < amountOfPoints; ++i) {
+					int yPoint = coefBeforeX * i;
+					if(operatorAfterX == '+') {
+						yPoint += numberAfterOperator;
+					} else if(operatorAfterX == '-') {
+						yPoint -= numberAfterOperator;
+					} else if(operatorAfterX == '*') {
+						yPoint *= numberAfterOperator;
+					} else if(operatorAfterX == '/') {
+						yPoint /= numberAfterOperator;
+					} else {
+						System.out.println("Something went wrong");
+					}
+					dataY_new.add(yPoint);
+				}
+				dataX.clear();
+				dataY.clear();
+				dataX = dataX_new;
+				dataY = dataY_new;
+				diagramEquationFrame.remove(graphPanel_EquationDiagram);
+				startAndShowCalc();
+				diagramEquationFrame.setVisible(true);
+			}
+		}
+	}
+		
+	public static boolean checkContainingInTheArray(char charToCheck, char[] array) {
+		for(int i = 0 ; i < array.length; ++i) {
+			if(charToCheck == array[i]) {
+				return true;
+			}
+		} 
+		return false;
 	}
 }
 
