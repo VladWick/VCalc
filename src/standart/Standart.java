@@ -8,8 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.swing.border.*;
 
@@ -25,18 +23,17 @@ public class Standart {
 	public static JPanel mainPanelStandart = new JPanel();
 	
 	public static JPanel menuFieldStandart = new JPanel();
-	public static JLabel nameStandart = new JLabel("Standart");
+	public static JLabel nameStandart = new JLabel("Standart"); 
 	public static JButton darkThemeButtonDefaultStandart = new JButton();
 	public static JButton lightThemeButtonDefaultStandart = new JButton();
 	
-	public static JPanel switchBetweenModes = new JPanel();
+	public static JPanel switchBetweenModes_Standart = new JPanel();
 	public static JPanel switchPanelStandart = new JPanel();
 	public static JButton standartCalcButtonStandart = new JButton();
 	public static JButton scientificCalcButtonStandart = new JButton();
 	public static JButton derivativesCalcButtonStandart = new JButton();
 	public static JButton integralsCalcButtonStandart = new JButton();
-	public static JButton diagramButton = new JButton();
-	public static JButton anotherButton = new JButton();
+	public static JButton diagramButtonStandart = new JButton();
 	
 	public static JLabel outputFieldStandart = new JLabel();
 	
@@ -61,47 +58,26 @@ public class Standart {
 	public static JButton dotButton = new JButton();
 	public static JButton equalsButton = new JButton();
 	public static JButton changeSignButton = new JButton();
-
-	// Calculation variables
-	public static List<Character> operators = Arrays.asList('+', '-', '*', '/', '%');
-	public static List<Integer> numbers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-
-	public static double[] operations = {0.0, 0.0};
-	public static char currentOperator = ' ';
 	
-	// Neutral components
 	public static Border solidBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 	public static Font font18 = new Font(Font.SANS_SERIF,  Font.BOLD, 18);
 	public static Font font20 = new Font(Font.SANS_SERIF,  Font.BOLD, 20);
-	public static Font font25 = new Font(Font.SANS_SERIF,  Font.BOLD, 25);
-
-	public static Color colorBlack = new Color(0, 0, 0);
-	public static Color colorDarkGrey = new Color(12, 12, 12);
-	public static Color colorSlightlyDarkGrey = new Color(75, 75, 75);
-	public static Color colorWhite = new Color(255, 255, 255);
-	public static Color colorDarkWhite = new Color(250, 250, 250);
-	public static Color colorDeeperDarkWhite = new Color(245, 245, 245);
-	public static Color colorRed = new Color(255, 0, 0);
-	public static Color colorGreen = new Color(0, 255, 0);
-	public static Color colorBlue = new Color(0, 0, 255);
-	public static Color colorGray = new Color(235, 235, 235);
+	public static Font font25 = new Font(Font.SANS_SERIF,  Font.BOLD, 25); 
 	
 	public void addingComponentsInTheRightOrder() {
-		
 		menuFieldStandart.add(nameStandart);
 		menuFieldStandart.add(darkThemeButtonDefaultStandart);
 		menuFieldStandart.add(lightThemeButtonDefaultStandart);
 		
-		switchBetweenModes.add(switchPanelStandart);
-		switchBetweenModes.add(diagramButton);
-		switchBetweenModes.add(anotherButton);
+		switchBetweenModes_Standart.add(switchPanelStandart);
+		switchBetweenModes_Standart.add(diagramButtonStandart);
 		switchPanelStandart.add(standartCalcButtonStandart);
 		switchPanelStandart.add(scientificCalcButtonStandart);
 		switchPanelStandart.add(derivativesCalcButtonStandart);
 		switchPanelStandart.add(integralsCalcButtonStandart);
 		
 		mainPanelStandart.add(menuFieldStandart);
-		mainPanelStandart.add(switchBetweenModes);
+		mainPanelStandart.add(switchBetweenModes_Standart);
 		mainPanelStandart.add(outputFieldStandart);
 		
 		buttonsLabelStandart.add(deleteAllButton);
@@ -133,6 +109,10 @@ public class Standart {
 	public void customizeComponents() throws IOException {
 		
 		mainPanelStandart.setLayout(new GridLayout(3, 1));
+		menuFieldStandart.setLayout(new GridLayout(1, 3));
+		switchPanelStandart.setLayout(new GridLayout(4, 1));
+		switchBetweenModes_Standart.setLayout(new GridLayout(1,2));
+		buttonsLabelStandart.setLayout(new GridLayout(5, 4, 3, 3));	
 		
 		nameStandart.setText("Standart Calc");
 		nameStandart.setFont(font20);
@@ -148,8 +128,7 @@ public class Standart {
 		lightThemeButtonDefaultStandart = new JButton(new ImageIcon(buttonIconLight));
 		lightThemeButtonDefaultStandart.setBorder(BorderFactory.createEmptyBorder());
 		lightThemeButtonDefaultStandart.setContentAreaFilled(false);
-		menuFieldStandart.setLayout(new GridLayout(1, 3));
-		
+
 		standartCalcButtonStandart.setText("Standart");
 		standartCalcButtonStandart.setFont(font18);
 		scientificCalcButtonStandart.setText("Scientific");
@@ -158,12 +137,8 @@ public class Standart {
 		derivativesCalcButtonStandart.setFont(font18);
 		integralsCalcButtonStandart.setText("Integrals");
 		integralsCalcButtonStandart.setFont(font18);
-		diagramButton.setText("Diagram");
-		diagramButton.setFont(font18);
-		anotherButton.setText("Another");
-		anotherButton.setFont(font18);
-		switchPanelStandart.setLayout(new GridLayout(4, 1));
-		switchBetweenModes.setLayout(new GridLayout(1,3));
+		diagramButtonStandart.setText("Diagram");
+		diagramButtonStandart.setFont(font18);
 		
 		outputFieldStandart.setBounds(30,100, 50, 50);
 		outputFieldStandart.setFont(font20);
@@ -252,7 +227,6 @@ public class Standart {
 		equalsButton.setFont(font20);
 		
 		buttonsLabelStandart.setBounds(40, 50, 0, 0);
-		buttonsLabelStandart.setLayout(new GridLayout(5, 4, 3, 3));	
 	}
 	
 	public void actionListeners() {
@@ -264,7 +238,7 @@ public class Standart {
 		derivativesCalcButtonStandart.addActionListener(new DerivativesMenuPressed());
 		integralsCalcButtonStandart.addActionListener(new IntegralsMenuPressed());
 		
-		diagramButton.addActionListener(new DiagramMenuPressed());
+		diagramButtonStandart.addActionListener(new DiagramMenuPressed());
 		
 		deleteAllButton.addActionListener(new DeletePressed());
 		deleteOneButton.addActionListener(new DeletePressed());
@@ -289,78 +263,10 @@ public class Standart {
 	}
 	
 	public void defaultWhiteMode() throws IOException {
-		menuFieldStandart.setBackground(colorDarkWhite);
-		nameStandart.setBackground(colorDarkWhite);
-		darkThemeButtonDefaultStandart.setBackground(colorDarkWhite);
-		lightThemeButtonDefaultStandart.setBackground(colorDarkWhite);
-		switchBetweenModes.setBackground(colorDarkWhite);
-		diagramButton.setBackground(colorDarkWhite);
-		anotherButton.setBackground(colorDarkWhite);
-		switchPanelStandart.setBackground(colorDarkWhite);
-		standartCalcButtonStandart.setBackground(colorDarkWhite);
-		scientificCalcButtonStandart.setBackground(colorDarkWhite);
-		derivativesCalcButtonStandart.setBackground(colorDarkWhite);
-		integralsCalcButtonStandart.setBackground(colorDarkWhite);
-		outputFieldStandart.setBackground(colorDarkWhite);
-		buttonsLabelStandart.setBackground(colorWhite);
-		oneButton.setBackground(colorDarkWhite);
-		twoButton.setBackground(colorDarkWhite);
-		threeButton.setBackground(colorDarkWhite);
-		fourButton.setBackground(colorDarkWhite);
-		fiveButton.setBackground(colorDarkWhite);
-		sixButton.setBackground(colorDarkWhite);
-		sevenButton.setBackground(colorDarkWhite);
-		eightButton.setBackground(colorDarkWhite);
-		nineButton.setBackground(colorDarkWhite);
-		zeroButton.setBackground(colorDarkWhite);
-		deleteAllButton.setBackground(colorDarkWhite);
-		deleteOneButton.setBackground(colorDarkWhite);
-		persentButton.setBackground(colorDarkWhite);
-		equalsButton.setBackground(colorDarkWhite);
-		changeSignButton.setBackground(colorDarkWhite);
-		dotButton.setBackground(colorDarkWhite);
-		plusButton.setBackground(colorDarkWhite);
-		minusButton.setBackground(colorDarkWhite);
-		multipleButton.setBackground(colorDarkWhite);
-		divideButton.setBackground(colorDarkWhite);
-		
-		oneButton.setForeground(colorBlack);
-		twoButton.setForeground(colorBlack);
-		threeButton.setForeground(colorBlack);
-		fourButton.setForeground(colorBlack);
-		fiveButton.setForeground(colorBlack);
-		sixButton.setForeground(colorBlack);
-		sevenButton.setForeground(colorBlack);
-		eightButton.setForeground(colorBlack);
-		nineButton.setForeground(colorBlack);
-		zeroButton.setForeground(colorBlack);
-		deleteAllButton.setForeground(colorBlack);
-		deleteOneButton.setForeground(colorBlack);
-		persentButton.setForeground(colorBlack);
-		equalsButton.setForeground(colorBlack);
-		changeSignButton.setForeground(colorBlack);
-		dotButton.setForeground(colorBlack);
-		plusButton.setForeground(colorBlack);
-		minusButton.setForeground(colorBlack);
-		multipleButton.setForeground(colorBlack);
-		divideButton.setForeground(colorBlack);
-		menuFieldStandart.setForeground(colorBlack);
-		nameStandart.setForeground(colorBlack);
-		darkThemeButtonDefaultStandart.setForeground(colorBlack);
-		lightThemeButtonDefaultStandart.setForeground(colorBlack);
-		switchBetweenModes.setForeground(colorBlack);
-		diagramButton.setForeground(colorBlack);
-		anotherButton.setForeground(colorBlack);
-		switchPanelStandart.setForeground(colorBlack);
-		standartCalcButtonStandart.setForeground(colorBlack);
-		scientificCalcButtonStandart.setForeground(colorBlack);
-		derivativesCalcButtonStandart.setForeground(colorBlack);
-		integralsCalcButtonStandart.setForeground(colorBlack);
-		outputFieldStandart.setForeground(colorBlack);
+		Standart_ActionListeners_Design.setUpdefaultWhiteMode();
 	}
 	
 	public void startAndShowCalc() {
-		
 		standartFrame.setSize(450, 700);
 		standartFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		standartFrame.setLayout(new GridLayout(2, 0));
@@ -382,60 +288,51 @@ public class Standart {
 	
 	public class StandartMenuPressed extends Standart implements ActionListener{
 		public void actionPerformed(ActionEvent e) { 
-			
 			scientificFrame.setVisible(false);
 			derivativesFrame.setVisible(false);
 			integralsFrame.setVisible(false);
-			
-			standartFrame.setVisible(true);
-			
 			diagramPointsFrame.setVisible(false);
 			diagramEquationFrame.setVisible(false);
+			
+			standartFrame.setVisible(true);
 		}
 	}
 	public class ScientificMenuPressed extends Standart implements ActionListener{
 		public void actionPerformed(ActionEvent e) { 
-			
 			standartFrame.setVisible(false);
 			derivativesFrame.setVisible(false);
 			integralsFrame.setVisible(false);
-			
-			scientificFrame.setVisible(true);
-			
 			diagramPointsFrame.setVisible(false);
 			diagramEquationFrame.setVisible(false);
+			
+			scientificFrame.setVisible(true);
 		}
 	}
 	public class DerivativesMenuPressed extends Standart implements ActionListener{
 		public void actionPerformed(ActionEvent e) { 
-			
 			standartFrame.setVisible(false);
 			scientificFrame.setVisible(false);
 			integralsFrame.setVisible(false);
-			
-			derivativesFrame.setVisible(true);
-			
 			diagramPointsFrame.setVisible(false);
 			diagramEquationFrame.setVisible(false);
+			
+			derivativesFrame.setVisible(true);
 		}
 	}
 	public class IntegralsMenuPressed extends Standart implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) { 
-			
 			standartFrame.setVisible(false);
 			scientificFrame.setVisible(false);
 			derivativesFrame.setVisible(false);
-			
-			integralsFrame.setVisible(true);
-			
 			diagramPointsFrame.setVisible(false);
 			diagramEquationFrame.setVisible(false);
+			
+			integralsFrame.setVisible(true);
 		}
 	}
 	public class DiagramMenuPressed extends Standart implements ActionListener {
 		public void actionPerformed(ActionEvent e) { 
-			
 			standartFrame.setVisible(false);
 			scientificFrame.setVisible(false);
 			derivativesFrame.setVisible(false);
@@ -447,450 +344,4 @@ public class Standart {
 	}
 	
 	
-}
-
-					/******************/
-					/*Action Listeners*/
-					/******************/
-
-class DotPressed extends Standart implements ActionListener {
-	
-	public void actionPerformed(ActionEvent e) {
-		String str = outputFieldStandart.getText();
-		writeDot(str);
-	}
-	
-	public void writeDot(String str) {
-		if(str.isEmpty()) {
-			System.out.println("Can`t start expression with dot.");
-		} else {
-			// Checking last char
-			char lastChar = str.charAt(str.length()-1);
-			String acceptString = "accept";
-			for(int i = 0 ; i < operators.size(); ++i) {
-				if(lastChar == operators.get(i)) {
-					acceptString = "operator";
-					break;
-				} else if(lastChar == '.') {
-					acceptString = "dot";
-					break;
-				}
-			}
-			
-			if(acceptString.equals("accept")) {
-				
-				// Checking whole string for 'dots'
-				boolean accept2 = true;
-				for(int i = 0 ; i < str.length()-1; i++) {
-					char currentChar = str.charAt(i);
-					if(currentChar == '.') {
-						accept2 = false;
-						System.out.print("Dot was already been pressed.");
-						break;
-					}
-				}
-				
-				if(accept2) {
-					Standart.outputFieldStandart.setText(str + ".");
-				}
-			} else if(acceptString.equals("dot")) {
-				System.out.println("Unacceptable. Dot + dot");
-			} else if(acceptString.equals("operator")) {
-				System.out.println("Unacceptable. Operator + dot.");
-			} else {
-				System.out.println("Something went wrong.");
-			}
-		}
-	}
-}
-class DeletePressed extends Standart implements ActionListener{
-	public void actionPerformed(ActionEvent e) { 
-		
-		String str = outputFieldStandart.getText();
-		
-		JButton o = (JButton)e.getSource();
-		String name = o.getName();
-		
-		if(name == "deleteAll") {
-			Standart.outputFieldStandart.setText("");
-		} else if (name == "deleteOne") {
-			Standart.outputFieldStandart.setText(str.substring(0, str.length()-1));
-		} else {
-			System.out.println("Something went wrong.");
-		}
-	}
-}
-class NumberPressed extends Standart implements ActionListener{
-	
-	public void actionPerformed(ActionEvent e) {
-		String str = outputFieldStandart.getText();
-		
-		/*Get the number of the button*/
-		JButton o = (JButton)e.getSource();
-		String name = o.getName();
-		int nameInt = Integer.parseInt(name);
-		
-		String type = "number";
-		
-		type = checkTypeOfInput(str, type);
-		writeNumber(str, nameInt, type);	
-	}
-	
-	public String checkTypeOfInput(String str, String type) {
-		if(!str.isEmpty()) {
-			char lastChar = str.charAt(str.length()-1);
-			
-			if(!str.equals("-")) {
-				for(int i = 0 ; i < operators.size(); ++i) {
-					if(lastChar == operators.get(i)) {
-						type = "operator";
-						currentOperator = operators.get(i);
-						// Adding first operation here to prevent problems in 'ChangeSign'
-						String substr = str.substring(0, str.length()-1);
-						double firstOperation = Double.parseDouble(substr); 
-						operations[0] = firstOperation;
-						break;
-					}
-				}
-			}
-		}
-		return type;
-	}
-	
-	public void writeNumber(String str, int nameInt, String type) {
-		for(int i = 0 ; i < numbers.size(); ++i) {
-			if(nameInt == numbers.get(i)) {
-				if(type.equals("number")) {
-					Standart.outputFieldStandart.setText(str + numbers.get(i));
-				} else if (type.equals("operator")){
-					Standart.outputFieldStandart.setText(Integer.toString(numbers.get(i)));
-				}
-			} 
-		}
-	}
-}
-
-class OperatorPressed extends Standart implements ActionListener{
-	
-	public void actionPerformed(ActionEvent e) {
-		String str = outputFieldStandart.getText();
-		JButton o = (JButton)e.getSource();
-		String name = o.getName();
-		char nameChar = name.charAt(0);
-		
-		writeOperator(str, name, nameChar);
-	}
-	
-	public void writeOperator(String str, String name, char nameChar) {
-		if(str.isEmpty()) {
-			if(name.equals("-")) {
-				Standart.outputFieldStandart.setText("-");
-			} else {
-				System.out.println("Expression can`t start with the operator rather than minus.");
-			}
-		} else if(str.length() == 1) {
-			char lastChar = str.charAt(str.length()-1);
-			
-			if(lastChar == '-') {
-				if(name.equals("-")) {
-					System.out.println("Two minuses at the start. Wrong.");
-				} else {
-					System.out.println("Minus + operator at the start. Wrong.");
-				}
-			} else {
-				boolean accept = true;
-				for(int i = 0; i < operators.size(); ++i) {
-					if(lastChar == operators.get(i)) {
-						accept = false;
-						break;
-					}
-				}
-				if(!accept) {
-					System.out.println("Operator + operator. Wrong.");
-				} else {
-					for(int i = 0; i < operators.size(); ++i) {
-						if(nameChar == operators.get(i)) {
-							Standart.outputFieldStandart.setText(str + operators.get(i));
-							break;
-						}
-					}
-				}
-			}
-		} else {
-			char lastChar = str.charAt(str.length()-1);	
-			
-			if(lastChar == '.') {
-				System.out.println("Dot + operator. Unacceptable.");
-			} else {
-				boolean operatorLastChar = false;
-				for(int i = 0; i < operators.size(); ++i) {
-					if(lastChar == operators.get(i)) {
-						operatorLastChar = true;
-					}
-				}
-				
-				if(!operatorLastChar) {
-					Standart.outputFieldStandart.setText(str + name);
-				} else {
-					System.out.println("Operator + operator. Wrong.");
-				}
-			}
-		}
-	}
-}
-
-class EqualsPressed extends Standart implements ActionListener{
-	
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldStandart.getText();
-		solve(str);
-	}
-	
-	public void solve(String str) {
-		
-		if(str.isEmpty()) {
-			System.out.println("Nothing to solve.");
-		} else {
-			String lastChar = str.substring(str.length()-1);
-			double lastCharDouble = Double.parseDouble(lastChar);
-			
-			/*Adding second operation number*/
-			for(int i = 0 ; i < numbers.size(); ++i) {
-				if(lastCharDouble == numbers.get(i)) {
-					
-					String substr = str.substring(0, str.length());
-					double secondOperation = Double.parseDouble(substr); 
-					operations[1] = secondOperation;
-					
-					break;
-				}
-			}
-			
-			/*Solving the Calc*/
-			double x = operations[0];
-			double y = operations[1];
-			Double answer = 0.0;
-			
-			switch(currentOperator) {
-				case '*': {
-					answer = x*y;
-					operations[0] = answer;
-					operations[1] = 0.0;
-					break;
-				}
-				case '/': {
-					answer = x/y;
-					operations[0] = answer;
-					operations[1] = 0.0;
-					break;
-				}
-				case '+': {
-					answer = x+y;
-					operations[0] = answer;
-					operations[1] = 0.0;
-					break;
-				}
-				case '-': {
-					answer = x-y;
-					operations[0] = answer;
-					operations[1] = 0.0;
-					break;
-				}
-				case '%': {
-					answer = x%y;
-					operations[0] = answer;
-					operations[1] = 0.0;
-					break;
-				}
-			}
-			
-			if(answer == Math.floor(answer)) {
-				int answerInt = answer.intValue();			
-				Standart.outputFieldStandart.setText(Integer.toString(answerInt));
-			} else {
-				Standart.outputFieldStandart.setText(Double.toString(answer));
-			}
-		}
-	}
-}
-
-class ChangeSignPressed extends Standart implements ActionListener{
-	
-	void change(String str) {
-		if(str.isEmpty()) {
-			Standart.outputFieldStandart.setText("-");
-		} else {
-			char lastChar = str.charAt(str.length()-1);
-			char firstChar = str.charAt(0);
-			if(lastChar == '-' && str.length() == 1) {
-				Standart.outputFieldStandart.setText("");
-			} else {
-				if(firstChar != '-') {
-					Standart.outputFieldStandart.setText("-" + str);
-				} else {
-					Standart.outputFieldStandart.setText(str.substring(1, str.length()));
-				} 
-			}
-		}
-	}
-	
-	public void actionPerformed(ActionEvent e) { 
-		String str = outputFieldStandart.getText();
-		change(str);
-	}
-}
-
-/* ----- ----- */
-/*StandartCalc dark and light mode*/
-class darkThemeButtonDefaultStandartPressed extends Standart implements ActionListener {
-	
-	public void actionPerformed(ActionEvent e) {
-
-		menuFieldStandart.setBackground(colorSlightlyDarkGrey);
-		nameStandart.setBackground(colorSlightlyDarkGrey);
-		darkThemeButtonDefaultStandart.setBackground(colorSlightlyDarkGrey);
-		lightThemeButtonDefaultStandart.setBackground(colorSlightlyDarkGrey);
-		
-		switchBetweenModes.setBackground(colorSlightlyDarkGrey);
-		diagramButton.setBackground(colorSlightlyDarkGrey);
-		anotherButton.setBackground(colorSlightlyDarkGrey);
-		switchPanelStandart.setBackground(colorSlightlyDarkGrey);
-		standartCalcButtonStandart.setBackground(colorSlightlyDarkGrey);
-		scientificCalcButtonStandart.setBackground(colorSlightlyDarkGrey);
-		derivativesCalcButtonStandart.setBackground(colorSlightlyDarkGrey);
-		integralsCalcButtonStandart.setBackground(colorSlightlyDarkGrey);
-		outputFieldStandart.setBackground(colorSlightlyDarkGrey);
-		
-		buttonsLabelStandart.setBackground(colorBlack);
-		oneButton.setBackground(colorSlightlyDarkGrey);
-		twoButton.setBackground(colorSlightlyDarkGrey);
-		threeButton.setBackground(colorSlightlyDarkGrey);
-		fourButton.setBackground(colorSlightlyDarkGrey);
-		fiveButton.setBackground(colorSlightlyDarkGrey);
-		sixButton.setBackground(colorSlightlyDarkGrey);
-		sevenButton.setBackground(colorSlightlyDarkGrey);
-		eightButton.setBackground(colorSlightlyDarkGrey);
-		nineButton.setBackground(colorSlightlyDarkGrey);
-		zeroButton.setBackground(colorSlightlyDarkGrey);
-		deleteAllButton.setBackground(colorSlightlyDarkGrey);
-		deleteOneButton.setBackground(colorSlightlyDarkGrey);
-		persentButton.setBackground(colorSlightlyDarkGrey);
-		equalsButton.setBackground(colorSlightlyDarkGrey);
-		changeSignButton.setBackground(colorSlightlyDarkGrey);
-		dotButton.setBackground(colorSlightlyDarkGrey);
-		plusButton.setBackground(colorSlightlyDarkGrey);
-		minusButton.setBackground(colorSlightlyDarkGrey);
-		multipleButton.setBackground(colorSlightlyDarkGrey);
-		divideButton.setBackground(colorSlightlyDarkGrey);
-		
-		oneButton.setForeground(colorDarkWhite);
-		twoButton.setForeground(colorDarkWhite);
-		threeButton.setForeground(colorDarkWhite);
-		fourButton.setForeground(colorDarkWhite);
-		fiveButton.setForeground(colorDarkWhite);
-		sixButton.setForeground(colorDarkWhite);
-		sevenButton.setForeground(colorDarkWhite);
-		eightButton.setForeground(colorDarkWhite);
-		nineButton.setForeground(colorDarkWhite);
-		zeroButton.setForeground(colorDarkWhite);
-		deleteAllButton.setForeground(colorDarkWhite);
-		deleteOneButton.setForeground(colorDarkWhite);
-		persentButton.setForeground(colorDarkWhite);
-		equalsButton.setForeground(colorDarkWhite);
-		changeSignButton.setForeground(colorDarkWhite);
-		dotButton.setForeground(colorDarkWhite);
-		plusButton.setForeground(colorDarkWhite);
-		minusButton.setForeground(colorDarkWhite);
-		multipleButton.setForeground(colorDarkWhite);
-		divideButton.setForeground(colorDarkWhite);
-		
-		menuFieldStandart.setForeground(colorDarkWhite);
-		nameStandart.setForeground(colorDarkWhite);
-		darkThemeButtonDefaultStandart.setForeground(colorDarkWhite);
-		lightThemeButtonDefaultStandart.setForeground(colorDarkWhite);
-		switchBetweenModes.setForeground(colorDarkWhite);
-		diagramButton.setForeground(colorDarkWhite);
-		anotherButton.setForeground(colorDarkWhite);
-		switchPanelStandart.setForeground(colorDarkWhite);
-		standartCalcButtonStandart.setForeground(colorDarkWhite);
-		scientificCalcButtonStandart.setForeground(colorDarkWhite);
-		derivativesCalcButtonStandart.setForeground(colorDarkWhite);
-		integralsCalcButtonStandart.setForeground(colorDarkWhite);
-	}
-}
-class lightThemeButtonDefaultStandartPressed extends Standart implements ActionListener {
-	
-	public void actionPerformed(ActionEvent e) {
-		
-		menuFieldStandart.setBackground(colorDarkWhite);
-		nameStandart.setBackground(colorDarkWhite);
-		darkThemeButtonDefaultStandart.setBackground(colorDarkWhite);
-		lightThemeButtonDefaultStandart.setBackground(colorDarkWhite);
-		switchBetweenModes.setBackground(colorDarkWhite);
-		diagramButton.setBackground(colorDarkWhite);
-		anotherButton.setBackground(colorDarkWhite);
-		switchPanelStandart.setBackground(colorDarkWhite);
-		standartCalcButtonStandart.setBackground(colorDarkWhite);
-		scientificCalcButtonStandart.setBackground(colorDarkWhite);
-		derivativesCalcButtonStandart.setBackground(colorDarkWhite);
-		integralsCalcButtonStandart.setBackground(colorDarkWhite);
-		outputFieldStandart.setBackground(colorDarkWhite);
-		
-		buttonsLabelStandart.setBackground(colorWhite);
-		oneButton.setBackground(colorDarkWhite);
-		twoButton.setBackground(colorDarkWhite);
-		threeButton.setBackground(colorDarkWhite);
-		fourButton.setBackground(colorDarkWhite);
-		fiveButton.setBackground(colorDarkWhite);
-		sixButton.setBackground(colorDarkWhite);
-		sevenButton.setBackground(colorDarkWhite);
-		eightButton.setBackground(colorDarkWhite);
-		nineButton.setBackground(colorDarkWhite);
-		zeroButton.setBackground(colorDarkWhite);
-		deleteAllButton.setBackground(colorDarkWhite);
-		deleteOneButton.setBackground(colorDarkWhite);
-		persentButton.setBackground(colorDarkWhite);
-		equalsButton.setBackground(colorDarkWhite);
-		changeSignButton.setBackground(colorDarkWhite);
-		dotButton.setBackground(colorDarkWhite);
-		plusButton.setBackground(colorDarkWhite);
-		minusButton.setBackground(colorDarkWhite);
-		multipleButton.setBackground(colorDarkWhite);
-		divideButton.setBackground(colorDarkWhite);
-		
-		oneButton.setForeground(colorBlack);
-		twoButton.setForeground(colorBlack);
-		threeButton.setForeground(colorBlack);
-		fourButton.setForeground(colorBlack);
-		fiveButton.setForeground(colorBlack);
-		sixButton.setForeground(colorBlack);
-		sevenButton.setForeground(colorBlack);
-		eightButton.setForeground(colorBlack);
-		nineButton.setForeground(colorBlack);
-		zeroButton.setForeground(colorBlack);
-		deleteAllButton.setForeground(colorBlack);
-		deleteOneButton.setForeground(colorBlack);
-		persentButton.setForeground(colorBlack);
-		equalsButton.setForeground(colorBlack);
-		changeSignButton.setForeground(colorBlack);
-		dotButton.setForeground(colorBlack);
-		plusButton.setForeground(colorBlack);
-		minusButton.setForeground(colorBlack);
-		multipleButton.setForeground(colorBlack);
-		divideButton.setForeground(colorBlack);
-		
-		menuFieldStandart.setForeground(colorBlack);
-		nameStandart.setForeground(colorBlack);
-		darkThemeButtonDefaultStandart.setForeground(colorBlack);
-		lightThemeButtonDefaultStandart.setForeground(colorBlack);
-		switchBetweenModes.setForeground(colorBlack);
-		diagramButton.setForeground(colorBlack);
-		anotherButton.setForeground(colorBlack);
-		switchPanelStandart.setForeground(colorBlack);
-		standartCalcButtonStandart.setForeground(colorBlack);
-		scientificCalcButtonStandart.setForeground(colorBlack);
-		derivativesCalcButtonStandart.setForeground(colorBlack);
-		integralsCalcButtonStandart.setForeground(colorBlack);
-		outputFieldStandart.setForeground(colorBlack);
-	}
 }

@@ -7,15 +7,15 @@ import integrals.Integrals;
 import scientific.Scientific;
 import standart.Standart;
 
-/*VCalc 2.0
+/*VCalc 2.2
  * 
 */
 public class Main {
 	
 	public static void main(String[] args) throws IOException {
-
+		
 		VCalc();
-
+		
 	}
 	
 	public static void VCalc() throws IOException {
@@ -33,7 +33,7 @@ public class Main {
 		frameScientific.actionListenersScientific();
 		frameScientific.defaultWhiteMode();
 		frameScientific.startAndShowCalc();
-		
+		 
 		Derivatives frameDerivatives = new Derivatives();
 		frameDerivatives.customizeComponents();
 		frameDerivatives.addingComponentsInTheRightOrder();

@@ -12,9 +12,7 @@ import java.awt.Stroke;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 public class DiagramPanel extends JPanel{
 	
@@ -42,7 +40,7 @@ public class DiagramPanel extends JPanel{
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         double xScale = ((double) getWidth() - 2 * padding - labelPadding) / (scoresY.size() - 1);
-        double yScale = ((double) getHeight() - 2 * padding - labelPadding) / (getMaxScoreY() - getMinScoreY());
+        double yScale = ((double) getHeight() - 2 * padding - labelPadding) / (getMaxScoreY());
 
         List<Point> graphPoints = new ArrayList<>();
         for (int i = 0; i < scoresY.size(); i++) {
@@ -66,7 +64,7 @@ public class DiagramPanel extends JPanel{
                 g2.setColor(gridColor);
                 g2.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
                 g2.setColor(Color.BLACK);
-                String yLabel = ((int) ((getMinScoreY() + (getMaxScoreY() - getMinScoreY()) * ((i * 1.0) / numberYDivisions)) * 100)) / 100.0 + "";
+                String yLabel = (int) (((int) (((getMaxScoreY()) * ((i * 1.0) / numberYDivisions)) * 100)) / 100.0) + "";
                 FontMetrics metrics = g2.getFontMetrics();
                 int labelWidth = metrics.stringWidth(yLabel);
                 g2.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3);
@@ -163,17 +161,7 @@ public class DiagramPanel extends JPanel{
     }
     public void createGraphPanel() {
     	DiagramPanel mainPanel = new DiagramPanel(scoresX, scoresY);
-        mainPanel.setPreferredSize(new Dimension(800, 600));
-        
-        /*
-        JFrame frame = new JFrame("DrawGraph. Two dimensions.");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(mainPanel);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        */
-        
+        mainPanel.setPreferredSize(new Dimension(800, 600)); 
     }
 }
 
